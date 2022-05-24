@@ -1,0 +1,143 @@
+{
+  "project_info": {
+    "project_number": "933088839978",
+    "firebase_url": "https://mhchat-9b42c.firebaseio.com",
+    "project_id": "mhchat-9b42c",
+    "storage_bucket": "mhchat-9b42c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933088839978:android:f2f638d2e84fdaa8",
+        "android_client_info": {
+          "package_name": "com.medhelp2.mhchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933088839978-sg88uqlkcr8juu1bb904pi9vm02d5qoq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.medhelp2.mhchat",
+            "certificate_hash": "5cb75014e719d210a68c027aacdc4a432fece20e"
+          }
+        },
+        {
+          "client_id": "933088839978-7nn9etifgf84a75ctjm1i4uv4so50sdd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8ebfKSRZ6RxclvPQ5T6uJ7PkmAyU7hGU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933088839978-7nn9etifgf84a75ctjm1i4uv4so50sdd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933088839978:android:fc6d73f968780a91",
+        "android_client_info": {
+          "package_name": "com.medhelp.mamontino.medhelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933088839978-vso2cs5rvpucgh2i37g3vnivtnoa5uju.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.medhelp.mamontino.medhelp",
+            "certificate_hash": "5cb75014e719d210a68c027aacdc4a432fece20e"
+          }
+        },
+        {
+          "client_id": "933088839978-7nn9etifgf84a75ctjm1i4uv4so50sdd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8ebfKSRZ6RxclvPQ5T6uJ7PkmAyU7hGU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933088839978-7nn9etifgf84a75ctjm1i4uv4so50sdd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933088839978:android:2ff8ed70566504f3",
+        "android_client_info": {
+          "package_name": "com.medhelp.medhelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933088839978-gsd69e3gn9qrp8m8mrbt2joeu91ls952.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.medhelp.medhelp",
+            "certificate_hash": "5cb75014e719d210a68c027aacdc4a432fece20e"
+          }
+        },
+        {
+          "client_id": "933088839978-7nn9etifgf84a75ctjm1i4uv4so50sdd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8ebfKSRZ6RxclvPQ5T6uJ7PkmAyU7hGU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933088839978-7nn9etifgf84a75ctjm1i4uv4so50sdd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

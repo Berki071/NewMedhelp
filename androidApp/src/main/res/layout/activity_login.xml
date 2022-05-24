@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin"
+    xmlns:mask="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@android:color/transparent"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <ImageView
+            android:id="@+id/login_logo"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:contentDescription="@string/company_logo"
+            app:srcCompat="@drawable/ico_root" />
+
+        <TextView
+            android:id="@+id/login_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:gravity="center"
+            android:text="@string/login_header"
+            android:textColor="@color/color_primary"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLL"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="@string/login">
+            <br.com.sapereaude.maskedEditText.MaskedEditText
+                android:id="@+id/et_login_username"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/rect_border_primary_2dp_red"
+                android:gravity="center_vertical|start"
+                android:hint="__________"
+                android:inputType="phone"
+                android:paddingLeft="8dp"
+                android:typeface="monospace"
+                app:keep_hint="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hint"
+                mask:allowed_chars="1234567890"
+                mask:mask="+7(###)###-##-##"
+                tools:ignore="MissingConstraints"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:passwordToggleEnabled="true"
+            >
+
+            <EditText
+                android:id="@+id/et_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/rect_border_primary_2dp_red"
+                android:cursorVisible="true"
+                android:gravity="start|center_vertical"
+                android:hint="@string/password"
+                android:inputType="number|numberPassword"
+                android:maxLength="30"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:textColor="@color/black_effective"
+                android:textColorHint="@color/semi_gray"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/chb_login_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/base_margin_8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:checked="true"
+            android:text="@string/save_password"
+            android:textColor="@color/semi_gray" />
+
+        <Button
+            android:id="@+id/btn_login_enter"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/base_margin_8dp"
+            android:gravity="center"
+            android:text="@string/action_login"
+            style="@style/blueButton"
+             />
+
+        <TextView
+            android:id="@+id/forgotPas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_margin_8dp"
+            android:gravity="end"
+            android:padding="8dp"
+            android:text="@string/forgotPass"
+            android:textColor="#1565C0" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/howToRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_margin_8dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:text="Как зарегистрироваться?"
+            android:textColor="#1565C0" />
+
+        <TextView
+            android:id="@+id/writeToSupport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_margin_8dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Написать в техподдержку"
+            android:textColor="#1565C0" />
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

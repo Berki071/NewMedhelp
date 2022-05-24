@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_gravity="bottom"
+    android:background="@android:color/holo_green_light"
+    android:visibility="visible">
+
+
+    <ImageView
+        android:id="@+id/btnBasket"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginLeft="@dimen/base_margin_8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_add_shopping_cart_black_24dp" />
+
+    <TextView
+        android:id="@+id/amountServicesTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/base_margin_8dp"
+        android:layout_marginLeft="@dimen/base_margin_8dp"
+        android:text="Позиций выбрано: "
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/amountCashTitle"
+        app:layout_constraintLeft_toRightOf="@+id/btnBasket"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/amountServices"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base_margin_8dp"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/amountServicesTitle"
+        app:layout_constraintLeft_toRightOf="@+id/amountServicesTitle"
+        app:layout_constraintRight_toLeftOf="@+id/btnCross"
+        app:layout_constraintTop_toTopOf="@+id/amountServicesTitle" />
+
+    <TextView
+        android:id="@+id/amountCashTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/base_margin_8dp"
+        android:layout_marginLeft="@dimen/base_margin_8dp"
+        android:text="На сумму: "
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/btnBasket"
+        app:layout_constraintTop_toBottomOf="@+id/amountServicesTitle" />
+
+    <TextView
+        android:id="@+id/amountCash"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base_margin_8dp"
+        android:text="0 руб."
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/amountCashTitle"
+        app:layout_constraintLeft_toRightOf="@+id/amountCashTitle"
+        app:layout_constraintRight_toLeftOf="@+id/btnCross"
+        app:layout_constraintTop_toTopOf="@+id/amountCashTitle" />
+
+    <ImageButton
+        android:id="@+id/btnCross"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close_black_24dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.medhelp.medhelp">
+
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- для событий загрузки системы -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.QUICKBOOT_POWERON" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.webkit.resource.VIDEO_CAPTURE" />
+    <uses-permission android:name="android.webkit.resource.AUDIO_CAPTURE" />
+    <uses-permission android:name="android.webkit.resource.PROTECTED_MEDIA_ID" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--
+        <uses-feature android:name="android.hardware.camera" />
+        <uses-feature android:name="android.hardware.camera.autofocus" />
+        <uses-feature
+            android:name="android.hardware.camera.front"
+            android:required="true" />-->
+    <uses-permission android:name="oppo.permission.OPPO_COMPONENT_SAFE"/>
+    <uses-permission android:name="com.huawei.permission.external_app_settings.USE_COMPONENT"/>
+    <uses-permission  android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+
+    <application
+        android:networkSecurityConfig="@xml/file_paths"
+        android:requestLegacyExternalStorage="true"
+        android:name=".MainApp"
+        android:allowBackup="false"
+        android:icon="@drawable/logo_white_bg"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup,icon,theme,label,name"
+        >
+        <activity android:name=".ui._main_page.MainActivity" />
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.doctor.service_activity.ServiceActivity"
+            android:label="@string/app_select"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.analise_result.showPdf.ShowPDFActivity"
+            android:screenOrientation="portrait" />
+<!--        <activity-->
+<!--            android:name=".ui._chat.all_rooms.AllRoomsActivity"-->
+<!--            android:screenOrientation="portrait" />-->
+<!--        <activity-->
+<!--            android:name=".ui._chat.info.InformationActivity"-->
+<!--            android:screenOrientation="portrait" />-->
+<!--        <activity-->
+<!--            android:name=".ui._chat.room.RoomActivity"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            android:windowSoftInputMode="adjustResize" />-->
+<!--        <activity-->
+<!--            android:name=".ui._chat.show.ShowImage"-->
+<!--            android:screenOrientation="portrait" />-->
+        <activity
+            android:name=".ui.settings.favorites_tab.FavoritesTabActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.news_about_the_application.NewsAboutTheApplicationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.video_consultation.video_chat.VideoChatActivity"
+            android:screenOrientation="portrait" />
+
+
+        <service
+            android:name=".bg.service.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/kl_icon" />
+
+
+
+        <!--        <receiver android:name=".bg.oldClass.BroadcastOnBootCompile">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />-->
+        <!--            </intent-filter>-->
+        <!--        </receiver>-->
+        <!--        <receiver-->
+        <!--            android:name=".bg.oldClass.notification.BroadcastClickBtnFromNotification"-->
+        <!--            android:enabled="true"-->
+        <!--            android:exported="true">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="com.medhelp.medhelp.MedHelp" />-->
+        <!--            </intent-filter>-->
+        <!--        </receiver>-->
+
+        <!--        <receiver-->
+        <!--            android:exported="true"-->
+        <!--            android:name=".ui.video_consultation.video_chat.noti.NotificationVideoChatButtonListener">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="com.example.medhelp2.GOTOVIDEO" />-->
+        <!--                <action android:name="com.example.medhelp2.CLOSE" />-->
+        <!--                <action android:name="com.example.medhelp2.CLOSE_NOTY_ONLY" />-->
+        <!--                <action android:name="com.example.medhelp2.CLOSE_NOTY_ONLY" />-->
+        <!--            </intent-filter>-->
+        <!--        </receiver>-->
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="2cf131d16770f948315826e198b29ceebb98ad17" />
+        <meta-data
+            android:name="google_analytics_adid_collection_enabled"
+            android:value="false" />
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            tools:node="remove" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.medhelp.medhelp.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths2" />
+        </provider>
+
+    </application>
+</manifest> 

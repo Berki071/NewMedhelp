@@ -1,0 +1,290 @@
+<resources>
+
+    <!--title-->
+    <string name="app_name">Медицинский помощник.Клиент</string>
+    <string name="app_profile">Главная</string>
+    <string name="app_schedule">Расписание</string>
+    <string name="app_chat">Чат</string>
+    <string name="app_doctors">Специалисты</string>
+    <string name="app_search">Поиск услуг</string>
+    <string name="app_sale">Акции</string>
+    <string name="app_analise">Результаты анализов</string>
+    <string name="app_select">Выбор услуги</string>
+    <string name="app_tax_certificate">Справка в налоговую</string>
+
+    <!--hint message-->
+    <string name="hint_name">Введите имя</string>
+    <string name="hint_email">Введите e-mail</string>
+    <string name="hint_message">Введите сообщение</string>
+    <string name="hint_doctor">"Врач: "</string>
+    <string name="hint_doctor_name">ФИО доктора</string>
+    <string name="hint_reception_date">"Дата приема: "</string>
+    <string name="hint_reception_time">Время приема:</string>
+    <string name="hint_phone">Телефон:</string>
+    <string name="hint_time_start">"Время начала: "</string>
+    <string name="hint_time_end">"Время окончания: "</string>
+
+
+    <!--Doctor item-->
+    <string name="f_exp_1">Стаж: %s лет</string>
+    <string name="f_exp_year">Стаж: %s год</string>
+    <string name="f_exp_2">Стаж: %s года</string>
+
+    <!--Drawer-->
+    <string name="open_drawer">Drawer Open</string>
+    <string name="close_drawer">Drawer Close</string>
+    <string name="nav_logout">Выйти</string>
+    <string name="nav_schedule">Расписание</string>
+    <string name="nav_chat">Чат</string>
+    <string name="nav_record">Записаться на прием</string>
+    <string name="nav_result">Результаты анализов</string>
+    <string name="nav_price">Прейскурант на услуги</string>
+    <string name="analisePrice">Прейскурант на анализы</string>
+    <string name="nav_contacts">Контакты</string>
+    <string name="nav_sale">Акции</string>
+    <string name="nav_settings">Настройки</string>
+    <string name="nav_staff">Специалисты</string>
+    <string name="nav_feedback">Обратная связь</string>
+    <string name="nav_news">Возможности приложения </string>
+    <string name="nav_rate">Оценить приложение</string>
+    <string name="nav_list_analyzes">Сданные анализы</string>
+
+
+    <!--Error MessageResponse-->
+    <string name="api_retry_error">Повторите позже…</string>
+    <string name="api_default_error">Что-то пошло не так.</string>
+    <string name="err_msg_name">Введите полное имя</string>
+    <string name="err_msg_email">Введите корректный e-mail</string>
+    <string name="err_authorize">Неверное имя пользователя или пароль</string>
+    <string name="some_error">Произошла непредвиденная ошибка</string>
+    <string name="connection_error">Отсутствует соединение с интернетом</string>
+    <string name="empty_error_message">Не удалось загрузить даные</string>
+    <string name="empty_screen_text">Не удалось загрузить данные.\n Проверьте подключение \nк интернету и \nповторите попытку.</string>
+    <string name="please_retry">Попробуйте позже</string>
+    <string name="empty_chat_message">Вы еще не отправляли \n и не получали сообщений \n от этого пользователя</string>
+
+    <!--Login-->
+    <string name="login">Логин пользователя</string>
+    <string name="password">Пароль</string>
+    <string name="empty_data">Все поля дожны быть заполнены</string>
+    <string name="invalid_data">Пожалуйста введите корректные данные</string>
+    <string name="login_header">Введите учетные данные</string>
+
+    <!--about fragment-->
+    <string name="project_info">Информация о разработчике, ссылки на ресурсы</string>
+
+    <!--rating dialog-->
+    <string name="rate_us">Оценить приложение</string>
+    <string name="rating_message">Сообщите нам, как мы можем улучшить приложение.</string>
+    <string name="rating_play_store_redirect_message_line_1">Потрясающе!\n Спасибо за 5 звезд.</string>
+    <string name="rating_play_store_redirect_message_line_2">Вы можете помочь сделать лучше наше приложение, оставив отзыв в Play Market.</string>
+    <string name="rating_play_store_text">Оценить в Play Market</string>
+    <string name="rating_not_provided_error">Сначала укажите количество звезд.</string>
+    <string name="rating_thanks">Спасибо!</string>
+
+    <!--rating dialog idAnalise-->
+    <string name="rate_doctor_header">Оценить услугу</string>
+    <string name="rating_doctor_message">Вы можете оставить комментарий ниже</string>
+    <string name="rating_doctor_redirect_message">Потрясающе!\n Спасибо за 5 звезд.</string>
+    <string name="rating_doctor_not_provided_error">Сначала укажите количество звезд.</string>
+    <string name="rating_doctor_thanks">Спасибо!</string>
+
+    <!--play store-->
+    <string name="google_play_store_link">"https://play.google.com/store/apps/details?id="</string>
+    <string name="google_market_link">"market://details?id="</string>
+
+    <!--exit dialog-->
+    <string name="exit_from_app">Вы действительно хотите\nвыйти из учетной записи?</string>
+    <string name="btnNo">Нет</string>
+    <string name="btnYes">Да</string>
+
+    <!--confirm dialog-->
+    <string name="confirm_event_positive">Записаться на прием?</string>
+    <string name="confirm_event_negative">Отменить запись?</string>
+    <string name="confirm_event_day">Подтвердить запись?</string>
+    <string name="confirm_no_connection_message">Отсутствует соединение с интернетом</string>
+    <string name="confirm_btn_negative">Нет</string>
+    <string name="confirm_btn_positive">Да</string>
+    <string name="confirm_btn_positive_ok">OK</string>
+
+    <!--button-->
+    <string name="btn_later">Позже</string>
+    <string name="btn_submit">Оценить</string>
+    <string name="btn_enter">Войти</string>
+    <string name="btn_send">Отправить</string>
+    <string name="txt_confirm">Подтвердить</string>
+    <string name="btn_cancel">Отменить</string>
+    <string name="btn_continue">Продолжить</string>
+    <string name="btn_record">Записаться</string>
+    <string name="btn_close">Закрыть</string>
+
+    <!--hint-->
+    <string name="hint_ruble">р</string>
+    <string name="hint_progress">Данные обновляются, подождите…</string>
+    <string name="hint_select_doctor">Выберите специалиста</string>
+    <string name="hint_select_spec">Выберите специльность</string>
+    <string name="hint_select_service">Выберите услугу</string>
+    <string name="hint_chat_edit_text">Введите сообщение …</string>
+
+    <!--action-->
+    <string name="action_login">Войти</string>
+    <string name="action_clear">Очистить</string>
+    <string name="action_cut">Вырезать</string>
+    <string name="action_copy">Копировать</string>
+    <string name="action_paste">Вставить</string>
+    <string name="action_delete">Удалить</string>
+    <string name="action_share">Отправить</string>
+    <string name="action_search">Поиск</string>
+    <string name="action_retry">Повторить</string>
+    <string name="action_add_contact">Добавить пользователя</string>
+    <string name="action_settings">Настройки</string>
+
+    <string name="action_send">Отправить</string>
+    <string name="action_chat_send">Отправить</string>
+    <string name="action_info">Информация</string>
+    <string name="user">Пользователь</string>
+    <string name="last_message">Последнее сообщение</string>
+    <string name="save_password">Запомнить пароль</string>
+    <string name="register">Регистрация</string>
+    <string name="action_save">Сохранить</string>
+    <string name="about">О нас</string>
+
+    <!--data load message-->
+    <string name="data_load_network_ok">Данные успешно загружены из сети</string>
+    <string name="data_load_network_err">Ошибка загрузки данных из сети./nПроверьте соединение с интернетом и повторите попытку</string>
+    <string name="data_load_db_ok">Данные успешно загружены из локального хранилища</string>
+    <string name="data_load_db_err">Ошибка загрузки данных из локального хранилища</string>
+    <string name="data_load_pref_ok">Данные успешно загружены из Shared Preference</string>
+    <string name="data_load_pref_err">Ошибка загрузки данных из Shared Preference</string>
+
+    <!--linkToPDF description-->
+    <string name="company_logo">Логотип компании</string>
+    <string name="photo_doctor">Фотография специалиста</string>
+    <string name="user_image">Изображение пользователя</string>
+    <string name="keyboard">Клавиатура</string>
+    <string name="btn_rate">Оценить</string>
+    <string name="empty_screen_btn">Повторить</string>
+
+
+    <!--Calendar-->
+    <array name="calendar_days_array">
+        <item>Вс</item>
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+    </array>
+
+    <array name="calendar_months_array">
+        <item>Январь,</item>
+        <item>Февраль,</item>
+        <item>Март,</item>
+        <item>Апрель,</item>
+        <item>Май,</item>
+        <item>Июнь,</item>
+        <item>Июль,</item>
+        <item>Август,</item>
+        <item>Сентябрь,</item>
+        <item>Октябрь,</item>
+        <item>Ноябрь,</item>
+        <item>Декабрь,</item>
+    </array>
+
+    <!--alert spinner-->
+    <string name="alert_cancel_title">Подтверждение отмены</string>
+    <array name="cancelSpinner">
+        <item>"Выберите причину отмены из списка"</item>
+        <item>Не нуждаюсь в приеме</item>
+        <item>Неправильная запись (Не записывался)</item>
+        <item>Заболел</item>
+        <item>Уехал из города</item>
+        <item>Перезапишусь сам позже</item>
+        <item>Выздоровел</item>
+    </array>
+
+    <!-- карточка доктора-->
+    <string name="confirmEntry">Подтвердите запись</string>
+    <string name="txtDoctor">"Доктор: " </string>
+    <string name="txtService">"Услуга: "</string>
+    <string name="txtDate">"Дата: "</string>
+    <string name="txtTime">"Время: "</string>
+
+
+    <string name="specOneElement">Все</string>
+    <string name="noEntriesToDoctor">Здесь будет отображаться история Ваших приемов, нажмите кнопку «+» внизу экрана что бы записаться</string>
+    <string name="analysisNotReady">Выбранный анализ еще не готов</string>
+    <string name="enrollAgain">Записаться к этому врачу</string>
+
+    <!--notification-->
+    <string name="key">com.medhelp.medhelp.MedHelp</string>
+    <string name="refuse">Отказаться</string>
+
+
+    <string name="branch">"Филиал: "</string>
+    <string name="favoriteBranch">Выберите любимый филиал:</string>
+
+    //tooltips
+    <string name="scheduleTooltipBranch">Нажмите для выбора филиала! </string>
+    <string name="analiseListTooltipTrue">Данный значок указывает на то, что анализ готов </string>
+    <string name="analiseListTooltipFalse">Данный значок указывает на то, что анализ не готов</string>
+    <string name="analiseResultTooltipLoad">Нажмите для загрузки результата анализа </string>
+    <string name="analiseResultTooltipDelete">Нажмите для удаления из памяти телефона </string>
+    <string name="searchTooltipItem">Нажмите, чтобы записаться на прием</string>
+    <string name="searchTooltipStartedRoom">Нажмите для просмотра всех доступных контактов</string>
+    <string name="searchTooltipProfileBranch">Ваш любимый филиал. Для изменения необходимо перейти в настройки.</string>
+    <string name="searchTooltipSearchTab">Добавьте в закладки, чтобы иметь возможность быстрого доступа через выпадающий список специальностей</string>
+
+
+    <string name="noAnalysis">У Вас  еще нет анализов для отображения</string>
+    <string name="noTab">У Вас еще нет в избранном услуг для отображения</string>
+    <string name="select">Выбрать</string>
+    <string name="enterMessage">введите сообщение</string>
+    <string name="selectConvenientTime">Выберите удобное время:</string>
+    <string name="selectOtherDay">К сожалению, данный день уже расписан. Пожалуйста, выберите другую дату.</string>
+    <string name="selectDate">Выберите дату, на которую планируете записаться</string>
+    <string name="docNotWork">К сожалению, в данный день нет свободного времени. Пожалуйста, выберите другую дату.</string>
+    <string name="docNotWork2">К сожалению, в данный день нет свободного времени.</string>
+    <string name="hint_speciality">"Специальность: "</string>
+    <string name="experience">"Стаж: "</string>
+    <string name="additional">"Дополнительно: "</string>
+    <string name="resultFrom">"Результаты анализов от: "</string>
+    <string name="noServices">Услуги отсутствуют</string>
+    <string name="fio">"ФИО: "</string>
+    <string name="stateAReason">Необходимо указать причину</string>
+
+
+    <!-- Auth -->
+    <string name="auth_success">Авторизация прошла успешно.</string>
+    <string name="auth_failure">Ошибка авторизации.</string>
+    <string name="auth_error">Ошибка авторизации. Код #%d.</string>
+
+    <!-- Dialog -->
+    <string name="dialog_start_scanning_hint">Коснитесь датчика считывания отпечатков пальцев</string>
+    <string name="recommendations"><u>Рекомендации перед приемом</u></string>
+
+
+    <string name="forgotPass">Забыли пароль?</string>
+    <string name="day_of_the_schedule">- день расписан</string>
+    <string name="few_entries">- мало записей</string>
+    <string name="many_entries">- много записей</string>
+    <string name="does_not_work">- не работает</string>
+    <string name="stub_profile">Здесь будут отображаться Ваши приемы в нашем медицинском центре</string>
+    <string name="stub_test">Здесь будут отображаться результаты сданных Вами анализов</string>
+    <string name="stub_of_a_doctor">К сожалению по данной специальности нет специалистов</string>
+    <string name="stock_stub">Здесь будут отображаться специальные предложения нашего медицинского центра</string>
+    <string name="stub_chat">Здесь будут отображаться Ваши переписки с сотрудниками нашего медицинского центра</string>
+    <string name="stub_chat_video">Здесь будут отображаться Ваши текущие и предстоящие онлайн-консультации</string>
+    <string name="entrance_fingerprint">Вход по Fingerprint</string>
+    <string name="descriptionFingerprint">Авторизация в приложении с помощью отпечатка пальца</string>
+    <string name="management_of_selected_services">Управление избранными услугами</string>
+    <string name="descriptionTab">Нажмите для перехода в окно управления избранными услугами</string>
+    <string name="financeAndServices">Финансы/Услуги</string>
+    <string name="onlineConsultation">Онлайн-консультация</string>
+
+    <string name="edit_text_hint_evaluate_the_doctor">Скажите, как мы можем улучшить свою работу</string>
+    <string name="nav_contacting_support">Техническая поддержка</string>
+
+
+</resources>

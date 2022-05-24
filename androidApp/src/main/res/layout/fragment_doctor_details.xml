@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/base_margin_16dp"
+    android:layout_marginRight="@dimen/base_margin_16dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="center"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="8dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/topLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                app:layout_constraintBottom_toTopOf="@+id/doc_info_btn_parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/doc_info_image"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@null"
+                    app:layout_constraintBottom_toTopOf="@+id/linName"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/linName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/base_element_margin"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/linExp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/doc_info_image">
+
+                    <TextView
+                        android:id="@+id/doc_info_hint_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="@string/fio"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/doc_info_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:maxLines="2" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linExp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/base_element_margin"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/linSpec"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linName">
+
+                    <TextView
+                        android:id="@+id/doc_info_hint_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="@string/experience"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/doc_info_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:maxLines="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linSpec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/base_element_margin"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/linInfo"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linExp">
+
+                    <TextView
+                        android:id="@+id/doc_info_hint_spec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="@string/hint_speciality"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/doc_info_spec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:maxHeight="150dp"
+                        android:maxLines="4" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/base_element_margin"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linSpec">
+
+                    <TextView
+                        android:id="@+id/doc_info_hint_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/additional"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/doc_info_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:maxHeight="100dp"
+                        android:paddingRight="4dp"
+                        android:scrollbarSize="@dimen/divider_size_2dp"
+                        android:scrollbarThumbVertical="@android:color/darker_gray"
+                        android:scrollbars="vertical"
+                        android:text="" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/doc_info_btn_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topLin">
+
+                <Button
+                    android:id="@+id/btn_ok"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    style="@style/blueButton"
+                    android:text="Ok"
+                    android:visibility="gone"
+                    android:layout_weight="1"
+                    android:layout_marginRight="4dp"
+                    />
+
+                <Button
+                    android:id="@+id/doc_info_btn_close"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:text="@string/btn_close"
+                    style="@style/blueButton"
+                    android:layout_weight="1"
+                    android:layout_marginRight="4dp"
+                     />
+
+                <Button
+                    android:id="@+id/doc_info_btn_record"
+                    style="@style/blueButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:text="@string/btn_record"
+                    android:layout_weight="1"
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

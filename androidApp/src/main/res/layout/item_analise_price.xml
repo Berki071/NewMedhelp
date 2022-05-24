@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_search_item_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/base_margin_4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginRight="@dimen/base_margin_8dp"
+            android:layout_marginEnd="@dimen/base_margin_8dp"
+            android:layout_marginTop="@dimen/base_margin_8dp"
+            android:textSize="@dimen/text_size_16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/hint"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv_search_item_data"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_search_item_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#01579B"
+            android:textSize="@dimen/text_size_16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_search_item_name"
+            app:layout_constraintRight_toLeftOf="@+id/tv_search_item_rub"
+            app:layout_constraintTop_toTopOf="@+id/tv_search_item_name" />
+
+        <TextView
+            android:id="@+id/tv_search_item_rub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/base_margin_8dp"
+            android:layout_marginEnd="@dimen/base_margin_8dp"
+            android:text="@string/hint_ruble"
+            android:textColor="#01579B"
+            android:textSize="@dimen/text_size_16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_search_item_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_search_item_name" />
+
+        <TextView
+            android:id="@+id/hint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/base_margin_8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_search_item_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

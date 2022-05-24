@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Customer"
+        android:textSize="11sp"
+        android:textColor="@color/text_semi_dark_hint"
+        android:fontFamily="@font/sofia_pro_regular"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="1dp"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_bg_rec_win_text_line"
+        >
+        <EditText
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:maxLength="100"
+            android:maxLines="2"
+            android:scrollbars="vertical"
+            android:textSize="14sp"
+            android:text=""
+            android:digits="йцукеёнгшщзхъфывапролджэячсмитьбюЙЦУКЕЁНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮQWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890 "
+            android:textColor="@color/text_dark_hint"
+            android:fontFamily="@font/sofia_pro_regular"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:background="@null"
+            />
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintTop_toBottomOf="@+id/app_bar_schedule"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!--<include layout="@layout/schedule_description"-->
+                    <!--app:layout_constraintTop_toTopOf="parent"-->
+                    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                    <!--app:layout_constraintRight_toRightOf="parent"-->
+                    <!--/>-->
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/allBranch"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/base_margin_8dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/holder_schedule_day"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/base_margin_32dp"
+                        android:background="@color/light_gray"
+                        android:gravity="center"
+                        android:text="@string/selectDate"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/allBranch" />
+
+                    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                        android:id="@+id/calendar_schedule"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        app:mcv_calendarMode="week"
+                        app:mcv_selectionColor="@color/color_primary_dark"
+                        app:layout_constraintTop_toBottomOf="@+id/holder_schedule_day"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        />
+
+                    <TextView
+                        android:id="@+id/holder_schedule_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/base_margin_32dp"
+                        android:background="@color/light_gray"
+                        android:gravity="center"
+                        android:text="@string/selectConvenientTime"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/calendar_schedule" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_schedule"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:nestedScrollingEnabled="false"
+                        android:visibility="visible"
+                        app:layout_constraintTop_toBottomOf="@+id/holder_schedule_time"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/rootEmpty"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rootSchedule">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.5" />
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="@dimen/base_margin_16dp"
+                            android:layout_marginTop="@dimen/base_margin_16dp"
+                            android:layout_marginRight="@dimen/base_margin_16dp"
+                            android:scaleType="centerInside"
+                            app:layout_constraintBottom_toBottomOf="@+id/guideline"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/sh_profile" />
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/base_margin_16dp"
+                            android:layout_marginRight="@dimen/base_margin_16dp"
+                            android:gravity="center"
+                            android:text="Ничего не найдено, выберите другую неделю или филиал"
+                            android:textColor="@color/semi_gray"
+                            android:textSize="18sp"
+                            android:textStyle="italic"
+                            android:typeface="normal"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/rootSchedule"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/calendar_schedule"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        >
+
+                        <TextView
+                            android:id="@+id/err_schedule"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="@dimen/activity_horizontal_margin"
+                            android:text="@string/selectOtherDay"
+                            android:visibility="gone"
+                            android:background="@color/light_gray"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/empty_schedule"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="@dimen/activity_horizontal_margin"
+                            android:text="@string/selectDate"
+                            android:visibility="gone"
+                            android:background="@color/light_gray"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/hol_schedule"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="@dimen/activity_horizontal_margin"
+                            android:text="@string/docNotWork"
+                            android:visibility="gone"
+                            android:background="@color/light_gray"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <include
+                layout="@layout/item_error_download"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar_schedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                >
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/collapsing_toolbar_schedule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    app:contentScrim="@color/color_primary"
+                    app:layout_collapseMode="parallax"
+                    app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+                    app:titleEnabled="false">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <androidx.appcompat.widget.Toolbar
+                            android:id="@+id/toolbar_schedule"
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="@color/transparent"
+                            app:title="@string/app_schedule"
+                            />
+
+                        <!--<ImageButton-->
+                        <!--android:id="@+id/imageButtonInfo"-->
+                        <!--android:layout_width="40dp"-->
+                        <!--android:layout_height="40dp"-->
+                        <!--android:layout_alignBaseline="@+id/toolbar_schedule"-->
+                        <!--android:layout_alignParentEnd="true"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_marginTop="8dp"-->
+                        <!--android:layout_marginEnd="8dp"-->
+                        <!--android:layout_marginRight="8dp"-->
+                        <!--android:background="@null"-->
+                        <!--app:srcCompat="@drawable/ic_info_white_24dp" />-->
+
+                    </RelativeLayout>
+
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

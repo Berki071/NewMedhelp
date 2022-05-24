@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ExpandableGridView">
+        <attr name="horizontalSpacing" format="dimension" />
+        <attr name="verticalSpacing" format="dimension" />
+        <attr name="stretchMode">
+            <enum name="none" value="0"/>
+            <enum name="spacingWidth" value="1" />
+            <enum name="columnWidth" value="2" />
+            <enum name="spacingWidthUniform" value="3" />
+        </attr>
+        <attr name="columnWidth" format="dimension" />
+        <attr name="numColumns" format="integer" min="0">
+            <enum name="auto_fit" value="-1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MyCarousel">
+        <attr name="coloBackgroundMain" format="color"/>
+        <attr name="colorTitle" format="color"/>
+        <attr name="colorLogoText" format="color"/>
+        <attr name="sizeLogoSp" format="dimension"/>
+        <attr name="sizeTitleSp" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="TextFieldWithTitleAttr">
+        <attr name="titleAttr" format="string"/>
+        <attr name="textAttr" format="string"/>
+        <attr name="promptAttr" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="EdTextFieldWithTitleAttr">
+        <attr name="titleAttrEt" format="string"/>
+        <attr name="textAttrEt" format="string"/>
+        <attr name="promptAttrEt" format="integer"/>
+        <attr name="maxLengthSim" format="integer"/>
+        <attr name="inputTypeSimMy" format="string"/>
+        <attr name="myLines" format="integer"/>
+    </declare-styleable>
+
+</resources>
+
+
+

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/ProfileCardViewStyle">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/base_element_margin">
+
+        <ImageView
+            android:id="@+id/image_doc_item"
+            android:layout_width="@dimen/ic_size_big"
+            android:layout_height="@dimen/ic_size_big"
+            android:layout_marginTop="@dimen/base_element_margin"
+            android:contentDescription="@string/photo_doctor" />
+
+        <ImageView
+            android:id="@+id/image_video"
+            android:layout_width="@dimen/ic_size_big"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            app:srcCompat="@drawable/ic_video_cam_blue_24dp"
+            android:layout_below="@+id/image_doc_item"
+            />
+
+        <TextView
+            android:id="@+id/tv_price_name_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="@dimen/base_element_margin"
+            android:layout_marginLeft="@dimen/base_element_margin"
+            android:layout_marginTop="@dimen/base_element_margin"
+            android:layout_toEndOf="@+id/image_doc_item"
+            android:layout_toRightOf="@+id/image_doc_item"
+            android:gravity="center_horizontal"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_doc_hint_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_price_name_item"
+            android:layout_alignStart="@+id/tv_price_name_item"
+            android:layout_alignLeft="@+id/tv_price_name_item"
+            android:layout_marginTop="@dimen/base_element_margin"
+            android:gravity="start"
+            android:text="@string/hint_doctor"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_doc_name_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_price_name_item"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="@dimen/base_element_margin"
+            android:layout_marginLeft="@dimen/base_element_margin"
+            android:layout_marginTop="@dimen/base_element_margin"
+            android:layout_toEndOf="@+id/tv_doc_hint_item"
+            android:layout_toRightOf="@+id/tv_doc_hint_item"
+            android:gravity="end"
+            android:maxLines="2" />
+
+        <TextView
+            android:id="@+id/tv_date_hint_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_date_item"
+            android:layout_alignStart="@+id/tv_doc_hint_item"
+            android:layout_alignLeft="@+id/tv_doc_hint_item"
+            android:layout_alignBottom="@+id/tv_date_item"
+            android:gravity="start"
+            android:text="@string/hint_reception_date"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_date_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_doc_name_item"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/base_element_margin"
+            android:layout_toEndOf="@+id/tv_date_hint_item"
+            android:layout_toRightOf="@+id/tv_date_hint_item"
+            android:gravity="end" />
+
+
+        <TextView
+            android:id="@+id/tv_time_hint_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_time_item"
+            android:layout_alignStart="@+id/tv_doc_hint_item"
+            android:layout_alignLeft="@+id/tv_doc_hint_item"
+            android:layout_alignBottom="@+id/tv_time_item"
+            android:gravity="start"
+            android:text="@string/hint_reception_time"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_time_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_date_item"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/base_element_margin"
+            android:layout_toEndOf="@+id/tv_time_hint_item"
+            android:layout_toRightOf="@+id/tv_time_hint_item"
+            android:gravity="end" />
+
+        <TextView
+            android:id="@+id/tv_branch_hint_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_branch_item"
+            android:layout_alignStart="@+id/tv_doc_hint_item"
+            android:layout_alignLeft="@+id/tv_doc_hint_item"
+            android:layout_alignBottom="@+id/tv_branch_item"
+            android:gravity="start"
+            android:text="@string/branch"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_branch_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_time_item"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/base_element_margin"
+            android:layout_toEndOf="@+id/tv_time_hint_item"
+            android:layout_toRightOf="@+id/tv_time_hint_item"
+            android:gravity="end" />
+
+        <TextView
+            android:id="@+id/tv_price_hint_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_price_item"
+            android:layout_alignStart="@+id/tv_doc_hint_item"
+            android:layout_alignLeft="@+id/tv_doc_hint_item"
+            android:layout_alignBottom="@+id/tv_price_item"
+            android:gravity="start"
+            android:text="Цена: "
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_price_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_branch_item"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/base_element_margin"
+            android:layout_toEndOf="@+id/tv_time_hint_item"
+            android:layout_toRightOf="@+id/tv_time_hint_item"
+            android:gravity="end" />
+
+        <TextView
+            android:id="@+id/recommendations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_price_item"
+            android:layout_alignStart="@+id/tv_doc_hint_item"
+            android:layout_alignLeft="@+id/tv_doc_hint_item"
+            android:layout_marginTop="@dimen/base_margin_8dp"
+            android:layout_marginBottom="@dimen/base_size_4dp"
+            android:drawableRight="@drawable/ic_new_releases_light_blue_300_24dp"
+            android:text="@string/recommendations"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recommendations"
+            android:layout_marginTop="@dimen/base_margin_4dp"
+            android:layout_marginBottom="8dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rootPaymentConfirmation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/rootCancelPostpone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/btn_payment"
+                    style="@style/blueButton"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/base_margin_8dp"
+                    android:text="Оплатить"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/btn_confirm_profile_item"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+
+
+                <Button
+                    android:id="@+id/btn_confirm_profile_item"
+                    style="@style/blueButton"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="@dimen/divider_size_2dp"
+                    android:layout_marginLeft="@dimen/divider_size_2dp"
+                    android:layout_marginTop="@dimen/base_margin_8dp"
+                    android:text="@string/txt_confirm"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/btn_payment"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rootCancelPostpone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/base_element_margin"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rootPaymentConfirmation">
+
+                <Button
+                    android:id="@+id/btn_cancel_profile_item"
+                    style="@style/blueButton"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="@dimen/divider_size_2dp"
+                    android:text="@string/btn_cancel"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/btn_postpone"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <Button
+                    android:id="@+id/btn_postpone"
+                    style="@style/blueButton"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:text="Перенести"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/btn_cancel_profile_item"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
