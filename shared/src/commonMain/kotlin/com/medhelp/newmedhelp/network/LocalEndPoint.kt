@@ -16,8 +16,8 @@ interface LocalEndPoint {
             BASE_URL + "allfilial/{" + NetworkManager.ID_CENTER + "}"
         const val NEW_FAVORITE_BRANCH =
             BASE_URL + "SmenaLikeFilial/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_BRANCH + "}/{" + NetworkManager.ID_USER_NEW + "}/{" + NetworkManager.ID_BRANCH_NEW + "}/{" + NetworkManager.ID_CENTER + "}"
-        const val SEND_LOG_TO_SERVER =
-            BASE_URL + "LogDataInsert/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_CENTER + "}/{" + NetworkManager.ID_BRANCH + "}/{" + NetworkManager.TYPE + "}/kl/{" + NetworkManager.VERSION_CODE + "}"
+//        const val SEND_LOG_TO_SERVER =
+//            BASE_URL + "LogDataInsert/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_CENTER + "}/{" + NetworkManager.ID_BRANCH + "}/{" + NetworkManager.TYPE + "}/kl/{" + NetworkManager.VERSION_CODE + "}"
         const val REQUEST_PASS =
             BASE_URL + "NewPWDMobileUser/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.AUTH + "}"
         const val NEWS_UPDATE = BASE_URL + "NewsUpdate"

@@ -13,7 +13,6 @@ import com.medhelp.medhelp.utils.timber_log.LoggingTree
 import com.medhelp.shared.model.CenterResponse
 import com.medhelp.shared.model.SettingsAllBranchHospitalResponse
 import com.medhelp.shared.model.UserResponse
-import com.medhelp.shared.network.NetworkManager
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,6 +22,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import com.medhelp.medhelp.data.network.NetworkManager as NM
+import com.medhelp.shared.network.NetworkManager
 
 class SplashPresenter(var mainView: SplashActivity) {
     var crashlytics = FirebaseCrashlytics.getInstance()
@@ -53,8 +53,7 @@ class SplashPresenter(var mainView: SplashActivity) {
     private fun verifyUser(username: String, password: String, isRepeatOnErrorConnection: Boolean, id_kl: String?, id_filial: String?) {
         mainScope.launch {
             kotlin.runCatching {
-                networkManager2.doLoginApiCall(
-                    ProtectionData().getSignature(
+                networkManager2.doLoginApiCall(ProtectionData().getSignature(
                         mainView
                     )!!, username, password
                 )
@@ -73,8 +72,7 @@ class SplashPresenter(var mainView: SplashActivity) {
                             }
                         }
                         val dd = prefManager.currentUserInfo
-                        if (dd == null || dd.apiKey == null) prefManager.currentUserInfo =
-                            it.response[0]
+                        if (dd == null || dd.apiKey == null) prefManager.currentUserInfo = it.response[0]
                         updateHeaderInfo()
                     } else {
                         prefManager.currentPassword = ""
@@ -82,12 +80,8 @@ class SplashPresenter(var mainView: SplashActivity) {
                         mainView.openLoginActivity()
                     }
                 }.onFailure {
-                    Timber.tag("my").e(
-                        LoggingTree.getMessageForError(
-                            it,
-                            "SplashPresenter\$verifyUser "
-                        )
-                    )
+                    Timber.tag("my").e(LoggingTree.getMessageForError(it,"SplashPresenter\$verifyUser "))
+
                     if (it is ANError) {
                         val anError = it
                         if (anError != null && anError.errorDetail != null && anError.errorDetail.contains(

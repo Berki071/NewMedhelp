@@ -1,5 +1,6 @@
 package com.medhelp.shared.network
 
+import com.medhelp.newmedhelp.model.SimpleResponseBoolean
 import com.medhelp.shared.model.CenterList
 import com.medhelp.shared.model.CurrentUserInfoList
 import com.medhelp.shared.model.SettingsAllBaranchHospitalList
@@ -126,5 +127,20 @@ class NetworkManager {
             }
         }
     }
+
+    @Throws(Exception::class) suspend fun sendLogToServer(type: String, log: String, versionCode: String,  idUSer: String, idBranch: String, idCenter: String) : SimpleResponseBoolean {
+        return httpClient.post(Url(LocalEndPoint.BASE_URL + "LogDataInsert/" + idUSer + "/" + idCenter + "/" + idBranch + "/" + type + "/kl/" + versionCode)) {
+            headers {
+                append(AUTH, LocalEndPoint.API_KEY)
+            }
+
+            body= MultiPartFormDataContent(formData {
+                append("log", log)
+            })
+        }
+    }
+
+
+
 }
 

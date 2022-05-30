@@ -5,7 +5,6 @@ import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.OkHttpResponseListener
 import com.medhelp.medhelp.data.model.*
 import com.medhelp.medhelp.data.model.analise_price.AnalisePriceList
-import com.medhelp.medhelp.data.model.chat.InfoAboutDocList
 import com.medhelp.medhelp.data.model.chat.MessageFromServerList
 import com.medhelp.medhelp.data.model.chat.SimpleResBoolean
 import com.medhelp.medhelp.data.model.notification.NotificationMsgList
@@ -86,31 +85,31 @@ class NetworkManager(val prefManager: PreferencesManager) {
             .getObjectObservable(ErrorResponse::class.java)
     }
 
-    fun sendLogToServer(
-        type: String,
-        log: String,
-        versionCode: Int
-    ): Observable<SimpleResponseBoolean> {
-        var idUSer = 0
-        var idBranch = 0
-        var idCenter = 0
-        try {
-            idUSer = prefManager.currentUserInfo!!.idUser!!
-            idBranch = prefManager.currentUserInfo!!.idBranch!!
-            idCenter = prefManager.currentUserInfo!!.idCenter!!
-        } catch (e: Exception) {
-        }
-        return Rx2AndroidNetworking.post(LocalEndPoint.SEND_LOG_TO_SERVER)
-            .addHeaders(AUTH, LocalEndPoint.API_KEY)
-            .addPathParameter(ID_USER, idUSer.toString())
-            .addPathParameter(ID_BRANCH, idBranch.toString())
-            .addPathParameter(ID_CENTER, idCenter.toString())
-            .addPathParameter(TYPE, type)
-            .addPathParameter(VERSION_CODE, versionCode.toString())
-            .addBodyParameter("log", log)
-            .build()
-            .getObjectObservable(SimpleResponseBoolean::class.java)
-    }
+//    fun sendLogToServer(
+//        type: String,
+//        log: String,
+//        versionCode: Int
+//    ): Observable<SimpleResponseBoolean> {
+//        var idUSer = 0
+//        var idBranch = 0
+//        var idCenter = 0
+//        try {
+//            idUSer = prefManager.currentUserInfo!!.idUser!!
+//            idBranch = prefManager.currentUserInfo!!.idBranch!!
+//            idCenter = prefManager.currentUserInfo!!.idCenter!!
+//        } catch (e: Exception) {
+//        }
+//        return Rx2AndroidNetworking.post(LocalEndPoint.SEND_LOG_TO_SERVER)
+//            .addHeaders(AUTH, LocalEndPoint.API_KEY)
+//            .addPathParameter(ID_USER, idUSer.toString())
+//            .addPathParameter(ID_BRANCH, idBranch.toString())
+//            .addPathParameter(ID_CENTER, idCenter.toString())
+//            .addPathParameter(TYPE, type)
+//            .addPathParameter(VERSION_CODE, versionCode.toString())
+//            .addBodyParameter("log", log)
+//            .build()
+//            .getObjectObservable(SimpleResponseBoolean::class.java)
+//    }
 
     fun sendNewFavoriteHospitalBranchToInnerServer(
         newBranch: Int,
@@ -397,17 +396,17 @@ class NetworkManager(val prefManager: PreferencesManager) {
             .getObjectObservable(SimpleResponseString::class.java)
     }
 
-    fun getAllRoom(idUser: Int, idBranch: Int): Observable<InfoAboutDocList> {
-        return Rx2AndroidNetworking.get(CenterEndPoint.ALL_ROOM)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-            .addPathParameter(ID_USER, idUser.toString())
-            .addPathParameter(ID_BRANCH, idBranch.toString())
-            .build()
-            .getObjectObservable(InfoAboutDocList::class.java)
-    }
+//    fun getAllRoom(idUser: Int, idBranch: Int): Observable<InfoAboutDocList> {
+//        return Rx2AndroidNetworking.get(CenterEndPoint.ALL_ROOM)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
+//            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
+//            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
+//            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
+//            .addPathParameter(ID_USER, idUser.toString())
+//            .addPathParameter(ID_BRANCH, idBranch.toString())
+//            .build()
+//            .getObjectObservable(InfoAboutDocList::class.java)
+//    }
 
     fun getAllExternalMsg(idUser: Int, idBranch: Int): Observable<MessageFromServerList> {
         return Rx2AndroidNetworking.get(CenterEndPoint.EXTERNAL_MSG)
