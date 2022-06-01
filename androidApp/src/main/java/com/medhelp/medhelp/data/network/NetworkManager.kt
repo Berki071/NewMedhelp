@@ -623,22 +623,18 @@ class NetworkManager(val prefManager: PreferencesManager) {
     }
 
     //endregion
-    fun sendFcmId(
-        idUser: String,
-        idFilial: String,
-        idFcm: String
-    ): Observable<SimpleResBoolean> {
-        return Rx2AndroidNetworking.get(CenterEndPoint.SEND_FCM_ID)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-            .addPathParameter(ID_USER, idUser)
-            .addPathParameter(ID_BRANCH, idFilial)
-            .addPathParameter(ID_FCM, idFcm)
-            .build()
-            .getObjectObservable(SimpleResBoolean::class.java)
-    }
+//    fun sendFcmId(idUser: String, idFilial: String, idFcm: String): Observable<SimpleResBoolean> {
+//        return Rx2AndroidNetworking.get(CenterEndPoint.SEND_FCM_ID)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
+//            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
+//            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
+//            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
+//            .addPathParameter(ID_USER, idUser)
+//            .addPathParameter(ID_BRANCH, idFilial)
+//            .addPathParameter(ID_FCM, idFcm)
+//            .build()
+//            .getObjectObservable(SimpleResBoolean::class.java)
+//    }
 
     fun getTechUsersFcm(): Observable<TechUsersFcmIdResponse> {
         return Rx2AndroidNetworking.get(LocalEndPoint.GET_USERS_TECH_FCM_ID)

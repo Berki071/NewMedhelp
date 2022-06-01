@@ -12,6 +12,7 @@ import com.medhelp.medhelp.data.pref.PreferencesManager
 import com.medhelp.medhelp.utils.main.MainUtils
 import com.medhelp.medhelp.utils.main.NetworkUtils
 import com.medhelp.medhelp.utils.timber_log.LoggingTree
+import com.medhelp.newmedhelp.MUtils
 import com.medhelp.shared.model.UserResponse
 import com.medhelp.shared.network.NetworkManager
 import io.reactivex.Observable
@@ -222,17 +223,17 @@ class LoginPresenter(var mainView: LoginActivity) {
 
                 mainScope.launch {
                     kotlin.runCatching {
-                        networkManager2.getCurrentUserInfoInCenter(tmp.idUser!!, tmp.idBranch!!,prefManager.currentUserInfo!!.apiKey!!, prefManager.centerInfo!!.db_name!!,prefManager.currentUserInfo!!.idUser.toString(),prefManager.currentUserInfo!!.idBranch.toString())
+                        networkManager2.getCurrentUserInfoInCenter(tmp.idUser!!.toString(), tmp.idBranch!!.toString(),prefManager.currentUserInfo!!.apiKey!!, prefManager.centerInfo!!.db_name!!,prefManager.currentUserInfo!!.idUser.toString(),prefManager.currentUserInfo!!.idBranch.toString())
                     }
                         .onSuccess {
-                            tmp.surname = MainUtils.encodeDecodeWord(
-                                it.responses[0].surname, it.responses[0].keySurname
+                            tmp.surname = MUtils.encodeDecodeWord(
+                                it.responses[0].surname!!, it.responses[0].keySurname!!
                             )
                             tmp.name = it.responses[0].name
                             tmp.patronymic = it.responses[0].patronymic
-                            tmp.phone = MainUtils.encodeDecodeWord(
-                                it.responses[0].phone,
-                                it.responses[0].keyPhone
+                            tmp.phone = MUtils.encodeDecodeWord(
+                                it.responses[0].phone!!,
+                                it.responses[0].keyPhone!!
                             )
                             tmp.birthday = it.responses[0].birthday
                             tmp.email = it.responses[0].email
@@ -282,6 +283,7 @@ class LoginPresenter(var mainView: LoginActivity) {
                 })
         }
 
+    private var countFcmSend=0
     private fun sendFcmToken(token: String) {
         val list = prefManager.usersLogin
         if (list == null || list.size == 0) {
@@ -289,32 +291,30 @@ class LoginPresenter(var mainView: LoginActivity) {
             mainView.closeActivity()
             return
         }
-        Observable.fromIterable(list)
-            .flatMap { userResponse: UserResponse ->
-                networkManager.sendFcmId(
-                    userResponse.idUser.toString(),
-                    userResponse.idBranch.toString(),
-                    token
-                )
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<SimpleResBoolean> {
-                override fun onSubscribe(d: Disposable) {}
-                override fun onNext(userResponse: SimpleResBoolean) {}
-                override fun onError(e: Throwable) {
-                    Timber.tag("my")
-                        .e(LoggingTree.getMessageForError(e, "LoginPresenter\$sendFcmToken"))
-                    mainView.openProfileActivity()
-                    mainView.closeActivity()
-                }
 
-                override fun onComplete() {
-                    mainView.openProfileActivity()
-                    mainView.closeActivity()
+        for (i in list) {
+            mainScope.launch {
+                kotlin.runCatching {
+                    networkManager2.sendFcmId(i.idUser.toString(), i.idBranch.toString(), token, prefManager.currentUserInfo!!.apiKey!!, prefManager.centerInfo!!.db_name!!,prefManager.currentUserInfo!!.idUser.toString(),prefManager.currentUserInfo!!.idBranch.toString())
                 }
+                    .onSuccess {
+                        countFcmSend--
+                        if(countFcmSend<=0)
+                            allHospitalBranch
+
+                    }.onFailure {
+                        if (it is ANError) {
+                            val anError = it
+                            crashlytics.log(anError.errorDetail + "//7//" + anError.errorBody)
+                        } else {
+                            crashlytics.log(it.message!!)
+                        }
+                        Timber.tag("my").e(LoggingTree.getMessageForError(it, "LoginPresenter\$restorePass "))
+                        mainView.hideLoading()
+                        mainView.showError("Ошибка восстановления пароля")
+                    }
             }
-            )
+        }
     }
 
     fun restorePass(username: String) {

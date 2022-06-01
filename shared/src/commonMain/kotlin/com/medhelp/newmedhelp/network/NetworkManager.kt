@@ -1,5 +1,6 @@
 package com.medhelp.shared.network
 
+import com.medhelp.newmedhelp.model.SimpleResBoolean
 import com.medhelp.newmedhelp.model.SimpleResponseBoolean
 import com.medhelp.shared.model.CenterList
 import com.medhelp.shared.model.CurrentUserInfoList
@@ -87,7 +88,7 @@ class NetworkManager {
         }
     }
 
-    @Throws(Exception::class)  suspend fun getCurrentUserInfoInCenter(idUser: Int, idBranch: Int, h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : CurrentUserInfoList {
+    @Throws(Exception::class)  suspend fun getCurrentUserInfoInCenter(idUser: String, idBranch: String, h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : CurrentUserInfoList {
         return httpClient.get(Url(BASE_URL_CENTER + "ClientInfoById/" + idUser + "/" + idBranch)) {
             headers {
                 append(AUTH, h_Auth)
@@ -140,6 +141,16 @@ class NetworkManager {
         }
     }
 
+    @Throws(Exception::class) suspend fun sendFcmId (idUser: String, idFilial: String, idFcm: String, h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : SimpleResBoolean {
+        return httpClient.get(Url( CenterEndPoint.BASE_URL + "UpdateFCMuser/" + idUser + "/" + idFilial + "/" + idFcm )) {
+            headers {
+                append(AUTH, h_Auth)
+                append(DB_NAME, h_dbName)
+                append(ID_KL, h_idKl)
+                append(ID_FILIAL, h_idFilial)
+            }
+        }
+    }
 
 
 }

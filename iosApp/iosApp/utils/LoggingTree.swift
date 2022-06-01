@@ -41,6 +41,9 @@ class LoggingTree{
     static func e (_ msg : String, _ error : Error){
         self.sendLogToServer(ERROR, msg+"; \(error)")
     }
+    static func e (_ msg : String){
+        self.sendLogToServer(ERROR, msg)
+    }
     static func ePay (_ msg : String, _ error : Error){
         self.sendLogToServer(ERROR_PAYMENT, msg+"; \(error)")
     }

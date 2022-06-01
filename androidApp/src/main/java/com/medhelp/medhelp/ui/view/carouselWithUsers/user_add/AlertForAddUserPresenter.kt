@@ -41,8 +41,6 @@ class AlertForAddUserPresenter(var context: Context, var view: AlertForAddUser) 
     private fun refreshUsers() {
         val username = prefManager.currentLogin
         val password = prefManager.currentPassword
-        val cd = CompositeDisposable()
-
 
         mainScope.launch {
             kotlin.runCatching {
@@ -83,7 +81,7 @@ class AlertForAddUserPresenter(var context: Context, var view: AlertForAddUser) 
 
                 mainScope.launch {
                     kotlin.runCatching {
-                        networkManager2.getCurrentUserInfoInCenter(tmp.idUser!!, tmp.idBranch!!,prefManager.currentUserInfo!!.apiKey!!, prefManager.centerInfo!!.db_name!!,prefManager.currentUserInfo!!.idUser.toString(),prefManager.currentUserInfo!!.idBranch.toString())
+                        networkManager2.getCurrentUserInfoInCenter(tmp.idUser!!.toString(), tmp.idBranch!!.toString(),prefManager.currentUserInfo!!.apiKey!!, prefManager.centerInfo!!.db_name!!,prefManager.currentUserInfo!!.idUser.toString(),prefManager.currentUserInfo!!.idBranch.toString())
                     }
                         .onSuccess {
                             tmp.surname = it.responses[0].surname

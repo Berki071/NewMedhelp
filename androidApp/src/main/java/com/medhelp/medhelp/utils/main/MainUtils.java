@@ -154,26 +154,26 @@ public final class MainUtils {
 //        }
 //    }
 
-    public static String getEncodeKey(String word){
-        String tmp="";
-        Random generator = new Random();
-
-        for(int i=0; i<word.length(); i++){
-            if(word.charAt(i)>255)
-                tmp+=(char)(generator.nextInt(4095));
-            else
-                tmp+=(char)(generator.nextInt(255));
-        }
-
-        return tmp;
-    }
-    public static String encodeDecodeWord(String word, String key){
-        String encodeStr="";
-        for (int i = 0; i < word.length(); i++)
-            encodeStr += (char)(word.charAt(i) ^ key.charAt(i));
-
-        return encodeStr;
-    }
+//    public static String getEncodeKey(String word){
+//        String tmp="";
+//        Random generator = new Random();
+//
+//        for(int i=0; i<word.length(); i++){
+//            if(word.charAt(i)>255)
+//                tmp+=(char)(generator.nextInt(4095));
+//            else
+//                tmp+=(char)(generator.nextInt(255));
+//        }
+//
+//        return tmp;
+//    }
+//    public static String encodeDecodeWord(String word, String key){
+//        String encodeStr="";
+//        for (int i = 0; i < word.length(); i++)
+//            encodeStr += (char)(word.charAt(i) ^ key.charAt(i));
+//
+//        return encodeStr;
+//    }
 
     public static String getRealPathFromURI(Uri contentUri, Context context) {
         String[] proj = { MediaStore.Images.Media.DATA };
