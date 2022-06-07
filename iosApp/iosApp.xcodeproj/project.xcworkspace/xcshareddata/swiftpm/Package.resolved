@@ -11,6 +11,24 @@
         }
       },
       {
+        "package": "AnyFormatKit",
+        "repositoryURL": "https://github.com/luximetr/AnyFormatKit",
+        "state": {
+          "branch": null,
+          "revision": "ae3a965164005b07f81d6aa066520d7ad14ea54e",
+          "version": "2.5.2"
+        }
+      },
+      {
+        "package": "AnyFormatKitSwiftUI",
+        "repositoryURL": "https://github.com/luximetr/AnyFormatKitSwiftUI.git",
+        "state": {
+          "branch": null,
+          "revision": "09cb509f5982e66eff69af7f335047a4e2aa004b",
+          "version": "0.5.3"
+        }
+      },
+      {
         "package": "BoringSSL-GRPC",
         "repositoryURL": "https://github.com/firebase/boringssl-SwiftPM.git",
         "state": {
@@ -74,6 +92,24 @@
         }
       },
       {
+        "package": "InputMask",
+        "repositoryURL": "https://github.com/RedMadRobot/input-mask-ios",
+        "state": {
+          "branch": null,
+          "revision": "40e33ad9fb8cef671f8c4f667f6c0a0043abcbb3",
+          "version": "6.1.0"
+        }
+      },
+      {
+        "package": "iPhoneNumberField",
+        "repositoryURL": "https://github.com/MojtabaHs/iPhoneNumberField.git",
+        "state": {
+          "branch": null,
+          "revision": "a6b5fcc6c9b085285932fe4fe754086ab92409cb",
+          "version": "0.6.1"
+        }
+      },
+      {
         "package": "leveldb",
         "repositoryURL": "https://github.com/firebase/leveldb.git",
         "state": {
@@ -89,6 +125,15 @@
           "branch": null,
           "revision": "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
           "version": "2.30909.0"
+        }
+      },
+      {
+        "package": "PhoneNumberKit",
+        "repositoryURL": "https://github.com/marmelroy/PhoneNumberKit",
+        "state": {
+          "branch": null,
+          "revision": "d4c094934237b23344cf948dd999c431feb8da06",
+          "version": "3.4.1"
         }
       },
       {

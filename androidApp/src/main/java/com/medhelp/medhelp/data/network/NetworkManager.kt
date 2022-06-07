@@ -63,13 +63,13 @@ import java.io.IOException
 
 class NetworkManager(val prefManager: PreferencesManager) {
     //region local
-    fun requestNewPass(username: String): Observable<SimpleResponseString> {
-        return Rx2AndroidNetworking.get(LocalEndPoint.REQUEST_PASS)
-            .addPathParameter(AUTH, LocalEndPoint.API_KEY)
-            .addPathParameter(ID_USER, username)
-            .build()
-            .getObjectObservable(SimpleResponseString::class.java)
-    }
+//    fun requestNewPass(username: String): Observable<SimpleResponseString> {
+//        return Rx2AndroidNetworking.get(LocalEndPoint.REQUEST_PASS)
+//            .addPathParameter(AUTH, LocalEndPoint.API_KEY)
+//            .addPathParameter(ID_USER, username)
+//            .build()
+//            .getObjectObservable(SimpleResponseString::class.java)
+//    }
 
 
 
@@ -718,6 +718,11 @@ class NetworkManager(val prefManager: PreferencesManager) {
     }
 
     fun sendDataForTaxCertificate(data: DataForTaxCertificate): Observable<SendTaxCertificateResponseList> {
+//        var DB_NAME1 = prefManager.centerInfo!!.db_name
+//        var AUTH1 = prefManager.currentUserInfo!!.apiKey
+//        var ID_KL1 = prefManager.currentUserInfo!!.idUser.toString()
+//        var ID_FILIAL1 = prefManager.currentUserInfo!!.idBranch.toString()
+
         return Rx2AndroidNetworking.get(CenterEndPoint.SEND_DATA_FOR_TAX_CERTIFICATE)
             .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
             .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)

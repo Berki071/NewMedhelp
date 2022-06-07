@@ -10,10 +10,16 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		561861F5284A128300C3CA28 /* AnyFormatKitSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 561861F4284A128300C3CA28 /* AnyFormatKitSwiftUI */; };
+		561861F7284DB66500C3CA28 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561861F6284DB66100C3CA28 /* Constants.swift */; };
 		562784ED2840C43000F48910 /* SharedPreferenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562784EC2840C43000F48910 /* SharedPreferenses.swift */; };
 		5663CF8B283E05F300EBD24B /* LoginUiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663CF8A283E05F300EBD24B /* LoginUiView.swift */; };
 		5663CFC5283F303800EBD24B /* SplashUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663CFC4283F303800EBD24B /* SplashUIView.swift */; };
 		5663CFC7283F314800EBD24B /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663CFC6283F314800EBD24B /* SplashPresenter.swift */; };
+		5685469B284878AF00E5DDFE /* NetMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5685469A284878AF00E5DDFE /* NetMonitor.swift */; };
+		5685469E28489C5200E5DDFE /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5685469D28489C5200E5DDFE /* LoginPresenter.swift */; };
+		568546A12849CB9200E5DDFE /* InputMask in Frameworks */ = {isa = PBXBuildFile; productRef = 568546A02849CB9200E5DDFE /* InputMask */; };
+		568546A62849F0B400E5DDFE /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 568546A52849F0B400E5DDFE /* iPhoneNumberField */; };
 		56B05AC32840D81000CA0BB0 /* MainUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B05AC22840D81000CA0BB0 /* MainUIView.swift */; };
 		56B05AC62840E14300CA0BB0 /* LoggingTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B05AC52840E14300CA0BB0 /* LoggingTree.swift */; };
 		56B05AC8284461F400CA0BB0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56B05AC7284461F400CA0BB0 /* GoogleService-Info.plist */; };
@@ -41,10 +47,13 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		561861F6284DB66100C3CA28 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		562784EC2840C43000F48910 /* SharedPreferenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPreferenses.swift; sourceTree = "<group>"; };
 		5663CF8A283E05F300EBD24B /* LoginUiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUiView.swift; sourceTree = "<group>"; };
 		5663CFC4283F303800EBD24B /* SplashUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashUIView.swift; sourceTree = "<group>"; };
 		5663CFC6283F314800EBD24B /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
+		5685469A284878AF00E5DDFE /* NetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetMonitor.swift; sourceTree = "<group>"; };
+		5685469D28489C5200E5DDFE /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		56B05AC22840D81000CA0BB0 /* MainUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUIView.swift; sourceTree = "<group>"; };
 		56B05AC52840E14300CA0BB0 /* LoggingTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingTree.swift; sourceTree = "<group>"; };
 		56B05AC7284461F400CA0BB0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -58,10 +67,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				56B05ACB2844666000CA0BB0 /* FirebaseAnalytics in Frameworks */,
+				568546A62849F0B400E5DDFE /* iPhoneNumberField in Frameworks */,
 				56B05AD12844666100CA0BB0 /* FirebaseCrashlytics in Frameworks */,
 				56B05AD32844666100CA0BB0 /* FirebaseMessaging in Frameworks */,
+				568546A12849CB9200E5DDFE /* InputMask in Frameworks */,
 				56B05ACF2844666100CA0BB0 /* FirebaseAppCheck in Frameworks */,
 				56B05ACD2844666100CA0BB0 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				561861F5284A128300C3CA28 /* AnyFormatKitSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				562784EC2840C43000F48910 /* SharedPreferenses.swift */,
+				561861F6284DB66100C3CA28 /* Constants.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -97,16 +110,26 @@
 			isa = PBXGroup;
 			children = (
 				5663CFC8283F314F00EBD24B /* splash */,
-				5663CF8A283E05F300EBD24B /* LoginUiView.swift */,
+				5685469C28489AAF00E5DDFE /* login */,
 				56B05AC22840D81000CA0BB0 /* MainUIView.swift */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		5685469C28489AAF00E5DDFE /* login */ = {
+			isa = PBXGroup;
+			children = (
+				5663CF8A283E05F300EBD24B /* LoginUiView.swift */,
+				5685469D28489C5200E5DDFE /* LoginPresenter.swift */,
+			);
+			path = login;
 			sourceTree = "<group>";
 		};
 		56B05AC42840E11C00CA0BB0 /* utils */ = {
 			isa = PBXGroup;
 			children = (
 				56B05AC52840E14300CA0BB0 /* LoggingTree.swift */,
+				5685469A284878AF00E5DDFE /* NetMonitor.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -175,6 +198,9 @@
 				56B05ACE2844666100CA0BB0 /* FirebaseAppCheck */,
 				56B05AD02844666100CA0BB0 /* FirebaseCrashlytics */,
 				56B05AD22844666100CA0BB0 /* FirebaseMessaging */,
+				568546A02849CB9200E5DDFE /* InputMask */,
+				568546A52849F0B400E5DDFE /* iPhoneNumberField */,
+				561861F4284A128300C3CA28 /* AnyFormatKitSwiftUI */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* iosApp.app */;
@@ -206,6 +232,9 @@
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
 				56B05AC92844666000CA0BB0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				5685469F2849CB9100E5DDFE /* XCRemoteSwiftPackageReference "input-mask-ios" */,
+				568546A42849F0B400E5DDFE /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
+				561861F3284A128300C3CA28 /* XCRemoteSwiftPackageReference "AnyFormatKitSwiftUI" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -232,7 +261,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		56B05AD42844698900CA0BB0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -245,13 +274,13 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
 		};
 		7555FFB5242A651A00829871 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -275,7 +304,10 @@
 			files = (
 				562784ED2840C43000F48910 /* SharedPreferenses.swift in Sources */,
 				5663CF8B283E05F300EBD24B /* LoginUiView.swift in Sources */,
+				5685469B284878AF00E5DDFE /* NetMonitor.swift in Sources */,
+				5685469E28489C5200E5DDFE /* LoginPresenter.swift in Sources */,
 				56B05AC62840E14300CA0BB0 /* LoggingTree.swift in Sources */,
+				561861F7284DB66500C3CA28 /* Constants.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				5663CFC5283F303800EBD24B /* SplashUIView.swift in Sources */,
 				5663CFC7283F314800EBD24B /* SplashPresenter.swift in Sources */,
@@ -337,7 +369,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -392,7 +424,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -476,6 +508,30 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		561861F3284A128300C3CA28 /* XCRemoteSwiftPackageReference "AnyFormatKitSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/luximetr/AnyFormatKitSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.3;
+			};
+		};
+		5685469F2849CB9100E5DDFE /* XCRemoteSwiftPackageReference "input-mask-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RedMadRobot/input-mask-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		568546A42849F0B400E5DDFE /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.1;
+			};
+		};
 		56B05AC92844666000CA0BB0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -487,6 +543,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		561861F4284A128300C3CA28 /* AnyFormatKitSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 561861F3284A128300C3CA28 /* XCRemoteSwiftPackageReference "AnyFormatKitSwiftUI" */;
+			productName = AnyFormatKitSwiftUI;
+		};
+		568546A02849CB9200E5DDFE /* InputMask */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5685469F2849CB9100E5DDFE /* XCRemoteSwiftPackageReference "input-mask-ios" */;
+			productName = InputMask;
+		};
+		568546A52849F0B400E5DDFE /* iPhoneNumberField */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 568546A42849F0B400E5DDFE /* XCRemoteSwiftPackageReference "iPhoneNumberField" */;
+			productName = iPhoneNumberField;
+		};
 		56B05ACA2844666000CA0BB0 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 56B05AC92844666000CA0BB0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

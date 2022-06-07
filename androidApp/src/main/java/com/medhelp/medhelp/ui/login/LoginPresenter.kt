@@ -299,8 +299,10 @@ class LoginPresenter(var mainView: LoginActivity) {
                 }
                     .onSuccess {
                         countFcmSend--
-                        if(countFcmSend<=0)
-                            allHospitalBranch
+                        if(countFcmSend<=0) {
+                            mainView.openProfileActivity()
+                            mainView.closeActivity()
+                        }
 
                     }.onFailure {
                         if (it is ANError) {
@@ -319,33 +321,59 @@ class LoginPresenter(var mainView: LoginActivity) {
 
     fun restorePass(username: String) {
         mainView.showLoading()
-        val cd = CompositeDisposable()
-        cd.add(networkManager
-                .requestNewPass(username)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { responses: SimpleResponseString ->
-                        mainView.responseOnPassRequest(responses.response)
-                        mainView.hideLoading()
-                        cd.dispose()
-                    }
-                ) { throwable: Throwable ->
-                    if (throwable is ANError) {
-                        val anError = throwable
+
+        mainScope.launch {
+            kotlin.runCatching {
+                networkManager2.requestNewPass(username)
+            }
+                .onSuccess {
+                    mainView.responseOnPassRequest(it.response)
+                    mainView.hideLoading()
+                }.onFailure {
+                    if (it is ANError) {
+                        val anError = it
                         crashlytics.log(anError.errorDetail + "//7//" + anError.errorBody)
                     } else {
-                        crashlytics.log(throwable.message!!)
+                        crashlytics.log(it.message!!)
                     }
                     Timber.tag("my").e(
                         LoggingTree.getMessageForError(
-                            throwable,
+                            it,
                             "LoginPresenter\$restorePass "
                         )
                     )
                     mainView.hideLoading()
                     mainView.showError("Ошибка восстановления пароля")
-                    cd.dispose()
-                })
+                }
+        }
+
+//        val cd = CompositeDisposable()
+//        cd.add(networkManager2
+//                .requestNewPass(username)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(
+//                    { responses: SimpleResponseString ->
+//                        mainView.responseOnPassRequest(responses.response)
+//                        mainView.hideLoading()
+//                        cd.dispose()
+//                    }
+//                ) { throwable: Throwable ->
+//                    if (throwable is ANError) {
+//                        val anError = throwable
+//                        crashlytics.log(anError.errorDetail + "//7//" + anError.errorBody)
+//                    } else {
+//                        crashlytics.log(throwable.message!!)
+//                    }
+//                    Timber.tag("my").e(
+//                        LoggingTree.getMessageForError(
+//                            throwable,
+//                            "LoginPresenter\$restorePass "
+//                        )
+//                    )
+//                    mainView.hideLoading()
+//                    mainView.showError("Ошибка восстановления пароля")
+//                    cd.dispose()
+//                })
     }
 }

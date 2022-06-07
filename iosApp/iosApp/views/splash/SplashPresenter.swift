@@ -13,39 +13,48 @@ import FirebaseMessaging
 
 extension SplashUIView {
     
-    
     class SplashPresenter : ObservableObject {
         @Published var nextPage : String = "" //переход на след страницу
+        @Published var selectedShow: AlertAttention?
+        
         let sdk: NetworkManager
         var sharePreferenses : SharedPreferenses
-        
+        let netConnection = NetMonitor.shared
+    
+    
         init(){
             sdk=NetworkManager()
             sharePreferenses = SharedPreferenses()
+
+            netConnection.startMonitoring()
             
             testOpenNextActivity ()
         }
         
         func testOpenNextActivity (){
-            let sig = "EwXFAQoz6ca1uJAQxbeU6YD4Eps"
+            //let sig = "EwXFAQoz6ca1uJAQxbeU6YD4Eps"
             var login = sharePreferenses.currentLogin ?? nil
             var pass = sharePreferenses.currentPassword ?? nil
             
-            //            if(login==nil || pass==nil){
-            //                nextPage="Login"
-            //                return
-            //            }else{
-            //                verifyUser ()
-            //            }
-            
-            if(login == nil){
-                login = "9888888888"
-            }
-            if(pass==nil){
-                pass = "635088"
+            let status = netConnection.connType
+            if status == NetMonitor.ConnectionType.unknown{
+                self.showAlert("Отсутствует соединение с интернетом")
+            }else{
+                if(login==nil || pass==nil){
+                    self.showNextpage("Login")
+                    return
+                }else{
+                    verifyUser (Constants.sig ,login,pass)
+                }
             }
             
-            verifyUser (sig,login,pass)
+//            if(login == nil){
+//                login = "9888888888"
+//            }
+//            if(pass==nil){
+//                pass = "635088"
+//            }
+//            verifyUser (sig,login,pass)
         }
         
         func verifyUser (_ sig:String,_ login:String?,_ pass:String? ){
@@ -54,7 +63,7 @@ extension SplashUIView {
                 if let res : UserList = response {
                     if(res.response[0].login != nil ){
                         self.sharePreferenses.usersLogin=res.response
-                        
+         
                         // var tmp=String(describing: type(of: res.response))
                         //var tmp2=String(describing: type(of:  self.sharePreferenses.usersLogin))
                         
@@ -67,13 +76,13 @@ extension SplashUIView {
                     }else{
                         //self.sharePreferenses.currentPassword = ""
                         // self.sharePreferenses.usersLogin = nil
-                        self.nextPage="Login"  //переход на след страницу
+                        self.showNextpage("Login")
                     }
                     
                 } else {
                     if let t=error{
                         LoggingTree.e("SplashPresenter/verifyUser", t)
-                        self.nextPage="Login"
+                        self.showNextpage("Login")
                     }
                 }
             })
@@ -89,7 +98,7 @@ extension SplashUIView {
                 } else {
                     if let t=error{
                         LoggingTree.e("SplashPresenter/updateHeaderInfo", t)
-                        self.nextPage="Login"
+                        self.showNextpage("Login")
                     }
                 }
             })
@@ -102,7 +111,7 @@ extension SplashUIView {
             
             if userLogin.count == 0 {
                 LoggingTree.e("SplashPresenter/currentUserInfo 0 , Ошибка загрузки информации о пользователе")
-                self.nextPage="Login"
+                self.showNextpage("Login")
                 return
             }
             
@@ -146,7 +155,7 @@ extension SplashUIView {
                     } else {
                         if let t=error{
                             LoggingTree.e("SplashPresenter/currentUserInfo", t)
-                            self.nextPage="Login"
+                            self.showNextpage("Login")
                         }
                     }
                 })
@@ -157,7 +166,7 @@ extension SplashUIView {
             Messaging.messaging().token { token, error in
               if let error = error {
                   LoggingTree.e("SplashPresenter/firebaseId", error)
-                  self.nextPage="Login"
+                  self.showNextpage("Login")
               } else if let token = token {
               
                   self.sendFcmToken(token: token)
@@ -187,7 +196,7 @@ extension SplashUIView {
                 
                 sdk.sendFcmId(idUser: idUserItem, idFilial: idBranchItem, idFcm: token, h_Auth: apiKey, h_dbName: h_dbName, h_idKl: idUser, h_idFilial:  idBranch, completionHandler: { response, error in
                     if let res : SimpleResBoolean = response {
-                        self.countFcmSend += 1
+                        self.countFcmSend -= 1
                         if self.countFcmSend <= 0 {
                             self.allHospitalBranc()
                         }
@@ -195,7 +204,8 @@ extension SplashUIView {
                     } else {
                         if let t=error{
                             LoggingTree.e("LoginPresenter/restorePass", t)
-                            self.nextPage="Login"
+                            self.showAlert("Произошла непредвиденная ошибка")
+                            self.showNextpage("Main")
                         }
                     }
                 })
@@ -208,11 +218,11 @@ extension SplashUIView {
             sdk.getAllHospitalBranch(idCenter: idCent, completionHandler: { response, error in
                 if let res : SettingsAllBaranchHospitalList = response {
                     self.processingYandexKey(resp: res.response)
-                    self.nextPage="Main"
+                    self.showNextpage("Main")
                 } else {
                     if let t=error{
                         LoggingTree.e("SplashPresenter/getAllHospitalBranch", t)
-                        self.nextPage="Main"
+                        self.showNextpage("Main")
                     }
                 }
             })
@@ -239,6 +249,16 @@ extension SplashUIView {
                 }
             }
             
+        }
+        
+        func showNextpage(_ page : String){
+            //showAlert("nesxttttttttttttt")
+            netConnection.stopMonitoring()
+            self.nextPage = page
+        }
+        
+        func showAlert(_ str: String ){
+            selectedShow = AlertAttention(name: str)
         }
         
     }

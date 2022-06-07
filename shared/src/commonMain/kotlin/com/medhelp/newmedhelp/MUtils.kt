@@ -38,7 +38,7 @@ class MUtils {
 
 
         @Throws(Exception::class)
-        fun  сenterResponseToString (cl : CenterResponse) : String{
+        fun  centerResponseToString (cl : CenterResponse) : String {
             val json = Json.encodeToString(cl)
             return json
         }
@@ -46,5 +46,16 @@ class MUtils {
         fun  stringToCenterResponse (str : String) : CenterResponse {
             return Json.decodeFromString(str)
         }
+
+        @Throws(Exception::class)
+        fun usersLoginToString (cl : List<UserResponse>) : String {
+            val json = Json.encodeToString(cl)
+            return json
+        }
+        @Throws(Exception::class)
+        fun  stringToUsersLogin (str : String) : List<UserResponse> {
+            return Json.decodeFromString(str)
+        }
+
     }
 }

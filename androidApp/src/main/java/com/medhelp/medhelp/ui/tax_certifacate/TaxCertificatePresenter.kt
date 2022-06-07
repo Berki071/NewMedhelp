@@ -91,7 +91,7 @@ class TaxCertificatePresenter(val mainView : TaxCertificateFragment) {
                 cd.dispose()
             }, { throwable: Throwable? ->
                 MainUtils.hideLoading()
-                Timber.tag("my").e(LoggingTree.getMessageForError(throwable, "TaxCertificatePresenter\$sendDataForTaxCertificate"))
+                Timber.tag("my").e(LoggingTree.getMessageForError(throwable, "TaxCertificatePresenter/sendDataForTaxCertificate"))
                 Different.showAlertInfo(mainView.requireActivity(),"Ошибка",mainView.requireContext().getString(R.string.api_default_error))
             })
         )

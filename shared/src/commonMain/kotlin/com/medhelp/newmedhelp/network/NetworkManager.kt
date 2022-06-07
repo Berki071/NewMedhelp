@@ -2,6 +2,7 @@ package com.medhelp.shared.network
 
 import com.medhelp.newmedhelp.model.SimpleResBoolean
 import com.medhelp.newmedhelp.model.SimpleResponseBoolean
+import com.medhelp.newmedhelp.model.SimpleResponseString
 import com.medhelp.shared.model.CenterList
 import com.medhelp.shared.model.CurrentUserInfoList
 import com.medhelp.shared.model.SettingsAllBaranchHospitalList
@@ -152,6 +153,9 @@ class NetworkManager {
         }
     }
 
+    @Throws(Exception::class) suspend fun requestNewPass (username: String) : SimpleResponseString {
+        return httpClient.get(Url( LocalEndPoint.BASE_URL + "NewPWDMobileUser/" + username + "/" + LocalEndPoint.API_KEY )) {}
+    }
 
 }
 

@@ -94,8 +94,7 @@ class SplashPresenter(var mainView: SplashActivity) {
                         mainView.openLoginActivity()
                     }
                 }.onFailure {
-                    Timber.tag("my")
-                        .e(LoggingTree.getMessageForError(it, "SplashPresenter\$verifyUser "))
+                    Timber.tag("my").e(LoggingTree.getMessageForError(it, "SplashPresenter\$verifyUser "))
 
                     if (it is ANError) {
                         val anError = it
@@ -138,8 +137,7 @@ class SplashPresenter(var mainView: SplashActivity) {
                 .onSuccess {
                     saveCenterInfo(it.response[0])
                 }.onFailure {
-                    Timber.tag("my")
-                        .e(LoggingTree.getMessageForError(it, "SplashPresenter\$updateHeaderInfo "))
+                    Timber.tag("my").e(LoggingTree.getMessageForError(it, "SplashPresenter\$updateHeaderInfo "))
                     mainView.openLoginActivity()
                     if (it is ANError) {
                         val anError = it
@@ -205,12 +203,7 @@ class SplashPresenter(var mainView: SplashActivity) {
                                 firebaseId
                             }
                         }.onFailure {
-                            Timber.tag("my").e(
-                                LoggingTree.getMessageForError(
-                                    it,
-                                    "SplashPresenter\$getCurrentUserInfo "
-                                )
-                            )
+                            Timber.tag("my").e(LoggingTree.getMessageForError(it, "SplashPresenter\$getCurrentUserInfo "))
                             mainView.openLoginActivity()
                             if (it is ANError) {
                                 val anError = it

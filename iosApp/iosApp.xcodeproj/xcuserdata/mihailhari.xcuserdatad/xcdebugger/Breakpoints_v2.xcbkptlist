@@ -7,15 +7,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B12B3402-4178-4DE4-8DD6-7AB5CF69A6BB"
+            uuid = "69CAB24E-4E38-423A-81C8-D458F8BDBFCF"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iosApp/views/splash/SplashPresenter.swift"
+            filePath = "iosApp/views/login/LoginPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "verifyUser(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "70DA0D22-C6C2-4B61-8F57-5C599C3FB73A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/views/login/LoginPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "verifyUser(_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FFF300FC-8639-447C-82DE-2503FE97B12E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/views/login/LoginPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "updateHeaderInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -23,47 +55,143 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "18D77E1E-813C-48E9-BC25-D45451F04692"
+            uuid = "431DF7BB-5BEE-4117-AE9D-81D6885F3226"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iosApp/views/splash/SplashPresenter.swift"
+            filePath = "iosApp/views/login/LoginPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "updateHeaderInfo()"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "allHospitalBranch()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "62844122-42F5-4476-BEB6-8AE1DA105779"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/views/login/LoginPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "processingYandexKey(resp:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "77DB53DD-6D94-4300-84AA-3B0FDC12CB5D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/views/login/LoginPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
+            landmarkName = "currentUserInfo()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "18D77E1E-813C-48E9-BC25-D45451F04692 - a94b59b5c7e1de68"
+                  uuid = "77DB53DD-6D94-4300-84AA-3B0FDC12CB5D - de892e118c45cd24"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedCenterList&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.SplashUIView.SplashPresenter.updateHeaderInfo() -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedCurrentUserInfoList&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.LoginPresenter.currentUserInfo() -&gt; ()"
                   moduleName = "iosApp"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/splash/SplashPresenter.swift"
+                  urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/login/LoginPresenter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "94"
-                  endingLineNumber = "94"
+                  startingLineNumber = "227"
+                  endingLineNumber = "227"
+                  offsetFromSymbolStart = "314">
+               </Location>
+               <Location
+                  uuid = "77DB53DD-6D94-4300-84AA-3B0FDC12CB5D - de892e118c45cd24"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedCurrentUserInfoList&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.LoginPresenter.currentUserInfo() -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/login/LoginPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "227"
+                  endingLineNumber = "227"
+                  offsetFromSymbolStart = "6200">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C0598464-8F14-48DA-8EAE-79C8490D0673"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/views/login/LoginPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
+            landmarkName = "firebaseId()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4495405E-F0A6-4709-8A39-64AE91FA9451"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/views/login/LoginPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
+            landmarkName = "sendFcmToken(token:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4495405E-F0A6-4709-8A39-64AE91FA9451 - ec03361e325d1052"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedSimpleResBoolean&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.LoginPresenter.sendFcmToken(token: Swift.String) -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/login/LoginPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "280"
+                  endingLineNumber = "280"
                   offsetFromSymbolStart = "159">
                </Location>
                <Location
-                  uuid = "18D77E1E-813C-48E9-BC25-D45451F04692 - a94b59b5c7e1de68"
+                  uuid = "4495405E-F0A6-4709-8A39-64AE91FA9451 - ec03361e325d1052"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedCenterList&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.SplashUIView.SplashPresenter.updateHeaderInfo() -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedSimpleResBoolean&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.LoginPresenter.sendFcmToken(token: Swift.String) -&gt; ()"
                   moduleName = "iosApp"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/splash/SplashPresenter.swift"
+                  urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/login/LoginPresenter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "94"
-                  endingLineNumber = "94"
-                  offsetFromSymbolStart = "392">
+                  startingLineNumber = "280"
+                  endingLineNumber = "280"
+                  offsetFromSymbolStart = "460">
                </Location>
             </Locations>
          </BreakpointContent>

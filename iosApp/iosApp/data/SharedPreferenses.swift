@@ -45,21 +45,44 @@ class SharedPreferenses{
     
     var usersLogin : [UserResponse]{
         get{
-            let tmp = defaults.object(forKey: USERS_LOGIN_KEY) as? [UserResponse] ?? [UserResponse]()
+            let res = defaults.string(forKey: USERS_LOGIN_KEY)
             
-            //let decodedTeams = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(tmp) as! [UserResponse]
-            return tmp
+            if res == nil {
+                return [UserResponse]()
+            }else{
+                do{
+                    let tmp = try MUtils.companion.stringToUsersLogin(str: res!)
+                    return tmp
+                }catch{
+                    print("Неожиданная ошибка: \(error).")
+                    return [UserResponse]()
+                }
+            }
             
             
+            //let tmp = defaults.object(forKey: USERS_LOGIN_KEY) as? [UserResponse] ?? [UserResponse]()
+            //return tmp
         }
         
         set ( nVal){
-            do{
-                let encodedData = try NSKeyedArchiver.archivedData(withRootObject: nVal, requiringSecureCoding: false)
-                defaults.set(encodedData, forKey: USERS_LOGIN_KEY)
-            }catch{
-                
+            
+            if nVal != nil{
+                do{
+                    var str : String? = try MUtils.companion.usersLoginToString(cl: nVal)
+                    defaults.set(str, forKey: USERS_LOGIN_KEY)
+                }catch{
+                    print("Неожиданная ошибка: \(error).")
+                }
+            }else{
+                defaults.set(nil, forKey: USERS_LOGIN_KEY)
             }
+            
+//            do{
+//                let encodedData = try NSKeyedArchiver.archivedData(withRootObject: nVal, requiringSecureCoding: false)
+//                defaults.set(encodedData, forKey: USERS_LOGIN_KEY)
+//            }catch{
+//
+//            }
         }
     }
     
@@ -95,6 +118,20 @@ class SharedPreferenses{
     }
     
     var centerInfo : CenterResponse?{
+        set(nVal){
+            if nVal != nil{
+                do{
+                    var str : String? = try MUtils.companion.centerResponseToString(cl: nVal!)
+                    defaults.set(str, forKey: CENTER_INFO_KEY)
+                }catch{
+                    print("Неожиданная ошибка: \(error).")
+                }
+            }else{
+                defaults.set(nil, forKey: CENTER_INFO_KEY)
+            }
+            
+        }
+        
         get{
             
             let res = defaults.string(forKey: CENTER_INFO_KEY)
@@ -112,19 +149,7 @@ class SharedPreferenses{
             }
         }
         
-        set(nVal){
-            if nVal != nil{
-                do{
-                    var str : String? = try MUtils.companion.сenterResponseToString(cl: nVal!)
-                    defaults.set(str, forKey: CENTER_INFO_KEY)
-                }catch{
-                    print("Неожиданная ошибка: \(error).")
-                }
-            }else{
-                defaults.set(nil, forKey: CENTER_INFO_KEY)
-            }
-            
-        }
+      
     }
     
     var yandexStoreIsWorks : Bool{
