@@ -132,8 +132,7 @@ class LoginActivity : BaseActivity() {
                 val strUName = phone
                 if (strUName != "" && strUName.length == 10 && strUName.substring(0, 1) == "9")
                     presenter!!.restorePass(strUName)
-                else
-                    responseOnPassRequest("Проверьте правильность ввода номера")
+                else responseOnPassRequest("Проверьте правильность ввода номера")
             } else {
                 alert!!.dismiss()
             }

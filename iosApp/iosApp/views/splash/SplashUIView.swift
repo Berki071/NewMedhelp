@@ -9,41 +9,36 @@
 import SwiftUI
 
 struct AlertAttention: Identifiable {
-    var id: String { name }
-    let name: String
+    var id: String { text }
+    var titel: String = "Внимание!"
+    let text: String
 }
 
 struct SplashUIView: View {
     @ObservedObject var splashPresenter = SplashPresenter()
     
-
+    
     var body: some View {
         
-        VStack {
-            if(self.splashPresenter.nextPage != ""){
-                if(self.splashPresenter.nextPage == "Login"){
-                    //self.splashPresenter.netConnection.stopMonitoring()
-                    LoginUiView()
-                }else{
-                    
-                    MainUIView()
-                }
+        if(self.splashPresenter.nextPage != ""){
+            if(self.splashPresenter.nextPage == "Login"){
+                //self.splashPresenter.netConnection.stopMonitoring()
+                LoginUiView()
             }else{
                 
+                MainUIView()
+            }
+        }else{
+            
+            VStack {
                 Image("splash")
                     .resizable()
                     .ignoresSafeArea()
-                
+            }
+            .alert(item : $splashPresenter.selectedShow){ show in
+                Alert(title: Text(show.titel), message: Text(show.text), dismissButton: .cancel())
             }
         }
-        .alert(item : $splashPresenter.selectedShow){ show in
-            Alert(title: Text("Внимание!"), message: Text(show.name), dismissButton: .cancel())
-        }
-        
-        
-        
-        
-        
     }
     
 }

@@ -109,7 +109,7 @@ extension SplashUIView {
             let userLogin = self.sharePreferenses.usersLogin
             
             
-            if userLogin.count == 0 {
+            if userLogin!.count == 0 {
                 LoggingTree.e("SplashPresenter/currentUserInfo 0 , Ошибка загрузки информации о пользователе")
                 self.showNextpage("Login")
                 return
@@ -120,7 +120,7 @@ extension SplashUIView {
             let idUser=String(Int.init(self.sharePreferenses.currentUserInfo!.idUser!))
             let idBranch=String(Int.init(self.sharePreferenses.currentUserInfo!.idBranch!))
             
-            for i in  userLogin {
+            for i in  userLogin! {
                 let idUserItem=String(Int.init(i.idUser!))
                 let idBranchItem=String(Int.init(i.idBranch!))
                 
@@ -140,7 +140,7 @@ extension SplashUIView {
                         
                         var boo = true
                         
-                        for tm in userLogin {
+                        for tm in userLogin! {
                             if tm.name == nil {
                                 boo = false
                                 break
@@ -178,19 +178,19 @@ extension SplashUIView {
         func sendFcmToken(token : String){
             let userLogin = self.sharePreferenses.usersLogin
             
-            if userLogin.count == 0 {
+            if userLogin!.count == 0 {
                 allHospitalBranc()
                 return
             }
             
-            countFcmSend=userLogin.count
+            countFcmSend=userLogin!.count
             
             let apiKey = String.init(self.sharePreferenses.currentUserInfo!.apiKey!)
             let h_dbName = String.init(self.sharePreferenses.centerInfo!.db_name!)
             let idUser=String(Int.init(self.sharePreferenses.currentUserInfo!.idUser!))
             let idBranch=String(Int.init(self.sharePreferenses.currentUserInfo!.idBranch!))
             
-            for i in userLogin {
+            for i in userLogin! {
                 let idUserItem=String(Int.init(i.idUser!))
                 let idBranchItem=String(Int.init(i.idBranch!))
                 
@@ -258,8 +258,10 @@ extension SplashUIView {
         }
         
         func showAlert(_ str: String ){
-            selectedShow = AlertAttention(name: str)
+            selectedShow = AlertAttention( text: str)
         }
+        
+     
         
     }
 }

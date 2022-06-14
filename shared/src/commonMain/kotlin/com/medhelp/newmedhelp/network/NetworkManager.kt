@@ -157,5 +157,15 @@ class NetworkManager {
         return httpClient.get(Url( LocalEndPoint.BASE_URL + "NewPWDMobileUser/" + username + "/" + LocalEndPoint.API_KEY )) {}
     }
 
+    @Throws(Exception::class) suspend fun sendMsgToSupport (login: String, email: String, msg: String) : SimpleResBoolean {
+        return httpClient.post(Url( LocalEndPoint.BASE_URL + "SendMessageToTech" )) {
+            body= MultiPartFormDataContent(formData {
+                append("username", login)
+                append("email", email)
+                append("message", msg)
+            })
+        }
+    }
+
 }
 

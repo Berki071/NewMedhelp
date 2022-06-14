@@ -642,11 +642,7 @@ class NetworkManager(val prefManager: PreferencesManager) {
             .getObjectObservable(TechUsersFcmIdResponse::class.java)
     }
 
-    fun sendMsgToSupport(
-        login: String,
-        email: String,
-        msg: String
-    ): Observable<SimpleResBoolean> {
+    fun sendMsgToSupport(login: String, email: String, msg: String): Observable<SimpleResBoolean> {
         return Rx2AndroidNetworking.post(LocalEndPoint.SEND_MSG_TO_SUPPORT)
             .addBodyParameter("username", login)
             .addBodyParameter("email", email)

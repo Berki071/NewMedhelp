@@ -20,11 +20,12 @@ class LoginPresenter : ObservableObject {
     @Published var valueShowAlert: AlertAttention?
     
     @Published var showDialog: String = ""
+    @Published var showDialogSupportMSg: Bool = false
     
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var togleState: Bool = true
-    @Published var alertLogind : AlertLogind? 
+    @Published var alertLogind : StandartAlertData?
     
     let sdk: NetworkManager
     var sharePreferenses : SharedPreferenses
@@ -40,8 +41,6 @@ class LoginPresenter : ObservableObject {
             self.showAlert("Отсутствует соединение с интернетом")
         }
         
-        
-        alertLogind = AlertLogind(titel: "titel", text: "Text")
     }
     
     func updateUsernameHint(){
@@ -179,7 +178,7 @@ class LoginPresenter : ObservableObject {
         let userLogin = self.sharePreferenses.usersLogin
         
         
-        if userLogin.count == 0 {
+        if userLogin!.count == 0 {
             LoggingTree.e("LoginPresenter/currentUserInfo 0 , Ошибка загрузки информации о пользователе")
             self.showLoading(false)
             self.showAlert("Ошибка загрузки информации о пользователе")
@@ -191,7 +190,7 @@ class LoginPresenter : ObservableObject {
         let idUser=String(Int.init(truncating: self.sharePreferenses.currentUserInfo!.idUser!))
         let idBranch=String(Int.init(truncating: self.sharePreferenses.currentUserInfo!.idBranch!))
         
-        for i in  userLogin {
+        for i in  userLogin! {
             let idUserItem=String(Int.init(truncating: i.idUser!))
             let idBranchItem=String(Int.init(truncating: i.idBranch!))
             
@@ -211,7 +210,7 @@ class LoginPresenter : ObservableObject {
                     
                     var boo = true
                     
-                    for tm in userLogin {
+                    for tm in userLogin! {
                         if tm.name == nil {
                             boo = false
                             break
@@ -251,20 +250,20 @@ class LoginPresenter : ObservableObject {
     func sendFcmToken(token : String){
         let userLogin = self.sharePreferenses.usersLogin
         
-        if userLogin.count == 0 {
+        if userLogin!.count == 0 {
             self.showNextpage()
             self.showLoading(false)
             return
         }
         
-        countFcmSend=userLogin.count
+        countFcmSend=userLogin!.count
         
         let apiKey = String.init(self.sharePreferenses.currentUserInfo!.apiKey!)
         let h_dbName = String.init(self.sharePreferenses.centerInfo!.db_name!)
         let idUser=String(Int.init(self.sharePreferenses.currentUserInfo!.idUser!))
         let idBranch=String(Int.init(self.sharePreferenses.currentUserInfo!.idBranch!))
         
-        for i in userLogin {
+        for i in userLogin! {
             let idUserItem=String(Int.init(i.idUser!))
             let idBranchItem=String(Int.init(i.idBranch!))
             
@@ -289,34 +288,80 @@ class LoginPresenter : ObservableObject {
     
     
     func restoreAlertClick(){
-        if(username.isEmpty || username.count == 10  ){
+//        let d = username
+//        let dd = username.count
+//        let dd2 = self.username.count == 10
+        
+        if(username.isEmpty || username.count != 10  ){
             showAlert("Проверьте правильность ввода номера")
-            return 
+            return
         }
-        
-        showAlert(true)
-        
-        sdk.requestNewPass(idCenter: idCent, completionHandler: { response, error in
-            if let res : SettingsAllBaranchHospitalList = response {
-                self.processingYandexKey(resp: res.response)
-                self.currentUserInfo()
+
+        showLoading(true)
+
+        sdk.requestNewPass(username: username, completionHandler: { response, error in
+            if let res : SimpleResponseString = response {
+                self.showLoading(false)
+
+                self.alertLogind = StandartAlertData(titel: "Изменение пароля!", text: res.response!, isShowCansel: true ,someFuncOk: {() -> Void in  self.alertLogind = nil},
+                                               someFuncCancel: {() -> Void in self.alertLogind = nil})
             } else {
                 self.showLoading(false)
-                self.showAlert("Ошибка загрузки информации о филиалах")
-                
+                self.showAlert("Ошибка восстановления пароля")
+
                 if let t=error{
-                    LoggingTree.e("LoginPresenter/getAllHospitalBranch", t)
-                    
+                    LoggingTree.e("LoginPresenter/restoreAlertClick", t)
+
                 }
             }
         })
         
     }
     
+    func sendMsgToSupport(_ email : String, _ msg : String){
+        self.showLoading( true)
+        
+        if(self.username.count != 10){
+            self.showLoading( false)
+            showAlert("Телефон не указан или указан не корректно", titleM: "Ошибка!")
+        }
+        
+        if !Utils.textFieldValidatorEmail(email){
+            self.showLoading( false)
+            showAlert("Email не указан или указан не корректно", titleM: "Ошибка!")
+        }
+        
+        if(msg.count < 10){
+            self.showLoading( false)
+            showAlert("Сообщения нет или оно сильно короткое. Попробуйте написать более развернуто", titleM: "Ошибка!")
+        }
+        
+        sdk.sendMsgToSupport(login: self.username, email: email, msg: msg, completionHandler: { response, error in
+            if let res : SimpleResBoolean = response {
+                self.showLoading(false)
+                LoggingTree.v("Отправлено сообщение в техподдержку:  \(self.username) \(email) \(msg)")
+                self.showAlert("Ваше обращение отправлено и будет обработано в рабочие часы техподдержки. Ответ будет предоставлен на указанный адрес электронной почты.", titleM: "Отправлено успешно!")
+                
+                self.msgNotification()
+            } else {
+                self.showLoading(false)
+                self.showAlert("Что-то пошло не так.")
+
+                if let t=error{
+                    LoggingTree.e("LoginPresenter/sendMsgToSupport", t)
+
+                }
+            }
+        })
+        
+    }
+    func msgNotification(){
+        
+    }
 
     
-    func showAlert(_ str: String ){
-        valueShowAlert = AlertAttention(name: str)
+    func showAlert(_ str: String, titleM : String = "Внимание!" ){
+        valueShowAlert = AlertAttention(titel: titleM, text: str)
     }
     
     func showNextpage(){
@@ -332,5 +377,16 @@ class LoginPresenter : ObservableObject {
         }
     }
     
+    func showMsgSupporAlert(_ isShow : Bool){
+        self.showDialogSupportMSg = isShow
+    }
+    
+    func showAlertRestorePas(){
+        self.alertLogind = StandartAlertData(titel: "Вы действительно хотите восстановить пароль?", text: "Старый пароль будет заменен на новый ", isShowCansel: true ,  someFuncOk: {() -> Void in
+            self.restoreAlertClick()
+            self.alertLogind = nil
+            
+        }, someFuncCancel: {() -> Void in self.alertLogind = nil})
+    }
 }
 

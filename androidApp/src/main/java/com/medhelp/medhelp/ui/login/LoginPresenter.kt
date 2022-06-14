@@ -14,7 +14,6 @@ import com.medhelp.medhelp.utils.main.NetworkUtils
 import com.medhelp.medhelp.utils.timber_log.LoggingTree
 import com.medhelp.newmedhelp.MUtils
 import com.medhelp.shared.model.UserResponse
-import com.medhelp.shared.network.NetworkManager
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -25,6 +24,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import com.medhelp.medhelp.data.network.NetworkManager as NM
+import com.medhelp.shared.network.NetworkManager
 
 class LoginPresenter(var mainView: LoginActivity) {
     var crashlytics = FirebaseCrashlytics.getInstance()
@@ -346,34 +346,5 @@ class LoginPresenter(var mainView: LoginActivity) {
                     mainView.showError("Ошибка восстановления пароля")
                 }
         }
-
-//        val cd = CompositeDisposable()
-//        cd.add(networkManager2
-//                .requestNewPass(username)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(
-//                    { responses: SimpleResponseString ->
-//                        mainView.responseOnPassRequest(responses.response)
-//                        mainView.hideLoading()
-//                        cd.dispose()
-//                    }
-//                ) { throwable: Throwable ->
-//                    if (throwable is ANError) {
-//                        val anError = throwable
-//                        crashlytics.log(anError.errorDetail + "//7//" + anError.errorBody)
-//                    } else {
-//                        crashlytics.log(throwable.message!!)
-//                    }
-//                    Timber.tag("my").e(
-//                        LoggingTree.getMessageForError(
-//                            throwable,
-//                            "LoginPresenter\$restorePass "
-//                        )
-//                    )
-//                    mainView.hideLoading()
-//                    mainView.showError("Ошибка восстановления пароля")
-//                    cd.dispose()
-//                })
     }
 }

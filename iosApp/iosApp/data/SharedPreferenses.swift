@@ -43,7 +43,7 @@ class SharedPreferenses{
         }
     }
     
-    var usersLogin : [UserResponse]{
+    var usersLogin : [UserResponse]?{
         get{
             let res = defaults.string(forKey: USERS_LOGIN_KEY)
             
@@ -68,7 +68,7 @@ class SharedPreferenses{
             
             if nVal != nil{
                 do{
-                    var str : String? = try MUtils.companion.usersLoginToString(cl: nVal)
+                    let str : String? = try MUtils.companion.usersLoginToString(cl: nVal!)
                     defaults.set(str, forKey: USERS_LOGIN_KEY)
                 }catch{
                     print("Неожиданная ошибка: \(error).")

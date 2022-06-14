@@ -1,7 +1,6 @@
 package com.medhelp.medhelp.ui.support_fragment;
 
 import android.content.Context;
-
 import com.medhelp.medhelp.Constants;
 import com.medhelp.medhelp.data.model.FCMResponse;
 import com.medhelp.medhelp.data.model.TechUsersFcmIdItem;
@@ -10,18 +9,17 @@ import com.medhelp.medhelp.data.network.NetworkManager;
 import com.medhelp.medhelp.data.pref.PreferencesManager;
 import com.medhelp.medhelp.utils.main.MainUtils;
 import com.medhelp.medhelp.utils.timber_log.LoggingTree;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.List;
-
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+
 
 public class SupportPresenter {
     SupportDf mainView;
