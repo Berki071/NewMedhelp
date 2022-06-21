@@ -116,7 +116,7 @@ extension SplashUIView {
             }
             
             let apiKey = String.init(self.sharePreferenses.currentUserInfo!.apiKey!)
-            let h_dbName = String.init(self.sharePreferenses.centerInfo!.db_name!)
+            let h_dbName = self.sharePreferenses.centerInfo!.db_name
             let idUser=String(Int.init(self.sharePreferenses.currentUserInfo!.idUser!))
             let idBranch=String(Int.init(self.sharePreferenses.currentUserInfo!.idBranch!))
             
@@ -124,7 +124,7 @@ extension SplashUIView {
                 let idUserItem=String(Int.init(i.idUser!))
                 let idBranchItem=String(Int.init(i.idBranch!))
                 
-                sdk.getCurrentUserInfoInCenter(idUser: idUserItem, idBranch: idBranchItem, h_Auth: apiKey, h_dbName: h_dbName, h_idKl: idUser, h_idFilial:  idBranch, completionHandler: { response, error in
+                sdk.getCurrentUserInfoInCenter(idUser: idUserItem, idBranch: idBranchItem, h_Auth: apiKey, h_dbName: h_dbName!, h_idKl: idUser, h_idFilial:  idBranch, completionHandler: { response, error in
                     if let res : CurrentUserInfoList = response {
                         
                         i.surname = MUtils.companion.encodeDecodeWord(word: res.responses[0].surname!, key: res.responses[0].keySurname!)
@@ -186,7 +186,7 @@ extension SplashUIView {
             countFcmSend=userLogin!.count
             
             let apiKey = String.init(self.sharePreferenses.currentUserInfo!.apiKey!)
-            let h_dbName = String.init(self.sharePreferenses.centerInfo!.db_name!)
+            let h_dbName = self.sharePreferenses.centerInfo!.db_name!
             let idUser=String(Int.init(self.sharePreferenses.currentUserInfo!.idUser!))
             let idBranch=String(Int.init(self.sharePreferenses.currentUserInfo!.idBranch!))
             
@@ -195,7 +195,7 @@ extension SplashUIView {
                 let idBranchItem=String(Int.init(i.idBranch!))
                 
                 sdk.sendFcmId(idUser: idUserItem, idFilial: idBranchItem, idFcm: token, h_Auth: apiKey, h_dbName: h_dbName, h_idKl: idUser, h_idFilial:  idBranch, completionHandler: { response, error in
-                    if let res : SimpleResBoolean = response {
+                    if let res : SimpleResBooleanAsString = response {
                         self.countFcmSend -= 1
                         if self.countFcmSend <= 0 {
                             self.allHospitalBranc()

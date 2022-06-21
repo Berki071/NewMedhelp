@@ -10,65 +10,64 @@ import SwiftUI
 
 struct ProfilePage: View {
     @ObservedObject var mainPresenter = ProfilePresenter()
+    @State var isShowAlertRecomend: StandartAlertData? = nil
     
     
     var body: some View {
         ZStack{
             //Color("color_primary")
-
             
-            VStack{
+            
+            VStack(spacing: 0){
                 HStack {
-                    Image("ico_root")
-                        .resizable(resizingMode: .stretch)
-                        .frame(width: 100.0, height: 72.0)
-                    VStack(alignment: .leading){
-                        HStack{
-                            Image("account_balance-account_balance_symbol")
-                                .foregroundColor(.white)
-                            Text(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/)
-                                .foregroundColor(Color.white)
-                        }
-                        HStack{
-                            Image("call-call_symbol")
-                                .foregroundColor(.white)
-                            Text("Placeholder")
-                                .foregroundColor(Color.white)
-                        }
-                        HStack{
-                            Image("web-web_symbol")
-                                .foregroundColor(.white)
-                            Text("Placeholder")
-                                .foregroundColor(Color.white)
-                        }
-                    }
-                    .padding(.leading, 16.0)
-                    
-                    Spacer()
-                    
+                   
                 }
-                .padding([.leading, .bottom, .trailing], 16.0)
                 .frame(maxWidth: .infinity)
                 .background(Color("color_primary"))
                 
-                
+            
                 List {
-                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Content@*/Text("Content")/*@END_MENU_TOKEN@*/
+                    if(mainPresenter.actualReceptions.count > 0){
+                        Section(header: Text("Предстоящие")) {
+                            ForEach(mainPresenter.actualReceptions) { item in
+                                ProfileItem(item : item, isShowAlertRecomend: $isShowAlertRecomend)
+                                    .listRowInsets(EdgeInsets(top: 0, leading: -8, bottom: 0, trailing: -8))
+                            }
+                        }
+                    }
+                    
+                    if(mainPresenter.latestReceptions.count > 0){
+                        Section(header: Text("Прошедшие")) {
+                            ForEach(mainPresenter.latestReceptions) { item in
+                                ProfileItem(item : item, isShowAlertRecomend: $isShowAlertRecomend)
+                                    .listRowInsets(EdgeInsets(top: 0, leading: -8, bottom: 0, trailing: -8))
+                            }
+                        }
+                    }
                 }
-            }
-            .background(.white)
-            
-            
-            
+                .listStyle(.sidebar)
+                .frame(maxWidth: .infinity)
+        
         }
-        //.edgesIgnoringSafeArea(.all)
+        .background(.white)
+        
+        if(self.mainPresenter.showDialogLoading == true){
+            LoadingView()
+        }
+        
+        if(isShowAlertRecomend != nil){
+            StandartAlert(dataOb: isShowAlertRecomend!)
+        }
         
     }
-        
+    //.edgesIgnoringSafeArea(.all)
+    
+}
+
 }
 
 struct ProfilePage_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilePage()
+        ProfilePage(isShowAlertRecomend : nil)
     }
 }

@@ -1,3 +1,4 @@
+/*
 package com.medhelp.medhelp.data.model;
 
 import com.google.gson.annotations.SerializedName;
@@ -38,3 +39,4 @@ public class DateList {
         this.response = response;
     }
 }
+*/

@@ -18,7 +18,7 @@ import com.medhelp.medhelp.ui.view.ETextFieldWithTitleForNumber
 import com.medhelp.medhelp.ui.view.EtFieldWithTitle
 import com.medhelp.medhelp.ui.view.TextFieldWithTitle
 import com.medhelp.medhelp.utils.Different
-import com.medhelp.medhelp.utils.main.TimesUtils
+import com.medhelp.medhelp.utils.TimesUtils
 import com.medhelp.shared.model.UserResponse
 import java.util.*
 
@@ -75,8 +75,8 @@ class ToOrderCertificateDf : DialogFragment() {
 
         preferencesManager=PreferencesManager(requireContext())
 
-        dateStart.text.text=TimesUtils.getCurrentDate(TimesUtils.DATE_FORMAT_ddMMyyyy)
-        dateStop.text.text=TimesUtils.getCurrentDate(TimesUtils.DATE_FORMAT_ddMMyyyy)
+        dateStart.text.text= TimesUtils.getCurrentDate(TimesUtils.DATE_FORMAT_ddMMyyyy)
+        dateStop.text.text= TimesUtils.getCurrentDate(TimesUtils.DATE_FORMAT_ddMMyyyy)
         et_fio.visibility=View.GONE
 
         dateStart.setOnClickListener{
@@ -173,7 +173,7 @@ class ToOrderCertificateDf : DialogFragment() {
             tmp = r2d1
 
             dateAndTime.clear()
-            dateAndTime.timeInMillis = TimesUtils.stringToLong(dateStart.text.getText().toString(), TimesUtils.DATE_FORMAT_ddMMyyyy)
+            dateAndTime.timeInMillis = TimesUtils.stringToLong(dateStart.text.getText().toString(), TimesUtils.DATE_FORMAT_ddMMyyyy) ?: 0
             object : DatePickerDialog(requireContext(), tmp, dateAndTime[Calendar.YEAR], dateAndTime[Calendar.MONTH], dateAndTime[Calendar.DAY_OF_MONTH]) {
                 override fun onDateChanged(view: DatePicker, year: Int, month: Int, dayOfMonth: Int) {
                     var month = month
@@ -190,7 +190,7 @@ class ToOrderCertificateDf : DialogFragment() {
             tmp = r2d2
 
             dateAndTime.clear()
-            dateAndTime.timeInMillis = TimesUtils.stringToLong(dateStop.text.getText().toString(), TimesUtils.DATE_FORMAT_ddMMyyyy)
+            dateAndTime.timeInMillis = TimesUtils.stringToLong(dateStop.text.getText().toString(), TimesUtils.DATE_FORMAT_ddMMyyyy) ?: 0
             object : DatePickerDialog(requireContext(), tmp, dateAndTime[Calendar.YEAR], dateAndTime[Calendar.MONTH], dateAndTime[Calendar.DAY_OF_MONTH]) {
                 override fun onDateChanged(view: DatePicker, year: Int, month: Int, dayOfMonth: Int) {
                     var month = month

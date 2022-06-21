@@ -4,11 +4,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.VisitResponse;
-import com.medhelp.medhelp.data.model.yandex_cashbox.YandexKey;
+import com.medhelp.medhelp.data.model.YandexKey;
 import com.medhelp.medhelp.ui.view.shopping_basket.sub.PaymentData;
+import com.medhelp.newmedhelp.model.VisitResponse;
+import com.medhelp.newmedhelp.model.VisitResponseAndroid;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class ShoppingBasketTitleViewHolder extends GroupViewHolder {
     private Button pay;
     private ImageView img;
 
-    List<VisitResponse> list;
+    List<VisitResponseAndroid> list;
     YandexKey yKeys;
     String idBranch;
     TitleListener titleListener;
@@ -56,7 +56,7 @@ public class ShoppingBasketTitleViewHolder extends GroupViewHolder {
 
 
 
-    public void setData(List<VisitResponse> list, YandexKey yKeys, String idBranch)
+    public void setData(List<VisitResponseAndroid> list, YandexKey yKeys, String idBranch)
     {
         this.list=list;
         this.yKeys=yKeys;
@@ -86,7 +86,7 @@ public class ShoppingBasketTitleViewHolder extends GroupViewHolder {
         //title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
     }
 
-    private String getSumList(List<VisitResponse> list)
+    private String getSumList(List<VisitResponseAndroid> list)
     {
         int sum=0;
         for(VisitResponse tmp : list)
@@ -97,7 +97,7 @@ public class ShoppingBasketTitleViewHolder extends GroupViewHolder {
         return String.valueOf(sum);
     }
 
-    private String getDescription(List<VisitResponse> list)
+    private String getDescription(List<VisitResponseAndroid> list)
     {
         String description="";
         for(VisitResponse vr : list)

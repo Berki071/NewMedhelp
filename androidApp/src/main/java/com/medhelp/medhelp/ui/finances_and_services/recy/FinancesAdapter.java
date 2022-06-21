@@ -6,17 +6,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.VisitResponse;
 import com.medhelp.medhelp.data.pref.PreferencesManager;
+import com.medhelp.newmedhelp.model.VisitResponse;
+import com.medhelp.newmedhelp.model.VisitResponseAndroid;
 import com.medhelp.shared.model.CenterResponse;
 
 import java.util.List;
 
 public class FinancesAdapter extends RecyclerView.Adapter<FinancesHolder> {
     private Context context;
-    private List<VisitResponse> list;
+    private List<VisitResponseAndroid> list;
     private FinancesHolder.FinancesHolderListener listener;
 
     private CenterResponse centerResponse;
@@ -25,7 +25,7 @@ public class FinancesAdapter extends RecyclerView.Adapter<FinancesHolder> {
 
     private boolean blockBasket=false;
 
-    public FinancesAdapter(Context context, List<VisitResponse> list,FinancesHolder.FinancesHolderListener listener, String time , String today)
+    public FinancesAdapter(Context context, List<VisitResponseAndroid> list, FinancesHolder.FinancesHolderListener listener, String time , String today)
     {
         this.context=context;
         this.list=list;

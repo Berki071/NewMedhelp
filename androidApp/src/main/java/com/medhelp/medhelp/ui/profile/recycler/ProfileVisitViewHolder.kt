@@ -9,13 +9,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.medhelp.medhelp.Constants
 import com.medhelp.medhelp.R
-import com.medhelp.medhelp.data.model.VisitResponse
 import com.medhelp.medhelp.data.pref.PreferencesManager
 import com.medhelp.medhelp.ui._main_page.MainActivity
-import com.medhelp.medhelp.utils.main.TimesUtils
+import com.medhelp.medhelp.utils.TimesUtils
 import com.medhelp.medhelp.utils.workToFile.show_file.ShowFile2
 import com.medhelp.medhelp.utils.workToFile.show_file.ShowFile2.BuilderImage
 import com.medhelp.medhelp.utils.workToFile.show_file.ShowFile2.ShowListener
+import com.medhelp.newmedhelp.model.VisitResponseAndroid
 import com.medhelp.shared.model.CenterResponse
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder
 import java.io.File
@@ -50,7 +50,7 @@ class ProfileVisitViewHolder(val itemView: View, val today: String, val time: St
 
     private val YES = "да"
     private val NO = "нет"
-    private var visitRes: VisitResponse? = null
+    private var visitRes: VisitResponseAndroid? = null
     private var centerResponse: CenterResponse
     private var context = itemView.context
     private var prefManager= PreferencesManager(itemView.context)
@@ -83,7 +83,7 @@ class ProfileVisitViewHolder(val itemView: View, val today: String, val time: St
 
         receptionCancel?.setOnClickListener(View.OnClickListener { c: View? ->
             if (receptionCancel!!.getText().toString() == "Отмена") {
-                if (!statusIsPaid(visitRes!!.status)) {
+                if (!statusIsPaid(visitRes!!.status!!)) {
                     itemClickListener.cancelBtnClick(
                         visitRes!!.idUser,
                         visitRes!!.idRecord,
@@ -105,10 +105,7 @@ class ProfileVisitViewHolder(val itemView: View, val today: String, val time: St
             itemClickListener.enrollAgainBtnClick(visitRes)
         })
         btn_postpone?.setOnClickListener(View.OnClickListener { c: View? ->
-            if (!statusIsPaid(
-                    visitRes!!.status
-                )
-            ) {
+            if (!statusIsPaid(visitRes!!.status!!)) {
                 itemClickListener.postponeBtnClick(visitRes)
             } else {
                 showAlertActionProhibited()
@@ -128,16 +125,15 @@ class ProfileVisitViewHolder(val itemView: View, val today: String, val time: St
         })
     }
 
-    fun onBindButton(response: VisitResponse?, blockBasket: Boolean, yandexStoreIsWork: Boolean) {
+    fun onBindButton(response: VisitResponseAndroid?, blockBasket: Boolean, yandexStoreIsWork: Boolean) {
         visitRes = response
         if (response != null) {
             if (response.nameServices != null && receptionTitle != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) receptionTitle!!.text =
-                    Html.fromHtml(
-                        "<u>" + response.nameServices + "</u>",
-                        Html.FROM_HTML_MODE_LEGACY
-                    ) else receptionTitle!!.text =
-                    Html.fromHtml("<u>" + response.nameServices + "</u>")
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                    receptionTitle!!.text = Html.fromHtml("<u>" + response.nameServices + "</u>", Html.FROM_HTML_MODE_LEGACY
+                    )
+                else
+                    receptionTitle!!.text = Html.fromHtml("<u>" + response.nameServices + "</u>")
             } else {
                 receptionTitle!!.text = Html.fromHtml("<u>" + response.nameServices + "</u>")
             }
@@ -155,16 +151,12 @@ class ProfileVisitViewHolder(val itemView: View, val today: String, val time: St
         if (response.timeOfReceipt != null && receptionTime != null) {
             receptionTime!!.text = response.timeOfReceipt
         }
-        if (response.call == NO && isTheTimeConfirm(
-                response.dateOfReceipt,
-                response.timeOfReceipt
-            )
-        ) {
+        if (response.call == NO && isTheTimeConfirm(response.dateOfReceipt!!, response.timeOfReceipt!!)) {
             receptionConfirm!!.visibility = View.VISIBLE
         } else {
             receptionConfirm!!.visibility = View.GONE
         }
-        if (isTheTimeCancel(response.dateOfReceipt, response.timeOfReceipt)) {
+        if (isTheTimeCancel(response.dateOfReceipt!!, response.timeOfReceipt!!)) {
             //receptionCancel.setVisibility(View.VISIBLE);
             btn_postpone!!.visibility = View.VISIBLE
             receptionCancel!!.text = "Отмена"
@@ -207,8 +199,11 @@ class ProfileVisitViewHolder(val itemView: View, val today: String, val time: St
                 override fun error(error: String?) {}
             })
             .build()
-        if (response.comment != "") initClickRecommendation(response.comment) else recommendation!!.visibility =
-            View.GONE
+
+        if (response.comment != "")
+            initClickRecommendation(response.comment!!)
+        else
+            recommendation!!.visibility = View.GONE
     }
 
     private var alert: AlertDialog? = null
@@ -255,7 +250,7 @@ class ProfileVisitViewHolder(val itemView: View, val today: String, val time: St
         dialog!!.show()
     }
 
-    fun onBindNoButton(response: VisitResponse?, blockBasket: Boolean, yandexStoreIsWork: Boolean) {
+    fun onBindNoButton(response: VisitResponseAndroid?, blockBasket: Boolean, yandexStoreIsWork: Boolean) {
         if (response != null) {
             if (response.dop != null) {
                 if (response.dop == Constants.TYPE_DOP_VIDEO_CALL) image_video!!.visibility =
@@ -311,29 +306,29 @@ class ProfileVisitViewHolder(val itemView: View, val today: String, val time: St
 
     private fun testDate(): Boolean {
         val analysis = TimesUtils.stringToLong( /*item.getTimeOfReceipt()+" "+*/
-            visitRes!!.dateOfReceipt, TimesUtils.DATE_FORMAT_ddMMyyyy
-        )
-        val tDay = TimesUtils.stringToLong( /*time+" "+*/today, TimesUtils.DATE_FORMAT_ddMMyyyy)
+            visitRes!!.dateOfReceipt!!, TimesUtils.DATE_FORMAT_ddMMyyyy
+        ) ?: 0
+        val tDay = TimesUtils.stringToLong( /*time+" "+*/today, TimesUtils.DATE_FORMAT_ddMMyyyy) ?: 0
         //int timeTo=1000*60*centerResponse.getTimeForDenial();
         return analysis >= tDay
     }
 
     private fun isTheTimeConfirm(date: String, time2: String): Boolean {
-        val analysis = TimesUtils.stringToLong("$time2 $date", TimesUtils.DATE_FORMAT_HHmm_ddMMyyyy)
+        val analysis = TimesUtils.stringToLong("$time2 $date", TimesUtils.DATE_FORMAT_HHmm_ddMMyyyy) ?: 0
         // analysis=TimesUtils.localLongToUtcLong(analysis);
-        val tDay = TimesUtils.stringToLong("$time $today", TimesUtils.DATE_FORMAT_HHmm_ddMMyyyy)
+        val tDay = TimesUtils.stringToLong("$time $today", TimesUtils.DATE_FORMAT_HHmm_ddMMyyyy) ?: 0
         val timeTo = 1000 * 60 * centerResponse.timeForConfirm
-        val d1 = TimesUtils.longToString(analysis, TimesUtils.DATE_FORMAT_HHmmss_ddMMyyyy)
-        val d11 = TimesUtils.longToString(analysis, TimesUtils.DATE_FORMAT_HHmmss_ddMMyyyy)
-        val d2 = TimesUtils.longToString(tDay, TimesUtils.DATE_FORMAT_HHmmss_ddMMyyyy)
-        val d3 = TimesUtils.longToString(tDay + timeTo, TimesUtils.DATE_FORMAT_HHmmss_ddMMyyyy)
-        val boo = analysis >= tDay && analysis <= tDay + timeTo
+//        val d1 = TimesUtils.longToString(analysis, TimesUtils.DATE_FORMAT_HHmmss_ddMMyyyy) ?: 0
+//        val d11 = TimesUtils.longToString(analysis, TimesUtils.DATE_FORMAT_HHmmss_ddMMyyyy) ?: 0
+//        val d2 = TimesUtils.longToString(tDay, TimesUtils.DATE_FORMAT_HHmmss_ddMMyyyy)
+//        val d3 = TimesUtils.longToString(tDay + timeTo, TimesUtils.DATE_FORMAT_HHmmss_ddMMyyyy)
+//        val boo = analysis >= tDay && analysis <= tDay + timeTo
         return analysis >= tDay && analysis <= tDay + timeTo
     }
 
     private fun isTheTimeCancel(date: String, time2: String): Boolean {
-        val analysis = TimesUtils.stringToLong("$time2 $date", TimesUtils.DATE_FORMAT_HHmm_ddMMyyyy)
-        val tDay = TimesUtils.stringToLong("$time $today", TimesUtils.DATE_FORMAT_HHmm_ddMMyyyy)
+        val analysis = TimesUtils.stringToLong("$time2 $date", TimesUtils.DATE_FORMAT_HHmm_ddMMyyyy) ?: 0
+        val tDay = TimesUtils.stringToLong("$time $today", TimesUtils.DATE_FORMAT_HHmm_ddMMyyyy) ?: 0
         val timeTo = 1000 * 60 * centerResponse.timeForDenial
         return analysis >= tDay && analysis >= tDay + timeTo
     }

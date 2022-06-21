@@ -1,7 +1,7 @@
 package com.medhelp.medhelp.data.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.medhelp.medhelp.utils.main.TimesUtils;
+import com.medhelp.medhelp.utils.TimesUtils;
 
 public class MessageSupList implements Comparable  {
     @SerializedName("id_message") private String idMessage;

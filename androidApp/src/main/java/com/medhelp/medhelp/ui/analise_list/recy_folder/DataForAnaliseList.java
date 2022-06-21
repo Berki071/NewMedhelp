@@ -3,7 +3,7 @@ package com.medhelp.medhelp.ui.analise_list.recy_folder;
 import androidx.annotation.NonNull;
 
 import com.medhelp.medhelp.data.model.AnaliseListData;
-import com.medhelp.medhelp.utils.main.TimesUtils;
+import com.medhelp.medhelp.utils.TimesUtils;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
 import java.util.List;

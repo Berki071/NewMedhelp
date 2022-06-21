@@ -16,14 +16,12 @@ import com.medhelp.medhelp.data.model.yandex_cashbox.PaymentInformationModel
 import com.medhelp.medhelp.data.model.yandex_cashbox.PaymentModel
 import com.medhelp.medhelp.data.pref.PreferencesManager
 import com.medhelp.medhelp.ui.tax_certifacate.DataForTaxCertificate
-import com.medhelp.medhelp.utils.main.TimesUtils
 import com.medhelp.shared.network.CenterEndPoint
 import com.medhelp.shared.network.LocalEndPoint
 import com.medhelp.shared.network.NetworkManager.Companion.ADM_DATE
 import com.medhelp.shared.network.NetworkManager.Companion.ADM_TIME
 import com.medhelp.shared.network.NetworkManager.Companion.AMOUNT
 import com.medhelp.shared.network.NetworkManager.Companion.AUTH
-import com.medhelp.shared.network.NetworkManager.Companion.DATATODAY
 import com.medhelp.shared.network.NetworkManager.Companion.DATE
 import com.medhelp.shared.network.NetworkManager.Companion.DB_NAME
 import com.medhelp.shared.network.NetworkManager.Companion.DURATION
@@ -32,7 +30,6 @@ import com.medhelp.shared.network.NetworkManager.Companion.ID_BRANCH
 import com.medhelp.shared.network.NetworkManager.Companion.ID_BRANCH_NEW
 import com.medhelp.shared.network.NetworkManager.Companion.ID_CENTER
 import com.medhelp.shared.network.NetworkManager.Companion.ID_DOCTOR
-import com.medhelp.shared.network.NetworkManager.Companion.ID_FCM
 import com.medhelp.shared.network.NetworkManager.Companion.ID_FILIAL
 import com.medhelp.shared.network.NetworkManager.Companion.ID_KL
 import com.medhelp.shared.network.NetworkManager.Companion.ID_ROOM
@@ -51,7 +48,6 @@ import com.medhelp.shared.network.NetworkManager.Companion.TO
 import com.medhelp.shared.network.NetworkManager.Companion.TYPE
 import com.medhelp.shared.network.NetworkManager.Companion.USERNAME
 import com.medhelp.shared.network.NetworkManager.Companion.USERNAME2
-import com.medhelp.shared.network.NetworkManager.Companion.VERSION_CODE
 import com.rx2androidnetworking.Rx2AndroidNetworking
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -63,15 +59,6 @@ import java.io.IOException
 
 class NetworkManager(val prefManager: PreferencesManager) {
     //region local
-//    fun requestNewPass(username: String): Observable<SimpleResponseString> {
-//        return Rx2AndroidNetworking.get(LocalEndPoint.REQUEST_PASS)
-//            .addPathParameter(AUTH, LocalEndPoint.API_KEY)
-//            .addPathParameter(ID_USER, username)
-//            .build()
-//            .getObjectObservable(SimpleResponseString::class.java)
-//    }
-
-
 
     fun sendRating(dat: String, rat: Float, msg: String): Observable<ErrorResponse> {
         return Rx2AndroidNetworking.post(LocalEndPoint.SEND_RATING)
@@ -84,32 +71,6 @@ class NetworkManager(val prefManager: PreferencesManager) {
             .build()
             .getObjectObservable(ErrorResponse::class.java)
     }
-
-//    fun sendLogToServer(
-//        type: String,
-//        log: String,
-//        versionCode: Int
-//    ): Observable<SimpleResponseBoolean> {
-//        var idUSer = 0
-//        var idBranch = 0
-//        var idCenter = 0
-//        try {
-//            idUSer = prefManager.currentUserInfo!!.idUser!!
-//            idBranch = prefManager.currentUserInfo!!.idBranch!!
-//            idCenter = prefManager.currentUserInfo!!.idCenter!!
-//        } catch (e: Exception) {
-//        }
-//        return Rx2AndroidNetworking.post(LocalEndPoint.SEND_LOG_TO_SERVER)
-//            .addHeaders(AUTH, LocalEndPoint.API_KEY)
-//            .addPathParameter(ID_USER, idUSer.toString())
-//            .addPathParameter(ID_BRANCH, idBranch.toString())
-//            .addPathParameter(ID_CENTER, idCenter.toString())
-//            .addPathParameter(TYPE, type)
-//            .addPathParameter(VERSION_CODE, versionCode.toString())
-//            .addBodyParameter("log", log)
-//            .build()
-//            .getObjectObservable(SimpleResponseBoolean::class.java)
-//    }
 
     fun sendNewFavoriteHospitalBranchToInnerServer(
         newBranch: Int,
@@ -125,27 +86,18 @@ class NetworkManager(val prefManager: PreferencesManager) {
             .build()
             .getObjectObservable(SimpleResponseBoolean::class.java)
     }
+    //endregion
 
-//    fun getNewsUpdate(): Observable<NewsList> {
-//        return Rx2AndroidNetworking.get(LocalEndPoint.NEWS_UPDATE)
+
+//    fun getCurrentDateApiCall(): Observable<DateList> {
+//        return Rx2AndroidNetworking.get(CenterEndPoint.DATE)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
 //            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
 //            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
 //            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
 //            .build()
-//            .getObjectObservable(NewsList::class.java)
+//            .getObjectObservable(DateList::class.java)
 //    }
-    //endregion
-
-
-    fun getCurrentDateApiCall(): Observable<DateList> {
-        return Rx2AndroidNetworking.get(CenterEndPoint.DATE)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-            .build()
-            .getObjectObservable(DateList::class.java)
-    }
 
     fun getPriceApiCall(
         idDoctor: Int,
@@ -231,17 +183,17 @@ class NetworkManager(val prefManager: PreferencesManager) {
             .getObjectObservable(SaleList::class.java)
     }
 
-    fun getAllReceptionApiCall(): Observable<VisitList> {
-        return Rx2AndroidNetworking.get(CenterEndPoint.VISITS)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-            .addPathParameter(ID_USER, prefManager.currentUserInfo!!.idUser.toString())
-            .addPathParameter(ID_BRANCH, prefManager.currentUserInfo!!.idBranch.toString())
-            .build()
-            .getObjectObservable(VisitList::class.java)
-    }
+//    fun getAllReceptionApiCall(): Observable<VisitList> {
+//        return Rx2AndroidNetworking.get(CenterEndPoint.VISITS)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
+//            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
+//            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
+//            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
+//            .addPathParameter(ID_USER, prefManager.currentUserInfo!!.idUser.toString())
+//            .addPathParameter(ID_BRANCH, prefManager.currentUserInfo!!.idBranch.toString())
+//            .build()
+//            .getObjectObservable(VisitList::class.java)
+//    }
 
     fun getScheduleByDoctorApiCall(
         idDoctor: Int,
@@ -281,42 +233,33 @@ class NetworkManager(val prefManager: PreferencesManager) {
             .getObjectObservable(ScheduleList::class.java)
     }
 
-    fun sendCancellationOfVisit(
-        user: Int,
-        id_zapisi: Int,
-        cause: String,
-        idBranch: Int
-    ): Observable<VisitsOkAndCancelResponse> {
-        return Rx2AndroidNetworking.get(CenterEndPoint.VISITS_CANCEL)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-            .addPathParameter(ID_USER, user.toString())
-            .addPathParameter(ID_ZAPISI, id_zapisi.toString())
-            .addPathParameter(MESSAGE, cause)
-            .addPathParameter(DATATODAY, TimesUtils.getCurrentDate(TimesUtils.DATE_FORMAT_ddMMyy))
-            .addPathParameter(ID_BRANCH, idBranch.toString())
-            .build()
-            .getObjectObservable(VisitsOkAndCancelResponse::class.java)
-    }
+//    fun sendCancellationOfVisit(user: Int, id_zapisi: Int, cause: String, idBranch: Int): Observable<VisitsOkAndCancelResponse> {
+//        return Rx2AndroidNetworking.get(CenterEndPoint.VISITS_CANCEL)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
+//            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
+//            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
+//            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
+//            .addPathParameter(ID_USER, user.toString())
+//            .addPathParameter(ID_ZAPISI, id_zapisi.toString())
+//            .addPathParameter(MESSAGE, cause)
+//            .addPathParameter(DATATODAY, TimesUtils.getCurrentDate(TimesUtils.DATE_FORMAT_ddMMyy))
+//            .addPathParameter(ID_BRANCH, idBranch.toString())
+//            .build()
+//            .getObjectObservable(VisitsOkAndCancelResponse::class.java)
+//    }
 
-    fun sendConfirmationOfVisit(
-        user: Int,
-        id_zapisi: Int,
-        idBranch: Int
-    ): Observable<VisitsOkAndCancelResponse> {
-        return Rx2AndroidNetworking.get(CenterEndPoint.VISITS_OK)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-            .addPathParameter(ID_USER, user.toString())
-            .addPathParameter(ID_ZAPISI, id_zapisi.toString())
-            .addPathParameter(ID_BRANCH, idBranch.toString())
-            .build()
-            .getObjectObservable(VisitsOkAndCancelResponse::class.java)
-    }
+//    fun sendConfirmationOfVisit(user: Int, id_zapisi: Int, idBranch: Int): Observable<SimpleResponseBoolean> {
+//        return Rx2AndroidNetworking.get(CenterEndPoint.VISITS_OK)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
+//            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
+//            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
+//            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
+//            .addPathParameter(ID_USER, user.toString())
+//            .addPathParameter(ID_ZAPISI, id_zapisi.toString())
+//            .addPathParameter(ID_BRANCH, idBranch.toString())
+//            .build()
+//            .getObjectObservable(SimpleResponseBoolean::class.java)
+//    }
 
     fun sendToDoctorVisit(
         id_doctor: Int,
@@ -538,15 +481,7 @@ class NetworkManager(val prefManager: PreferencesManager) {
 //            .getObjectObservable(SettingsAllBaranchHospitalList::class.java)
 //    }
 
-    fun sendToServerPaymentData(
-        idUser: String,
-        idBranch: String,
-        idZapisi: String,
-        idService: String,
-        amount: String,
-        count: Int,
-        paymentId: String
-    ): Observable<SimpleResBoolean> {
+    fun sendToServerPaymentData(idUser: String, idBranch: String, idZapisi: String, idService: String, amount: String, count: Int, paymentId: String): Observable<SimpleResBoolean> {
         return Rx2AndroidNetworking.post(CenterEndPoint.SEND_TO_SERVER_PAYMENT_DATA)
             .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
             .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
@@ -563,22 +498,18 @@ class NetworkManager(val prefManager: PreferencesManager) {
             .getObjectObservable(SimpleResBoolean::class.java)
     }
 
-    fun sendIAmHere(
-        idUser: Int,
-        idZapisi: Int,
-        idBranch: Int
-    ): Observable<SimpleResBoolean> {
-        return Rx2AndroidNetworking.post(CenterEndPoint.I_AM_HERE)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-            .addPathParameter(ID_USER, idUser.toString())
-            .addPathParameter(ID_ZAPISI, idZapisi.toString())
-            .addPathParameter(ID_BRANCH, idBranch.toString())
-            .build()
-            .getObjectObservable(SimpleResBoolean::class.java)
-    }
+//    fun sendIAmHere(idUser: Int, idZapisi: Int, idBranch: Int): Observable<SimpleResBoolean> {
+//        return Rx2AndroidNetworking.post(CenterEndPoint.I_AM_HERE)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
+//            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
+//            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
+//            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
+//            .addPathParameter(ID_USER, idUser.toString())
+//            .addPathParameter(ID_ZAPISI, idZapisi.toString())
+//            .addPathParameter(ID_BRANCH, idBranch.toString())
+//            .build()
+//            .getObjectObservable(SimpleResBoolean::class.java)
+//    }
 
     //region yandexCashbox
     private fun authenticate(idShop: String, keyShope: String): OkHttpClient {
@@ -623,18 +554,6 @@ class NetworkManager(val prefManager: PreferencesManager) {
     }
 
     //endregion
-//    fun sendFcmId(idUser: String, idFilial: String, idFcm: String): Observable<SimpleResBoolean> {
-//        return Rx2AndroidNetworking.get(CenterEndPoint.SEND_FCM_ID)
-//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-//            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-//            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-//            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-//            .addPathParameter(ID_USER, idUser)
-//            .addPathParameter(ID_BRANCH, idFilial)
-//            .addPathParameter(ID_FCM, idFcm)
-//            .build()
-//            .getObjectObservable(SimpleResBoolean::class.java)
-//    }
 
     fun getTechUsersFcm(): Observable<TechUsersFcmIdResponse> {
         return Rx2AndroidNetworking.get(LocalEndPoint.GET_USERS_TECH_FCM_ID)

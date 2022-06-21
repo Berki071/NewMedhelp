@@ -1,7 +1,8 @@
+/*
 package com.medhelp.medhelp.ui.profile;
 
-import com.medhelp.medhelp.data.model.VisitResponse;
 import com.medhelp.medhelp.ui.base.MvpView;
+import com.medhelp.newmedhelp.model.VisitResponse;
 import com.medhelp.shared.model.CenterResponse;
 import com.medhelp.shared.model.UserResponse;
 
@@ -48,3 +49,4 @@ public interface ProfileHelper {
         void sendConfirmComing(VisitResponse viz);
     }
 }
+*/

@@ -5,6 +5,7 @@ import com.medhelp.medhelp.R
 import com.medhelp.medhelp.data.model.settings.SimpleResponseBoolean
 import com.medhelp.medhelp.data.model.settings.SimpleResponseString
 import com.medhelp.medhelp.data.pref.PreferencesManager
+
 import com.medhelp.medhelp.utils.timber_log.LoggingTree
 import com.medhelp.shared.model.SettingsAllBranchHospitalResponse
 import com.medhelp.shared.model.UserResponse

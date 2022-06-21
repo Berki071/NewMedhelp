@@ -19,11 +19,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.medhelp.medhelp.Constants;
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.VisitResponse;
 import com.medhelp.medhelp.ui._main_page.MainActivity;
 import com.medhelp.medhelp.ui.video_consultation.video_chat.utils.CallReceiver;
 import com.medhelp.medhelp.ui.video_consultation.video_chat.utils.WebInterface;
 import com.medhelp.medhelp.utils.main.MainUtils;
+import com.medhelp.newmedhelp.model.VisitResponse;
 
 import java.io.File;
 

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Vibrator;
 import android.util.Log;
 
-import com.medhelp.medhelp.data.model.VisitResponse;
 import com.medhelp.medhelp.ui.video_consultation.video_chat.VideoChatActivity;
 import com.medhelp.medhelp.ui.video_consultation.video_chat.WebViewEasyRtc;
 

@@ -5,10 +5,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.VisitResponse;
 import com.medhelp.medhelp.data.pref.PreferencesManager;
+import com.medhelp.newmedhelp.model.VisitResponse;
+import com.medhelp.newmedhelp.model.VisitResponseAndroid;
 import com.thoughtbot.expandablerecyclerview.MultiTypeExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
@@ -94,7 +94,7 @@ public class ProfileAdapter extends MultiTypeExpandableRecyclerViewAdapter<Profi
     @Override
     public void onBindChildViewHolder(ProfileVisitViewHolder holder, int flatPosition, ExpandableGroup group, int childIndex) {
         int viewType = getItemViewType(flatPosition);
-        VisitResponse visit = ((ProfileParentModel) group).getItems().get(childIndex);
+        VisitResponseAndroid visit = ((ProfileParentModel) group).getItems().get(childIndex);
         switch (viewType) {
             case BUTTON_MODE:
                 holder.onBindButton(visit,blockBasket,yandexStoreIsWork);

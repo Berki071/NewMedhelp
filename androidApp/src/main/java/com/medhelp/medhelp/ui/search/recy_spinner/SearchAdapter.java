@@ -22,8 +22,6 @@ import com.medhelp.medhelp.ui.schedule.ScheduleFragment;
 import com.medhelp.medhelp.utils.timber_log.LoggingTree;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import it.sephiroth.android.library.xtooltip.ClosePolicy;
 import it.sephiroth.android.library.xtooltip.Tooltip;
 import timber.log.Timber;

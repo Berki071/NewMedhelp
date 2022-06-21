@@ -12,6 +12,8 @@ import shared
 class MainPresenter : ObservableObject{
     @Published var nextPage : String = "" //переход на след страницу
     
+    @Published var titleTop : String = ""
+    
     @Published var showMenu = false
     @Published var selectMenuPage = 0
     @Published var selectMenuAlert = 0  //1 алер выхода
@@ -26,6 +28,9 @@ class MainPresenter : ObservableObject{
         sharePreferenses = SharedPreferenses()
         netConnection.startMonitoring()
     
+        if(sharePreferenses.centerInfo != nil && sharePreferenses.centerInfo!.title != nil){
+            titleTop=sharePreferenses.centerInfo!.title!
+        }
     }
     
     func logOut(){

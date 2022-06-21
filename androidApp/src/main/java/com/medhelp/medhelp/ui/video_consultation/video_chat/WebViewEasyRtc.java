@@ -8,14 +8,13 @@ import android.os.Looper;
 import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-
 import com.medhelp.medhelp.Constants;
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.VisitResponse;
 import com.medhelp.medhelp.ui.video_consultation.video_chat.utils.MyWebChromeClient;
 import com.medhelp.medhelp.ui.video_consultation.video_chat.utils.MyWebViewClient;
 import com.medhelp.medhelp.ui.video_consultation.video_chat.utils.WebInterface;
-import com.medhelp.medhelp.utils.main.TimesUtils;
+import com.medhelp.medhelp.utils.TimesUtils;
+import com.medhelp.newmedhelp.model.VisitResponse;
 
 import java.io.File;
 import java.util.Timer;
@@ -391,28 +390,30 @@ public class WebViewEasyRtc {
 
     private int getTimerTime()
     {
-        long currentTimeLong=System.currentTimeMillis();
-        long timeOfReceiptStart=dataForVideoChat.getTimeMills();
-        long timeOfReceiptEnd=timeOfReceiptStart+(dataForVideoChat.getDurationSec()*1000);
+//        long currentTimeLong=System.currentTimeMillis();
+//        long timeOfReceiptStart=dataForVideoChat.getTimeMills();
+//        long timeOfReceiptEnd=timeOfReceiptStart+(dataForVideoChat.getDurationSec()*1000);
+//
+////        String d1 = ListActivity.longToString(currentTimeLong);
+////        String d2 = ListActivity.longToString(timeOfReceiptStart);
+////        String d3 = ListActivity.longToString(timeOfReceiptEnd);
+//
+//        if(((timeOfReceiptStart-Constants.MIN_TIME_BEFORE_VIDEO_CALL*60*1000)<currentTimeLong)  && currentTimeLong<timeOfReceiptEnd)
+//        {
+//            if (timeOfReceiptStart > currentTimeLong) {
+//                return dataForVideoChat.getDurationSec();
+//            } else {
+//                long k1 =  timeOfReceiptEnd-currentTimeLong;
+//                long k2 = (k1 / 1000);
+//                return (int) k2;
+//            }
+//        }
+//        else
+//        {
+//            return 0;
+//        }
 
-//        String d1 = ListActivity.longToString(currentTimeLong);
-//        String d2 = ListActivity.longToString(timeOfReceiptStart);
-//        String d3 = ListActivity.longToString(timeOfReceiptEnd);
-
-        if(((timeOfReceiptStart-Constants.MIN_TIME_BEFORE_VIDEO_CALL*60*1000)<currentTimeLong)  && currentTimeLong<timeOfReceiptEnd)
-        {
-            if (timeOfReceiptStart > currentTimeLong) {
-                return dataForVideoChat.getDurationSec();
-            } else {
-                long k1 =  timeOfReceiptEnd-currentTimeLong;
-                long k2 = (k1 / 1000);
-                return (int) k2;
-            }
-        }
-        else
-        {
-            return 0;
-        }
+        return 0;
     }
 
 

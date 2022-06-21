@@ -21,18 +21,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.android.play.core.review.ReviewInfo;
-import com.google.android.play.core.review.ReviewManager;
-import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.android.play.core.tasks.Task;
 import com.google.gson.Gson;
 import com.medhelp.medhelp.Constants;
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.DateResponse;
 import com.medhelp.medhelp.data.model.Doctor;
 import com.medhelp.medhelp.data.model.ScheduleResponse;
-import com.medhelp.medhelp.data.model.VisitResponse;
 import com.medhelp.medhelp.ui._main_page.MainActivity;
 import com.medhelp.medhelp.ui.base.BaseFragment;
 import com.medhelp.medhelp.ui.schedule.alert_doc_info.AlertCardDoctor;
@@ -45,7 +38,9 @@ import com.medhelp.medhelp.ui.schedule.recycler.DateState;
 import com.medhelp.medhelp.ui.schedule.recycler.HeaderViewHolder;
 import com.medhelp.medhelp.ui.schedule.recycler.ItemViewHolder;
 import com.medhelp.medhelp.utils.workToFile.show_file.ShowFile2;
-import com.medhelp.medhelp.utils.main.TimesUtils;
+import com.medhelp.newmedhelp.model.DateResponse;
+import com.medhelp.newmedhelp.model.VisitResponseAndroid;
+import com.medhelp.medhelp.utils.TimesUtils;
 import com.medhelp.medhelp.utils.timber_log.LoggingTree;
 import com.medhelp.shared.model.SettingsAllBranchHospitalResponse;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -55,16 +50,12 @@ import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter;
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
-
-
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters;
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection;
@@ -114,7 +105,7 @@ public class ScheduleFragment extends BaseFragment implements OnDateSelectedList
 
     private List<ItemCounterFreePlaces> listCalendarPlaces;
 
-    VisitResponse visit;
+    VisitResponseAndroid visit;
 
     Context context;
     Activity activity;
@@ -167,7 +158,7 @@ public class ScheduleFragment extends BaseFragment implements OnDateSelectedList
             if(str!=null  && !str.equals(""))
             {
                 Gson gson=new Gson();
-                visit=gson.fromJson(str, VisitResponse.class);
+                visit=gson.fromJson(str, VisitResponseAndroid.class);
 
                 idDoctor = 0;
                 idService = visit.getIdServices();
@@ -368,7 +359,7 @@ public class ScheduleFragment extends BaseFragment implements OnDateSelectedList
         if (idDoctor != 0) {
             presenter.getDateFromDoctor(idDoctor, idService, adm,selectedBranch);
         } else {
-            presenter.getDateFromService(idService, adm,selectedBranch);
+            presenter.getDateFromService1(idService, adm,selectedBranch);
         }
     }
 
@@ -734,7 +725,7 @@ public class ScheduleFragment extends BaseFragment implements OnDateSelectedList
                     if (idDoctor != 0) {
                         presenter.getDateFromDoctor(idDoctor, idService, adm,selectedBranch);
                     } else {
-                        presenter.getDateFromService(idService, adm,selectedBranch);
+                        presenter.getDateFromService1(idService, adm,selectedBranch);
                     }
                 });
 
@@ -952,7 +943,7 @@ public class ScheduleFragment extends BaseFragment implements OnDateSelectedList
             if (idDoctor != 0) {
                 presenter.getDateFromDoctor(idDoctor, idService, adm,selectedBranch);
             } else {
-                presenter.getDateFromService(idService, adm,selectedBranch);
+                presenter.getDateFromService1(idService, adm,selectedBranch);
             }
         });
     }

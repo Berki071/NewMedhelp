@@ -2,7 +2,7 @@ package com.medhelp.medhelp.ui.electronic_conclusions_fragment.adapters.recy;
 
 import com.medhelp.medhelp.data.model.AnaliseResponse;
 import com.medhelp.medhelp.data.model.ResultZakl2Item;
-import com.medhelp.medhelp.utils.main.TimesUtils;
+import com.medhelp.medhelp.utils.TimesUtils;
 
 public class DataClassForElectronicRecy implements Comparable<DataClassForElectronicRecy>{
     // сортировка перенесена с AnaliseResponse а должна работать без проблем в анализах

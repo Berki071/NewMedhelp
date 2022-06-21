@@ -1,8 +1,6 @@
 package com.medhelp.shared.network
 
-import com.medhelp.newmedhelp.model.SimpleResBoolean
-import com.medhelp.newmedhelp.model.SimpleResponseBoolean
-import com.medhelp.newmedhelp.model.SimpleResponseString
+import com.medhelp.newmedhelp.model.*
 import com.medhelp.shared.model.CenterList
 import com.medhelp.shared.model.CurrentUserInfoList
 import com.medhelp.shared.model.SettingsAllBaranchHospitalList
@@ -142,7 +140,7 @@ class NetworkManager {
         }
     }
 
-    @Throws(Exception::class) suspend fun sendFcmId (idUser: String, idFilial: String, idFcm: String, h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : SimpleResBoolean {
+    @Throws(Exception::class) suspend fun sendFcmId (idUser: String, idFilial: String, idFcm: String, h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : SimpleResBooleanAsString {
         return httpClient.get(Url( CenterEndPoint.BASE_URL + "UpdateFCMuser/" + idUser + "/" + idFilial + "/" + idFcm )) {
             headers {
                 append(AUTH, h_Auth)
@@ -157,7 +155,7 @@ class NetworkManager {
         return httpClient.get(Url( LocalEndPoint.BASE_URL + "NewPWDMobileUser/" + username + "/" + LocalEndPoint.API_KEY )) {}
     }
 
-    @Throws(Exception::class) suspend fun sendMsgToSupport (login: String, email: String, msg: String) : SimpleResBoolean {
+    @Throws(Exception::class) suspend fun sendMsgToSupport (login: String, email: String, msg: String) : SimpleResBooleanAsString {
         return httpClient.post(Url( LocalEndPoint.BASE_URL + "SendMessageToTech" )) {
             body= MultiPartFormDataContent(formData {
                 append("username", login)
@@ -167,5 +165,79 @@ class NetworkManager {
         }
     }
 
+    @Throws(Exception::class) suspend fun getCurrentDateApiCall(h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : DateList {
+        return httpClient.get(Url( CenterEndPoint.BASE_URL + "date")) {
+            headers {
+                append(AUTH, h_Auth)
+                append(DB_NAME, h_dbName)
+                append(ID_KL, h_idKl)
+                append(ID_FILIAL, h_idFilial)
+            }
+        }
+    }
+
+    @Throws(Exception::class) suspend fun getAllReceptionApiCall(h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : VisitList {
+        return httpClient.get(Url( CenterEndPoint.BASE_URL + "visits/"+h_idKl+"/" + h_idFilial)) {
+            headers {
+                append(AUTH, h_Auth)
+                append(DB_NAME, h_dbName)
+                append(ID_KL, h_idKl)
+                append(ID_FILIAL, h_idFilial)
+            }
+        }
+    }
+
+    @Throws(Exception::class) suspend fun sendCancellationOfVisit(user: String, id_zapisi: String, cause: String, currentData : String , idBranch: String,
+                                                                 h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : SimpleResponseBoolean {
+        return httpClient.get(Url( CenterEndPoint.BASE_URL + "visits_cancel/"+user+"/"+id_zapisi+"/"+cause+"/"+currentData+"/" + idBranch)) {
+            headers {
+                append(AUTH, h_Auth)
+                append(DB_NAME, h_dbName)
+                append(ID_KL, h_idKl)
+                append(ID_FILIAL, h_idFilial)
+            }
+        }
+    }
+
+    @Throws(Exception::class) suspend fun sendConfirmationOfVisit(user: String, id_zapisi: String, idBranch: String,
+                                                                  h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : SimpleResponseBoolean {
+        return httpClient.get(Url( CenterEndPoint.BASE_URL + "visits_ok/"+user+"/"+id_zapisi+"/" + idBranch)) {
+            headers {
+                append(AUTH, h_Auth)
+                append(DB_NAME, h_dbName)
+                append(ID_KL, h_idKl)
+                append(ID_FILIAL, h_idFilial)
+            }
+        }
+    }
+
+    @Throws(Exception::class) suspend fun sendIAmHere(user: String, id_zapisi: String, idBranch: String,
+                                                      h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : SimpleResponseBoolean {
+        return httpClient.post(Url( CenterEndPoint.BASE_URL + "iamhere/" + user + "/" + id_zapisi + "/" + idBranch)) {
+            headers {
+                append(AUTH, h_Auth)
+                append(DB_NAME, h_dbName)
+                append(ID_KL, h_idKl)
+                append(ID_FILIAL, h_idFilial)
+            }
+        }
+    }
+
+    @Throws(Exception::class) suspend fun sendToServerPaymentData(idUser: String, idBranch: String, idZapisi: String, idService: String, amount: String, count: String, paymentId: String,
+                                                                  h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : SimpleResBooleanAsString{
+        return httpClient.post(Url( CenterEndPoint.BASE_URL + "OnlinePayment/" + idUser + "/" + idBranch + "/" + idZapisi +
+                "/" + idService + "/" + amount + "/" + count)) {
+            headers {
+                append(AUTH, h_Auth)
+                append(DB_NAME, h_dbName)
+                append(ID_KL, h_idKl)
+                append(ID_FILIAL, h_idFilial)
+            }
+
+            body= MultiPartFormDataContent(formData {
+                append("pay_id", paymentId)
+            })
+        }
+    }
 }
 

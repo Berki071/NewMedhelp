@@ -3,7 +3,7 @@ package com.medhelp.medhelp.data.pref
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import com.medhelp.medhelp.ui.view.shopping_basket.sub.DataPaymentForRealm
+import com.medhelp.medhelp.data.model.DataPaymentForRealm
 import com.medhelp.shared.model.CenterResponse
 import com.medhelp.shared.model.UserResponse
 import java.util.*
@@ -11,8 +11,42 @@ import java.util.*
 const val PREF_NAME = "medhelp_mhchat_pref"
 
 class PreferencesManager(context: Context) {
+    companion object {
+        private const val PREF_KEY_CURRENT_USER_NAME = "PREF_KEY_CURRENT_USER_NAME"
+        private const val PREF_KEY_CURRENT_PASSWORD = "PREF_KEY_CURRENT_PASSWORD"
+        private const val PREF_KEY_START_MODE = "PREF_KEY_START_MODE"
+        private const val PREF_KEY_TOOLTIP_SCHEDULE = "PREF_KEY_TOOLTIP_SCHEDULE"
+        private const val PREF_KEY_TOOLTIP_ANALISE_LIST_TRUE = "PREF_KEY_TOOLTIP_ANALISE_LIST_TRUE"
+        private const val PREF_KEY_TOOLTIP_ANALISE_LIST_FALSE =
+            "PREF_KEY_TOOLTIP_ANALISE_LIST_FALSE"
+        private const val PREF_KEY_TOOLTIP_ANALISE_RESULT_LOAD =
+            "PREF_KEY_TOOLTIP_ANALISE_RESULT_LOAD"
+        private const val PREF_KEY_TOOLTIP_ANALISE_RESULT_DELETE =
+            "PREF_KEY_TOOLTIP_ANALISE_RESULT_DELETE"
+        private const val PREF_KEY_TOOLTIP_SEARCH_ITEM = "PREF_KEY_TOOLTIP_SEARCH_ITEM"
+        private const val PREF_KEY_TOOLTIP_START_ROOM = "PREF_KEY_TOOLTIP_START_ROOM"
+        private const val PREF_KEY_TOOLTIP_PROFILE_CENTER = "PREF_KEY_TOOLTIP_PROFILE_CENTER"
+        private const val PREF_KEY_TOOLTIP_SEARCH_TAB = "PREF_KEY_TOOLTIP_SEARCH_TAB"
+        private const val PREF_KEY_TOOLTIP_SEARCH_LOUPE = "PREF_KEY_TOOLTIP_SEARCG_LOUPE"
+        private const val PREF_KEY_TOOLTIP_TAX = "PREF_KEY_TOOLTIP_TAX"
+        private const val PREF_KEY_RATING_APP = "PREF_KEY_RATING_APP"
+        private const val PREF_KEY_SCREEN_LOCK = "PREF_KEY_SCREEN_LOCK"
+        private const val PREF_KEY_CENTER_INFO = "PREF_KEY_CENTER_INFO"
+        private const val PREF_KEY_CURRENT_USER_INFO = "PREF_KEY_CURRENT_USER_INFO"
+        private const val PREF_KEY_USERS_LOGIN = "PREF_KEY_USERS_LOGIN"
+        private const val PREF_KEY_YANDEX_STORE = "PREF_KEY_YANDEX_STORE"
+        private const val PREF_KEY_SHOW_ALERT_QUESTION_AT_EXIT = "PREF_KEY_SHOW_ALERT_QUESTION_AT_EXIT"
+        private const val PREF_KEY_REQUEST_AUTO_START = "PREF_KEY_REQUEST_AUTO_START"
+        private const val PREF_KEY_PAY_DATA = "PREF_KEY_PAY_DATA"
+    }
 
-    private val preferences: SharedPreferences
+    private var preferences: SharedPreferences
+
+    init {
+        val prefName = PREF_NAME
+        preferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+    }
+
     var notShowAlertQuestionAtExit: Boolean
         get() = preferences.getBoolean(PREF_KEY_SHOW_ALERT_QUESTION_AT_EXIT, false)
         set(boo) {
@@ -244,39 +278,5 @@ class PreferencesManager(context: Context) {
         }
 
         return list
-    }
-
-    companion object {
-        private const val PREF_KEY_CURRENT_USER_NAME = "PREF_KEY_CURRENT_USER_NAME"
-        private const val PREF_KEY_CURRENT_PASSWORD = "PREF_KEY_CURRENT_PASSWORD"
-        private const val PREF_KEY_START_MODE = "PREF_KEY_START_MODE"
-        private const val PREF_KEY_TOOLTIP_SCHEDULE = "PREF_KEY_TOOLTIP_SCHEDULE"
-        private const val PREF_KEY_TOOLTIP_ANALISE_LIST_TRUE = "PREF_KEY_TOOLTIP_ANALISE_LIST_TRUE"
-        private const val PREF_KEY_TOOLTIP_ANALISE_LIST_FALSE =
-            "PREF_KEY_TOOLTIP_ANALISE_LIST_FALSE"
-        private const val PREF_KEY_TOOLTIP_ANALISE_RESULT_LOAD =
-            "PREF_KEY_TOOLTIP_ANALISE_RESULT_LOAD"
-        private const val PREF_KEY_TOOLTIP_ANALISE_RESULT_DELETE =
-            "PREF_KEY_TOOLTIP_ANALISE_RESULT_DELETE"
-        private const val PREF_KEY_TOOLTIP_SEARCH_ITEM = "PREF_KEY_TOOLTIP_SEARCH_ITEM"
-        private const val PREF_KEY_TOOLTIP_START_ROOM = "PREF_KEY_TOOLTIP_START_ROOM"
-        private const val PREF_KEY_TOOLTIP_PROFILE_CENTER = "PREF_KEY_TOOLTIP_PROFILE_CENTER"
-        private const val PREF_KEY_TOOLTIP_SEARCH_TAB = "PREF_KEY_TOOLTIP_SEARCH_TAB"
-        private const val PREF_KEY_TOOLTIP_SEARCH_LOUPE = "PREF_KEY_TOOLTIP_SEARCG_LOUPE"
-        private const val PREF_KEY_TOOLTIP_TAX = "PREF_KEY_TOOLTIP_TAX"
-        private const val PREF_KEY_RATING_APP = "PREF_KEY_RATING_APP"
-        private const val PREF_KEY_SCREEN_LOCK = "PREF_KEY_SCREEN_LOCK"
-        private const val PREF_KEY_CENTER_INFO = "PREF_KEY_CENTER_INFO"
-        private const val PREF_KEY_CURRENT_USER_INFO = "PREF_KEY_CURRENT_USER_INFO"
-        private const val PREF_KEY_USERS_LOGIN = "PREF_KEY_USERS_LOGIN"
-        private const val PREF_KEY_YANDEX_STORE = "PREF_KEY_YANDEX_STORE"
-        private const val PREF_KEY_SHOW_ALERT_QUESTION_AT_EXIT = "PREF_KEY_SHOW_ALERT_QUESTION_AT_EXIT"
-        private const val PREF_KEY_REQUEST_AUTO_START = "PREF_KEY_REQUEST_AUTO_START"
-        private const val PREF_KEY_PAY_DATA = "PREF_KEY_PAY_DATA"
-    }
-
-    init {
-        val prefName = PREF_NAME
-        preferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
     }
 }

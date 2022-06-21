@@ -1,4 +1,4 @@
-package com.medhelp.medhelp.data.model.yandex_cashbox;
+package com.medhelp.medhelp.data.model;
 
 public class YandexKey {
     String uuid;

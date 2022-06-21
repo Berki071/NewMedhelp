@@ -45,7 +45,6 @@ import com.medhelp.medhelp.ui.finances_and_services.FinancesAndServicesFragment;
 import com.medhelp.medhelp.ui.login.LoginActivity;
 import com.medhelp.medhelp.ui.news_about_the_application.NewsAboutTheApplicationActivity;
 import com.medhelp.medhelp.ui.profile.ProfileFragment;
-import com.medhelp.medhelp.ui.sale.SaleFragment;
 import com.medhelp.medhelp.ui.schedule.ScheduleFragment;
 import com.medhelp.medhelp.ui.schedule.alert_question_at_exit.AlertQuestionAtExit;
 import com.medhelp.medhelp.ui.search.SearchFragment;
@@ -384,7 +383,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityHelpe
                     return true;
 
                 default:
-                    fragmentClass = SaleFragment.class;
+                    fragmentClass = SettingsFragment.class;
                     break;
             }
 

@@ -1,3 +1,4 @@
+/*
 package com.medhelp.medhelp.data.model;
 
 import android.os.Parcel;
@@ -5,7 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
-import com.medhelp.medhelp.utils.main.TimesUtils;
+import com.medhelp.medhelp.utils.TimesUtils;
 
 @SuppressWarnings("unused")
 public class VisitResponse implements Parcelable, Comparable {
@@ -329,4 +330,4 @@ public class VisitResponse implements Parcelable, Comparable {
         dest.writeString(executeTheScenario);
         dest.writeInt(durationSec);
     }
-}
+}*/

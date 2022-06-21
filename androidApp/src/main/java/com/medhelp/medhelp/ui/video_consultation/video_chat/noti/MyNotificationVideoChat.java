@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Build;
 import androidx.core.app.NotificationCompat;
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.VisitResponse;
+
 
 //public class MyNotificationVideoChat {
 //

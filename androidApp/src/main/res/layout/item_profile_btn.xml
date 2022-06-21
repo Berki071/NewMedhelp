@@ -38,6 +38,7 @@
             android:layout_marginStart="@dimen/base_element_margin"
             android:layout_marginLeft="@dimen/base_element_margin"
             android:layout_marginTop="@dimen/base_element_margin"
+
             android:layout_toEndOf="@+id/image_doc_item"
             android:layout_toRightOf="@+id/image_doc_item"
             android:gravity="center_horizontal"

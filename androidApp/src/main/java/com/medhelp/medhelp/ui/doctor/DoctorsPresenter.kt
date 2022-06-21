@@ -1,179 +1,135 @@
-package com.medhelp.medhelp.ui.doctor;
+package com.medhelp.medhelp.ui.doctor
 
+import android.content.Context
+import com.medhelp.medhelp.utils.timber_log.LoggingTree.Companion.getMessageForError
+import com.medhelp.medhelp.data.model.AllDoctorsResponse
+import com.medhelp.medhelp.data.pref.PreferencesManager
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import com.medhelp.medhelp.data.model.AllDoctorsList
+import com.medhelp.medhelp.utils.timber_log.LoggingTree
+import com.medhelp.medhelp.data.model.CategoryResponse
+import com.medhelp.medhelp.data.model.SpecialtyList
+import com.medhelp.medhelp.data.network.NetworkManager
+import com.medhelp.shared.model.UserResponse
+import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
+import java.lang.Exception
+import java.util.ArrayList
 
-import android.content.Context;
-import com.medhelp.medhelp.data.model.AllDoctorsResponse;
-import com.medhelp.medhelp.data.model.SpecialtyList;
-import com.medhelp.medhelp.data.network.NetworkManager;
-import com.medhelp.medhelp.data.pref.PreferencesManager;
-import com.medhelp.medhelp.utils.timber_log.LoggingTree;
-import com.medhelp.shared.model.UserResponse;
+class DoctorsPresenter(val view: DoctorsFragment) {
+    private var allDoc: List<AllDoctorsResponse>? = null
+    var prefManager: PreferencesManager
+    var networkManager: NetworkManager
 
-import java.util.ArrayList;
-import java.util.List;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
-import timber.log.Timber;
-
-public class DoctorsPresenter implements DoctorsHelper.Presenter
-{
-    private List<AllDoctorsResponse> allDoc;
-    Context context;
-    DoctorsHelper.View view;
-
-    PreferencesManager prefManager;
-    NetworkManager networkManager;
-
-    public DoctorsPresenter(Context context, DoctorsHelper.View view)
-    {
-        this.context=context;
-        this.view=view;
-
-        prefManager = new PreferencesManager(context);
-        networkManager = new NetworkManager(prefManager);
-
-        //int tt = prefManager.getCurrentUserInfo().getIdCenter();
+    init {
+        prefManager = PreferencesManager(view.requireContext())
+        networkManager = NetworkManager(prefManager)
     }
 
-    @Override
-    public void removePassword()
-    {
-        prefManager.setCurrentPassword("");
-        prefManager.setUsersLogin(null);
+    fun removePassword() {
+        prefManager.currentPassword = ""
+        prefManager.usersLogin = null
     }
 
-    @Override
-    public void getDoctorList(int idSpec)
-    {
-
-        if(idSpec==-1  && allDoc!=null)
-        {
-            view.updateView(allDoc);
-            view.hideLoading();
-            return;
+    fun getDoctorList(idSpec: Int) {
+        if (idSpec == -1 && allDoc != null) {
+            view!!.updateView(allDoc!!)
+            view!!.hideLoading()
+            return
         }
-
-        if(allDoc!=null)
-        {
-            view.updateView(sortAllDoc(idSpec));
-            view.hideLoading();
-            return;
+        if (allDoc != null) {
+            view!!.updateView(sortAllDoc(idSpec))
+            view!!.hideLoading()
+            return
         }
-
-        view.showLoading();
-
-        CompositeDisposable cd = new CompositeDisposable();
+        view!!.showLoading()
+        val cd = CompositeDisposable()
         cd.add(networkManager
-                .getAllDoctors()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(response ->
-                        {
-                            if (response.getResponses().size() <= 0) {
-                                view.updateView(null);
-                            } else {
-                                allDoc = response.getResponses();
-
-                                if(view!=null)
-                                    view.updateView(response.getResponses());
-                            }
-                            view.hideLoading();
-                            cd.dispose();
-                        },
-                        throwable ->
-                        {
-                            Timber.tag("my").e(LoggingTree.getMessageForError(throwable,"DoctorsPresenter$getDoctorList "));
-
-                            view.hideLoading();
-                            view.showErrorScreen();
-                            cd.dispose();
-                        })
-        );
-
-
+            .getAllDoctors()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { response: AllDoctorsList ->
+                    if (response.responses.size <= 0) {
+                        view!!.updateView(null)
+                    } else {
+                        allDoc = response.responses
+                        if (view != null) view!!.updateView(response.responses)
+                    }
+                    view!!.hideLoading()
+                    cd.dispose()
+                }
+            ) { throwable: Throwable? ->
+                Timber.tag("my").e(getMessageForError(throwable, "DoctorsPresenter\$getDoctorList "))
+                view!!.hideLoading()
+                view!!.showErrorScreen()
+                cd.dispose()
+            }
+        )
     }
 
-    private List<AllDoctorsResponse> sortAllDoc(int idSpec)
-    {
-        List<AllDoctorsResponse> sortList =new ArrayList<>();
-
-        for(int i=0;i<allDoc.size();i++)
-        {
-            AllDoctorsResponse doc=allDoc.get(i);
-
-            if(doc.getId_specialties_int_list()==null)
-                continue;
-
-            if(doc.getId_specialties_int_list().size()==1  && doc.getId_specialties_int_list().get(0)==idSpec)
-            {
-                sortList.add(doc);
-                continue;
+    private fun sortAllDoc(idSpec: Int): List<AllDoctorsResponse> {
+        val sortList: MutableList<AllDoctorsResponse> = ArrayList()
+        for (i in allDoc!!.indices) {
+            val doc = allDoc!![i]
+            if (doc.id_specialties_int_list == null) continue
+            if (doc.id_specialties_int_list.size == 1 && doc.id_specialties_int_list[0] == idSpec) {
+                sortList.add(doc)
+                continue
             }
-
-            for (int j=0;j<doc.getId_specialties_int_list().size();j++)
-            {
-                if(doc.getId_specialties_int_list().get(j)==idSpec)
-                {
-                    sortList.add(doc);
+            for (j in doc.id_specialties_int_list.indices) {
+                if (doc.id_specialties_int_list[j] == idSpec) {
+                    sortList.add(doc)
                 }
             }
         }
-
-        return sortList;
+        return sortList
     }
 
-    @Override
-    public void getSpecialtyByCenter()
-    {
-        view.showLoading();
-
-        CompositeDisposable cd = new CompositeDisposable();
+    fun getSpecialtyByCenter() {
+        view!!.showLoading()
+        val cd = CompositeDisposable()
         cd.add(networkManager
-                .getCategoryApiCall()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(SpecialtyList::getSpec)
-                .subscribe(response ->
-                {
-                    try
-                    {
-                        view.updateSpecialty(response);
-                    } catch (Exception e)
-                    {
-                        Timber.tag("my").e(LoggingTree.getMessageForError(e,"DoctorsPresenter$getSpecialtyByCenter$1 "));
-                    }
-
-                    cd.dispose();
-                }, throwable ->
-                {
-                    view.hideLoading();
-                    Timber.tag("my").e(LoggingTree.getMessageForError(throwable,"DoctorsPresenter$getSpecialtyByCenter$2 "));
-                    view.showErrorScreen();
-                    cd.dispose();
-                }));
+            .getCategoryApiCall()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { obj: SpecialtyList -> obj.spec }
+            .subscribe({ response: List<CategoryResponse> ->
+                try {
+                    view!!.updateSpecialty(response)
+                } catch (e: Exception) {
+                    Timber.tag("my")
+                        .e(getMessageForError(e, "DoctorsPresenter\$getSpecialtyByCenter$1 "))
+                }
+                cd.dispose()
+            }) { throwable: Throwable? ->
+                view!!.hideLoading()
+                Timber.tag("my").e(
+                    getMessageForError(
+                        throwable,
+                        "DoctorsPresenter\$getSpecialtyByCenter$2 "
+                    )
+                )
+                view!!.showErrorScreen()
+                cd.dispose()
+            })
     }
 
-    @Override
-    public void unSubscribe()
-    {
-        view.hideLoading();
+    fun unSubscribe() {
+        view!!.hideLoading()
     }
 
-    @Override
-    public String getUserToken() {
-        return prefManager.getCurrentUserInfo().getApiKey();
+    fun getUserToken(): String {
+        return prefManager.currentUserInfo!!.apiKey!!
     }
 
-    @Override
-    public UserResponse getCurrentUser()
-    {
-        return prefManager.getCurrentUserInfo();
+    fun getCurrentUser(): UserResponse {
+        return prefManager.currentUserInfo!!
     }
 
-    @Override
-    public void setCurrentUser(UserResponse user)
-    {
-        prefManager.setCurrentUserInfo(user);
+    fun setCurrentUser(user: UserResponse) {
+        prefManager.currentUserInfo = user
     }
+
 }

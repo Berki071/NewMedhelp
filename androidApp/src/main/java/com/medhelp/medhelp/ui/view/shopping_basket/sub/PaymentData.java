@@ -1,7 +1,7 @@
 package com.medhelp.medhelp.ui.view.shopping_basket.sub;
 
-import com.medhelp.medhelp.data.model.VisitResponse;
-import com.medhelp.medhelp.data.model.yandex_cashbox.YandexKey;
+import com.medhelp.medhelp.data.model.YandexKey;
+import com.medhelp.newmedhelp.model.VisitResponseAndroid;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class PaymentData {
     String sum;
     String description;
     YandexKey keys;
-    List<VisitResponse> visitList;
+    List<VisitResponseAndroid> visitList;
     String idPayment;
 
 
@@ -22,11 +22,11 @@ public class PaymentData {
         this.idPayment = idPayment;
     }
 
-    public List<VisitResponse> getVisitList() {
+    public List<VisitResponseAndroid> getVisitList() {
         return visitList;
     }
 
-    public void setVisitList(List<VisitResponse> visitList) {
+    public void setVisitList(List<VisitResponseAndroid> visitList) {
         this.visitList = visitList;
     }
 

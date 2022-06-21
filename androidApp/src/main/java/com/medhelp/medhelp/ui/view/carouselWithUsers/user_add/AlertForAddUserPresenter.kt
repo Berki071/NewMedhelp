@@ -7,7 +7,6 @@ import com.medhelp.medhelp.data.pref.PreferencesManager
 import com.medhelp.medhelp.utils.timber_log.LoggingTree
 import com.medhelp.shared.model.UserResponse
 import com.medhelp.shared.network.NetworkManager
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import timber.log.Timber

@@ -15,7 +15,7 @@
 //import com.medhelp.medhelp.bg.oldClass.notification.ShowNotification;
 //import com.medhelp.medhelp.data.model.notification.NotificationMsg;
 //import com.medhelp.medhelp.ui._main_page.MainActivity;
-//import com.medhelp.medhelp.utils.main.TimesUtils;
+//import com.medhelp.medhelp.utils.TimesUtils;
 //
 //import static com.medhelp.medhelp.ui._main_page.MainActivity.POINTER_TO_PAGE;
 //

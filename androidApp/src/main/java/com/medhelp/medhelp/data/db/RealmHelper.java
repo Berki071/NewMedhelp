@@ -6,7 +6,7 @@
 //import com.medhelp.medhelp.data.model.chat.ResponseFromSaveOurMessage;
 //import com.medhelp.medhelp.data.model.chat.Room;
 //import com.medhelp.medhelp.data.model.news.NewsResponse;
-//import com.medhelp.medhelp.ui.view.shopping_basket.sub.DataPaymentForRealm;
+//import com.medhelp.medhelp.data.model.DataPaymentForRealm;
 //
 //import java.util.List;
 //

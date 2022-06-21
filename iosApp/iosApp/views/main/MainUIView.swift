@@ -11,6 +11,14 @@ import SwiftUI
 struct MainUIView: View {
     @ObservedObject var mainPresenter = MainPresenter()
     
+    init() {
+        // for navigation bar title color
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+       // For navigation bar background color
+        //UINavigationBar.appearance().backgroundColor = .green
+    }
+    
+    
     var body: some View {
         let drag = DragGesture()
             .onEnded {
@@ -70,7 +78,9 @@ struct MainUIView: View {
                         }
                     ))
                     
+                    
                 }
+                
             }
         }
         
@@ -84,13 +94,16 @@ struct MainView: View {
     var body: some View {
         if(mainP.selectMenuPage == 0){
             ProfilePage()
-                .navigationBarTitle("Главная", displayMode: .inline)
+                .navigationBarTitle(mainP.titleTop, displayMode: .inline)
+            
         }else if(mainP.selectMenuPage == 1){
             DoctorsPage()
                 .navigationBarTitle("Специалисты", displayMode: .inline)
+              
         }else if(mainP.selectMenuPage == 2){
             ServicesPage()
                 .navigationBarTitle("Прейскурант на услуги", displayMode: .inline)
+               
         }
     }
 }

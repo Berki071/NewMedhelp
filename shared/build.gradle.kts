@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("com.android.library")
+    ///id("kotlin-parcelize")
    // id("io.realm.kotlin")
 }
 
@@ -40,6 +41,8 @@ kotlin {
         val androidMain by getting{
             dependencies {
                 implementation("io.ktor:ktor-client-android:1.6.1")
+                implementation("com.jakewharton.timber:timber:5.0.1")
+                implementation("com.google.code.gson:gson:2.9.0")
             }
         }
 

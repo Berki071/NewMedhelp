@@ -164,11 +164,11 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "4495405E-F0A6-4709-8A39-64AE91FA9451 - ec03361e325d1073"
+                  uuid = "4495405E-F0A6-4709-8A39-64AE91FA9451 - 5b41e040e50c4dd9"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedSimpleResBoolean&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.LoginPresenter.sendFcmToken(token: Swift.String) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedSimpleResBooleanAsString&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.LoginPresenter.sendFcmToken(token: Swift.String) -&gt; ()"
                   moduleName = "iosApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/login/LoginPresenter.swift"
@@ -179,11 +179,11 @@
                   offsetFromSymbolStart = "159">
                </Location>
                <Location
-                  uuid = "4495405E-F0A6-4709-8A39-64AE91FA9451 - ec03361e325d1073"
+                  uuid = "4495405E-F0A6-4709-8A39-64AE91FA9451 - 5b41e040e50c4dd9"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedSimpleResBoolean&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.LoginPresenter.sendFcmToken(token: Swift.String) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedSimpleResBooleanAsString&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.LoginPresenter.sendFcmToken(token: Swift.String) -&gt; ()"
                   moduleName = "iosApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/login/LoginPresenter.swift"
@@ -194,6 +194,22 @@
                   offsetFromSymbolStart = "460">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0CCD41BC-5615-4B13-BB13-9B14B15B9950"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/views/main/profile/recy/ProfileItem.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

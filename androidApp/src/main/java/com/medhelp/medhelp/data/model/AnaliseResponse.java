@@ -2,11 +2,9 @@ package com.medhelp.medhelp.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 import com.medhelp.medhelp.ui.electronic_conclusions_fragment.adapters.recy.DataClassForElectronicRecy;
-import com.medhelp.medhelp.utils.main.TimesUtils;
 
 public class AnaliseResponse extends DataClassForElectronicRecy implements Parcelable {
     @SerializedName("data")

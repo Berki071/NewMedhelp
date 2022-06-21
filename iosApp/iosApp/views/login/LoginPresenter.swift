@@ -186,7 +186,7 @@ class LoginPresenter : ObservableObject {
         }
         
         let apiKey = String.init(self.sharePreferenses.currentUserInfo!.apiKey!)
-        let h_dbName = String.init(self.sharePreferenses.centerInfo!.db_name!)
+        let h_dbName = self.sharePreferenses.centerInfo!.db_name!
         let idUser=String(Int.init(truncating: self.sharePreferenses.currentUserInfo!.idUser!))
         let idBranch=String(Int.init(truncating: self.sharePreferenses.currentUserInfo!.idBranch!))
         
@@ -259,7 +259,7 @@ class LoginPresenter : ObservableObject {
         countFcmSend=userLogin!.count
         
         let apiKey = String.init(self.sharePreferenses.currentUserInfo!.apiKey!)
-        let h_dbName = String.init(self.sharePreferenses.centerInfo!.db_name!)
+        let h_dbName = self.sharePreferenses.centerInfo!.db_name!
         let idUser=String(Int.init(self.sharePreferenses.currentUserInfo!.idUser!))
         let idBranch=String(Int.init(self.sharePreferenses.currentUserInfo!.idBranch!))
         
@@ -268,7 +268,7 @@ class LoginPresenter : ObservableObject {
             let idBranchItem=String(Int.init(i.idBranch!))
             
             sdk.sendFcmId(idUser: idUserItem, idFilial: idBranchItem, idFcm: token, h_Auth: apiKey, h_dbName: h_dbName, h_idKl: idUser, h_idFilial:  idBranch, completionHandler: { response, error in
-                if let res : SimpleResBoolean = response {
+                if let res : SimpleResBooleanAsString = response {
                     self.countFcmSend -= 1
                     if self.countFcmSend <= 0 {
                         self.showNextpage()
@@ -337,7 +337,7 @@ class LoginPresenter : ObservableObject {
         }
         
         sdk.sendMsgToSupport(login: self.username, email: email, msg: msg, completionHandler: { response, error in
-            if let res : SimpleResBoolean = response {
+            if let res : SimpleResBooleanAsString = response {
                 self.showLoading(false)
                 LoggingTree.v("Отправлено сообщение в техподдержку:  \(self.username) \(email) \(msg)")
                 self.showAlert("Ваше обращение отправлено и будет обработано в рабочие часы техподдержки. Ответ будет предоставлен на указанный адрес электронной почты.", titleM: "Отправлено успешно!")

@@ -6,12 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.VisitResponse;
-
+import com.medhelp.newmedhelp.model.VisitResponse;
 import java.util.List;
+
 
 public class ConsultationAdapter extends RecyclerView.Adapter<ConsultationHolder> {
     private List<VisitResponse> list;

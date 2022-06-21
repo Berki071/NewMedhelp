@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    //id("kotlinx-serialization")
 }
 
 android {
@@ -27,17 +28,17 @@ dependencies {
     implementation (fileTree(mapOf("include" to listOf("*.jar"), "dir" to "libs")))
     implementation (fileTree(mapOf("dir" to "libs", "include" to listOf ("*.aar"))))
 
-    implementation("com.google.android.material:material:1.6.0")
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+    implementation("com.google.android.material:material:1.6.1")
+    implementation("androidx.appcompat:appcompat:1.4.2")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
-    implementation ("androidx.core:core-ktx:1.7.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0-native-mt")
+    implementation ("androidx.core:core-ktx:1.8.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2")
 
     implementation ("androidx.cardview:cardview:1.0.0")
-    implementation ("com.google.android.material:material:1.6.0")
+    implementation ("com.google.android.material:material:1.6.1")
     implementation ("androidx.vectordrawable:vectordrawable:1.1.0")
-    implementation ("androidx.constraintlayout:constraintlayout:2.1.3")
+    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation ("androidx.exifinterface:exifinterface:1.3.3")
     implementation ("androidx.media:media:1.6.0")
 
@@ -54,15 +55,15 @@ dependencies {
     implementation ("io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:1.1.3")
 
     //    Logger
-    implementation ("com.jakewharton.timber:timber:5.0.1")
+    //implementation ("com.jakewharton.timber:timber:5.0.1")
 
     //Firebase
-    implementation (platform("com.google.firebase:firebase-bom:30.0.0"))
+    implementation (platform("com.google.firebase:firebase-bom:30.1.0"))
     implementation ("com.google.firebase:firebase-crashlytics")
     implementation ("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-messaging")
     implementation ("com.google.firebase:firebase-analytics")
-    implementation ("com.google.firebase:firebase-auth:21.0.4")
+    implementation ("com.google.firebase:firebase-auth:21.0.5")
 
     //просмотр pdf
     implementation ("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
@@ -75,7 +76,7 @@ dependencies {
     implementation ("com.github.wangjiegulu:rfab:2.0.0")
     //для оплаты
     implementation ("ru.yoomoney.sdk.kassa.payments:yookassa-android-sdk:6.5.2")
-    implementation ("com.google.android.gms:play-services-location:19.0.1")
+    implementation ("com.google.android.gms:play-services-location:20.0.0")
     implementation ("com.google.android.gms:play-services-wallet:19.1.0")
     implementation ("com.google.android.play:core:1.10.3")
     implementation ("androidx.legacy:legacy-support-v4:1.0.0")
@@ -89,5 +90,7 @@ dependencies {
     implementation("androidx.work:work-runtime:2.7.1")
 
    // compileOnly("io.realm.kotlin:library:0.11.1")
+
+   // implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.9.1")
 
 }

@@ -1,7 +1,7 @@
 package com.medhelp.medhelp.data.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.medhelp.medhelp.utils.main.TimesUtils;
+import com.medhelp.medhelp.utils.TimesUtils;
 
 public class BonusesItem implements Comparable<BonusesItem> {
     @SerializedName("data_bonus")

@@ -10,7 +10,30 @@ import SwiftUI
 
 struct DoctorsPage: View {
     var body: some View {
-        Text("Doctors!")
+        ZStack{
+            VStack(spacing: 0){
+                
+                HStack {
+                    
+                    
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color("color_primary"))
+                
+            }
+            .background(.white)
+            
+//            
+//            if(self.mainPresenter.showDialogLoading == true){
+//                LoadingView()
+//            }
+//            
+//            if(isShowAlertRecomend != nil){
+//                StandartAlert(dataOb: isShowAlertRecomend!)
+//            }
+
+        }
     }
 }
 

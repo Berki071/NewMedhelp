@@ -10,10 +10,10 @@ import com.medhelp.medhelp.R
 import com.medhelp.medhelp.data.model.chat.SimpleResBoolean
 import com.medhelp.medhelp.data.model.yandex_cashbox.PaymentInformationModel
 import com.medhelp.medhelp.data.model.yandex_cashbox.PaymentModel
-import com.medhelp.medhelp.data.model.yandex_cashbox.YandexKey
-import com.medhelp.medhelp.data.pref.PreferencesManager
-import com.medhelp.medhelp.ui.view.shopping_basket.sub.DataPaymentForRealm
+import com.medhelp.medhelp.data.model.DataPaymentForRealm
 import com.medhelp.medhelp.ui.view.shopping_basket.sub.PaymentData
+import com.medhelp.medhelp.data.model.YandexKey
+import com.medhelp.medhelp.data.pref.PreferencesManager
 import com.medhelp.medhelp.utils.timber_log.LoggingTree
 import com.medhelp.shared.model.CenterResponse
 import com.medhelp.shared.network.NetworkManager

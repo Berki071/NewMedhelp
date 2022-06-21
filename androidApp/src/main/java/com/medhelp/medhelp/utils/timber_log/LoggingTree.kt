@@ -1,17 +1,13 @@
 package com.medhelp.medhelp.utils.timber_log
 
 import android.content.Context
-import com.medhelp.medhelp.utils.rx.SchedulerProvider
-import com.medhelp.medhelp.data.pref.PreferencesManager
-import com.medhelp.medhelp.utils.main.TimesUtils
-import com.androidnetworking.error.ANError
-import com.medhelp.medhelp.utils.rx.AppSchedulerProvider
 import android.content.pm.PackageManager
+import com.medhelp.medhelp.data.pref.PreferencesManager
 import com.medhelp.shared.network.NetworkManager
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.Exception
+
 
 class LoggingTree(context: Context) : Timber.DebugTree() {
     companion object {
@@ -29,15 +25,15 @@ class LoggingTree(context: Context) : Timber.DebugTree() {
         fun getMessageForError(t: Throwable?, message: String): String {
             var err: String? = ""
             if (t != null) {
-                if (t is ANError) {
-                    val anError = t
-                    err += "ANError ErrorDetail: "
-                    err += anError.errorDetail
-                    err += "\n"
-                    err += "ANError ErrorBody: "
-                    err += anError.errorBody
-                    err += "\n"
-                }
+//                if (t is ANError) {
+//                    val anError = t
+//                    err += "ANError ErrorDetail: "
+//                    err += anError.errorDetail
+//                    err += "\n"
+//                    err += "ANError ErrorBody: "
+//                    err += anError.errorBody
+//                    err += "\n"
+//                }
                 err += "Throwable message: "
                 err += t.message
             }
@@ -49,7 +45,6 @@ class LoggingTree(context: Context) : Timber.DebugTree() {
     }
 
     private val networkManager: NetworkManager
-    private val schedulerProvider: SchedulerProvider
     private var versionCode = "0"
     var pm: PreferencesManager
     val mainScope = MainScope()
@@ -57,7 +52,6 @@ class LoggingTree(context: Context) : Timber.DebugTree() {
     init {
         pm = PreferencesManager(context)
         networkManager = NetworkManager()
-        schedulerProvider = AppSchedulerProvider()
         try {
             val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
             val verCode = pInfo.versionCode

@@ -1,3 +1,4 @@
+/*
 package com.medhelp.medhelp.data.model;
 
 import com.google.gson.annotations.SerializedName;
@@ -40,4 +41,4 @@ public class VisitList {
     public void setResponse(List<VisitResponse> response) {
         this.response = response;
     }
-}
+}*/

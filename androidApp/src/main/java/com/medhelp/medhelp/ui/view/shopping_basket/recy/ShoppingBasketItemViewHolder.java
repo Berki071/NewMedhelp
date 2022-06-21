@@ -5,7 +5,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.VisitResponse;
+import com.medhelp.newmedhelp.model.VisitResponse;
+import com.medhelp.newmedhelp.model.VisitResponseAndroid;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 
 
@@ -15,7 +16,7 @@ public class ShoppingBasketItemViewHolder extends ChildViewHolder {
     private TextView price;
     private ImageView delete;
 
-    private VisitResponse response;
+    private VisitResponseAndroid response;
 
     ChildListener listener;
 
@@ -36,7 +37,7 @@ public class ShoppingBasketItemViewHolder extends ChildViewHolder {
         });
     }
 
-    void onBind(VisitResponse response) {
+    void onBind(VisitResponseAndroid response) {
         this.response=response;
         title.setText(response.getNameServices());
         price.setText(response.getPrice() +"р.");
@@ -53,6 +54,6 @@ public class ShoppingBasketItemViewHolder extends ChildViewHolder {
 
 
     public interface ChildListener{
-        void deleteItem(VisitResponse itm);
+        void deleteItem(VisitResponseAndroid itm);
     }
 }

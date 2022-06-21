@@ -12,12 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.VisitResponse;
-
-
-
+import com.medhelp.newmedhelp.model.VisitResponse;
 import timber.log.Timber;
 
 public class EvaluateTheDoctor {

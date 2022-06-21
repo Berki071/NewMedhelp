@@ -6,10 +6,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class SimpleResponseBoolean {
-    @SerialName("imgError")
-    val error = false
-    @SerialName("Message")
-    val message: String? = null
+    @SerialName("error")
+    var error = false
+    @SerialName("message")
+    var message: String? = null
     @SerialName("response")
-    val response: Boolean=false
+    var response: Boolean=false
 }

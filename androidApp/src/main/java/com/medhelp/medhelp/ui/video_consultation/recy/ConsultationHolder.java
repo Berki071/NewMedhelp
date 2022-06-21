@@ -6,20 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
 import com.medhelp.medhelp.Constants;
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.VisitResponse;
 import com.medhelp.medhelp.ui._main_page.MainActivity;
 import com.medhelp.medhelp.utils.workToFile.show_file.ShowFile2;
-import com.medhelp.medhelp.utils.main.TimesUtils;
-
+import com.medhelp.medhelp.utils.TimesUtils;
+import com.medhelp.newmedhelp.model.VisitResponse;
 import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
-
-
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ConsultationHolder extends RecyclerView.ViewHolder {
@@ -113,7 +108,7 @@ public class ConsultationHolder extends RecyclerView.ViewHolder {
 
     private String getTimeStartAndEnd()
     {
-        long timeEnd=data.getTimeMills();
+        long timeEnd=data.getTimeMils();
         timeEnd+=data.getDurationSec()*1000;
 
         String str="c "+ data.getTimeOfReceipt();
@@ -125,7 +120,7 @@ public class ConsultationHolder extends RecyclerView.ViewHolder {
     private boolean isShowTimer()
     {
         long currentTimeAndDate=System.currentTimeMillis();
-        long dateTimeLongStart =data.getTimeMills();
+        long dateTimeLongStart =data.getTimeMils();
         long dateTimeLongStartMinusBeforeAdmission=dateTimeLongStart-(Constants.MIN_TIME_BEFORE_VIDEO_CALL*60*1000);
         long timeDataEnd =dateTimeLongStart+data.getDurationSec()*1000;
 
@@ -178,7 +173,7 @@ public class ConsultationHolder extends RecyclerView.ViewHolder {
 
             long currentTimeAndDate=System.currentTimeMillis();
             String m1=TimesUtils.longToString(currentTimeAndDate,TimesUtils.DATE_FORMAT_HHmmss_ddMMyyyy);
-            long receptionTimeAndDate=data.getTimeMills();
+            long receptionTimeAndDate=data.getTimeMils();
             String m2=TimesUtils.longToString(receptionTimeAndDate,TimesUtils.DATE_FORMAT_HHmmss_ddMMyyyy);
             long timeLeft=receptionTimeAndDate-currentTimeAndDate;
             timeLeft=timeLeft/1000;

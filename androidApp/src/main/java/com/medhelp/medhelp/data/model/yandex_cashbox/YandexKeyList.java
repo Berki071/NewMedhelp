@@ -1,7 +1,7 @@
 package com.medhelp.medhelp.data.model.yandex_cashbox;
 
 import com.google.gson.annotations.SerializedName;
-import com.medhelp.medhelp.data.model.AllDoctorsResponse;
+import com.medhelp.medhelp.data.model.YandexKey;
 
 import java.util.ArrayList;
 import java.util.List;

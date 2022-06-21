@@ -1,7 +1,6 @@
-package com.medhelp.medhelp.ui.view.shopping_basket.sub;
+package com.medhelp.medhelp.data.model;
 
 import com.google.gson.Gson;
-import com.medhelp.medhelp.data.model.yandex_cashbox.YandexKey;
 
 public class DataPaymentForRealm {
     long id;

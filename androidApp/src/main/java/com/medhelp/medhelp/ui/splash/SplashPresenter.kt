@@ -1,31 +1,21 @@
 package com.medhelp.medhelp.ui.splash
 
 import android.os.Handler
-import android.util.Log
 import com.androidnetworking.error.ANError
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.messaging.FirebaseMessaging
-import com.medhelp.medhelp.data.model.chat.SimpleResBoolean
 import com.medhelp.medhelp.data.network.ProtectionData
 import com.medhelp.medhelp.data.pref.PreferencesManager
-import com.medhelp.medhelp.utils.main.MainUtils
 import com.medhelp.medhelp.utils.timber_log.LoggingTree
 import com.medhelp.newmedhelp.MUtils
 import com.medhelp.shared.model.CenterResponse
 import com.medhelp.shared.model.SettingsAllBranchHospitalResponse
-import com.medhelp.shared.model.UserResponse
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import com.medhelp.medhelp.data.network.NetworkManager as NM
 import com.medhelp.shared.network.NetworkManager
-import io.reactivex.disposables.CompositeDisposable
 
 class SplashPresenter(var mainView: SplashActivity) {
     var crashlytics = FirebaseCrashlytics.getInstance()

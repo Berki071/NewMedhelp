@@ -5,7 +5,9 @@ import com.medhelp.medhelp.R
 import com.medhelp.medhelp.data.model.*
 import com.medhelp.medhelp.data.model.settings.SimpleResponseString
 import com.medhelp.medhelp.data.pref.PreferencesManager
+import com.medhelp.newmedhelp.model.DateResponse
 import com.medhelp.medhelp.utils.timber_log.LoggingTree
+import com.medhelp.medhelp.utils.TimesUtils
 import com.medhelp.shared.network.NetworkManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -44,34 +46,28 @@ class SchedulePresenter(val context: Context, val viewHelper: ScheduleFragment) 
         prefManager.currentUserInfo = null
     }
 
-    fun getDateFromService(idService: Int, adm: Int, idBranch: Int) {
+    fun getDateFromService1(idService: Int, adm: Int, idBranch: Int) {
         if (!viewHelper.isLoading()) viewHelper.showLoading()
-        val cd = CompositeDisposable()
-        cd.add(networkManager
-            .getCurrentDateApiCall()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ response: DateList ->
-                if (viewHelper == null) {
-                    return@subscribe
+
+        mainScope.launch {
+            kotlin.runCatching {
+                networkManager2.getCurrentDateApiCall(prefManager.currentUserInfo!!.apiKey!!, prefManager.centerInfo!!.db_name!!,prefManager.currentUserInfo!!.idUser.toString(),prefManager.currentUserInfo!!.idBranch.toString())
+            }
+                .onSuccess {
+                    if (viewHelper == null) {
+                        return@onSuccess
+                    }
+                    val date = it.response
+                    getScheduleByService(idService, date!!, adm, idBranch)
+                }.onFailure {
+                    Timber.tag("my").e(LoggingTree.getMessageForError(it, "SchedulePresenter\$getDateFromService "))
+                    if (viewHelper == null) {
+                        return@onFailure
+                    }
+                    viewHelper.hideLoading()
+                    viewHelper.showErrorScreen()
                 }
-                val date = response.response
-                getScheduleByService(idService, date, adm, idBranch)
-                cd.dispose()
-            }) { throwable: Throwable? ->
-                Timber.tag("my").e(
-                    LoggingTree.getMessageForError(
-                        throwable,
-                        "SchedulePresenter\$getDateFromService "
-                    )
-                )
-                if (viewHelper == null) {
-                    return@subscribe
-                }
-                viewHelper.hideLoading()
-                viewHelper.showErrorScreen()
-                cd.dispose()
-            })
+        }
     }
 
     fun getScheduleByService(idService: Int, date: DateResponse, adm: Int, idBranch: Int) {
@@ -82,7 +78,7 @@ class SchedulePresenter(val context: Context, val viewHelper: ScheduleFragment) 
         }
         val cd = CompositeDisposable()
         cd.add(networkManager
-            .getScheduleByServiceApiCall(idService, monday, adm, idBranch)
+            .getScheduleByServiceApiCall(idService, monday!!, adm, idBranch)
             .delay(1000, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
             .map { obj: ScheduleList -> obj.response }
@@ -109,32 +105,26 @@ class SchedulePresenter(val context: Context, val viewHelper: ScheduleFragment) 
 
     fun getDateFromDoctor(idDoctor: Int, idService: Int, adm: Int, idBranch: Int) {
         if (!viewHelper.isLoading()) viewHelper.showLoading()
-        val cd = CompositeDisposable()
-        cd.add(networkManager
-            .getCurrentDateApiCall()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ response: DateList ->
-                if (viewHelper == null) {
-                    return@subscribe
+
+        mainScope.launch {
+            kotlin.runCatching {
+                networkManager2.getCurrentDateApiCall(prefManager.currentUserInfo!!.apiKey!!, prefManager.centerInfo!!.db_name!!,prefManager.currentUserInfo!!.idUser.toString(),prefManager.currentUserInfo!!.idBranch.toString())
+            }
+                .onSuccess {
+                    if (viewHelper == null) {
+                        return@onSuccess
+                    }
+                    val date = it.response
+                    getScheduleByDoctor(idDoctor, date!!, adm, idBranch)
+                }.onFailure {
+                    Timber.tag("my").e(LoggingTree.getMessageForError(it, "SchedulePresenter\$getDateFromDoctor "))
+                    if (viewHelper == null) {
+                        return@onFailure
+                    }
+                    viewHelper.hideLoading()
+                    viewHelper.showErrorScreen()
                 }
-                val date = response.response
-                getScheduleByDoctor(idDoctor, date, adm, idBranch)
-                cd.dispose()
-            }) { throwable: Throwable? ->
-                Timber.tag("my").e(
-                    LoggingTree.getMessageForError(
-                        throwable,
-                        "SchedulePresenter\$getDateFromDoctor "
-                    )
-                )
-                if (viewHelper == null) {
-                    return@subscribe
-                }
-                viewHelper.hideLoading()
-                viewHelper.showErrorScreen()
-                cd.dispose()
-            })
+        }
     }
 
     fun getScheduleByDoctor(idDoctor: Int, date: DateResponse, adm: Int, idBranch: Int) {
@@ -145,7 +135,7 @@ class SchedulePresenter(val context: Context, val viewHelper: ScheduleFragment) 
         }
         val cd = CompositeDisposable()
         cd.add(networkManager
-            .getScheduleByDoctorApiCall(idDoctor, monday, adm, idBranch)
+            .getScheduleByDoctorApiCall(idDoctor, monday!!, adm, idBranch)
             .delay(1000, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
             .map { obj: ScheduleList -> obj.response }
@@ -323,77 +313,38 @@ class SchedulePresenter(val context: Context, val viewHelper: ScheduleFragment) 
             })
     }
 
-    fun rewriteAppointment_cancellation(
-        idUserC: Int,
-        id_RecordC: Int,
-        idBranchC: Int,
-        idSotrA: Int,
-        dateA: String,
-        timeA: String,
-        idSpecA: Int,
-        idServiceA: Int,
-        durationA: Int,
-        idUserA: String?,
-        idBranchA: Int
-    ) {
+    fun rewriteAppointment_cancellation(idUserC: Int, id_RecordC: Int, idBranchC: Int, idSotrA: Int, dateA: String, timeA: String, idSpecA: Int, idServiceA: Int, durationA: Int, idUserA: String?, idBranchA: Int) {
         val cause = "Перенос приема"
         viewHelper.showLoading()
-        CompositeDisposable().add(networkManager
-            .sendCancellationOfVisit(idUserC, id_RecordC, cause, idBranchC)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { response: VisitsOkAndCancelResponse ->
-                    Timber.tag("my").v("Отмена приема id записи $id_RecordC причина $cause")
-                    if (response.response) {
-                        makeAnAppointment(
-                            idSotrA,
-                            dateA,
-                            timeA,
-                            idSpecA,
-                            idServiceA,
-                            durationA,
-                            idUserA,
-                            idBranchA
-                        )
-                    }
-                }
-            ) { throwable: Throwable? ->
-                viewHelper.hideLoading()
-                Timber.tag("my").e(
-                    LoggingTree.getMessageForError(
-                        throwable,
-                        "SchedulePresenter\$cancellationOfVisit "
-                    )
+
+
+        mainScope.launch {
+            kotlin.runCatching {
+                networkManager2.sendCancellationOfVisit(idUserC.toString(), id_RecordC.toString(), cause, TimesUtils.getCurrentDate(
+                    TimesUtils.DATE_FORMAT_ddMMyy),idBranchC.toString(),
+                    prefManager.currentUserInfo!!.apiKey!!, prefManager.centerInfo!!.db_name!!,
+                    prefManager.currentUserInfo!!.idUser.toString(), prefManager.currentUserInfo!!.idBranch.toString()
                 )
-                viewHelper.showError("Произошла ошибка при выполнении операции, попробуйте повторить")
-            })
+            }
+                .onSuccess {
+                    Timber.tag("my").v("Отмена приема id записи $id_RecordC причина $cause")
+                    if (it.response) {
+                        makeAnAppointment(idSotrA, dateA, timeA, idSpecA, idServiceA, durationA, idUserA, idBranchA)
+                    }
+                }.onFailure {
+                    viewHelper.hideLoading()
+                    Timber.tag("my").e(LoggingTree.getMessageForError(it, "SchedulePresenter\$cancellationOfVisit "))
+                    viewHelper.showError("Произошла ошибка при выполнении операции, попробуйте повторить")
+                }
+        }
     }
 
-    fun makeAnAppointment(
-        idSotr: Int,
-        date: String,
-        time: String,
-        idSpec: Int,
-        idService: Int,
-        duration: Int,
-        idUser: String?,
-        idBranch: Int
-    ) {
+    fun makeAnAppointment(idSotr: Int, date: String, time: String, idSpec: Int, idService: Int, duration: Int, idUser: String?, idBranch: Int) {
         //getMvpView().showLoading();
         if (!viewHelper.isLoading()) viewHelper.showLoading()
         val cd = CompositeDisposable()
         cd.add(networkManager
-            .sendToDoctorVisit(
-                idSotr,
-                date,
-                time,
-                idSpec,
-                idService,
-                duration,
-                idBranch,
-                idUser!!
-            )
+            .sendToDoctorVisit(idSotr, date, time, idSpec, idService, duration, idBranch, idUser!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -441,30 +392,6 @@ class SchedulePresenter(val context: Context, val viewHelper: ScheduleFragment) 
                     viewHelper.showError("Произошла ошибка при выполнении операции")
                 }
         }
-
-//        val cd = CompositeDisposable()
-//        cd.add(networkManager
-//            .getBranchByIdService(idService)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(
-//                { response: SettingsAllBaranchHospitalList ->
-//                    viewHelper.setHospitalBranch(response.response)
-//                    if (response.response[0].nameBranch == null) {
-//                        viewHelper.hideLoading()
-//                    }
-//                }
-//            ) { throwable: Throwable? ->
-//                Timber.tag("my").e(
-//                    LoggingTree.getMessageForError(
-//                        throwable,
-//                        "SchedulePresenter\$getBranchByIdService "
-//                    )
-//                )
-//                viewHelper.hideLoading()
-//                viewHelper.showError("Произошла ошибка при выполнении операции")
-//                cd.dispose()
-//            })
     }
 
     fun getBranchByIdServiceIdDoc(idService: Int, idDoc: Int) {
@@ -485,30 +412,6 @@ class SchedulePresenter(val context: Context, val viewHelper: ScheduleFragment) 
                     viewHelper.showError("Произошла ошибка при выполнении операции")
                 }
         }
-
-//
-//        val cd = CompositeDisposable()
-//        cd.add(networkManager2
-//            .getBranchByIdServiceIdDoc(idService, idDoc,)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(
-//                { response: SettingsAllBaranchHospitalList ->
-//                    viewHelper.setHospitalBranch(
-//                        response.response
-//                    )
-//                }
-//            ) { throwable: Throwable? ->
-//                Timber.tag("my").e(
-//                    LoggingTree.getMessageForError(
-//                        throwable,
-//                        "SchedulePresenter\$getBranchByIdService "
-//                    )
-//                )
-//                viewHelper.hideLoading()
-//                viewHelper.showError("Произошла ошибка при выполнении операции")
-//                cd.dispose()
-//            })
     }
 
     fun setNewIdUserFavouriteBranch(idUser: String?) {

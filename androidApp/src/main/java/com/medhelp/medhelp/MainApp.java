@@ -1,13 +1,10 @@
 package com.medhelp.medhelp;
 
 import android.app.Application;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.medhelp.medhelp.utils.timber_log.LoggingTree;
 import timber.log.Timber;
 

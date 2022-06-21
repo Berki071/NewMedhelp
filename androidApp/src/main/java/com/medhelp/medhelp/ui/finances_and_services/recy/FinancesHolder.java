@@ -7,13 +7,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.VisitResponse;
-import com.medhelp.medhelp.utils.main.TimesUtils;
+import com.medhelp.medhelp.utils.TimesUtils;
+import com.medhelp.newmedhelp.model.VisitResponse;
+import com.medhelp.newmedhelp.model.VisitResponseAndroid;
 import com.medhelp.shared.model.CenterResponse;
 
 public class FinancesHolder extends RecyclerView.ViewHolder {
     private Context context;
-    private VisitResponse item;
+    private VisitResponseAndroid item;
 
     private final String addToPayment ="Добавить к оплате";
     private final String inBasket ="В корзине";
@@ -64,7 +65,7 @@ public class FinancesHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void onBind(VisitResponse item, boolean blockBasket)
+    public void onBind(VisitResponseAndroid item, boolean blockBasket)
     {
         this.item=item;
         date.setText(item.getDateOfReceipt());
@@ -132,6 +133,6 @@ public class FinancesHolder extends RecyclerView.ViewHolder {
 
 
     public interface FinancesHolderListener{
-        void toBasket(VisitResponse item,boolean toPay);
+        void toBasket(VisitResponseAndroid item, boolean toPay);
     }
 }

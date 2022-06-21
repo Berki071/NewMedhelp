@@ -27,29 +27,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.VisitResponse;
 import com.medhelp.medhelp.data.model.yandex_cashbox.PaymentModel;
-import com.medhelp.medhelp.data.model.yandex_cashbox.YandexKey;
+import com.medhelp.medhelp.data.model.YandexKey;
 import com.medhelp.medhelp.ui.view.shopping_basket.recy.ShoppingBasketAdapter;
 import com.medhelp.medhelp.ui.view.shopping_basket.recy.ShoppingBasketItemViewHolder;
 import com.medhelp.medhelp.ui.view.shopping_basket.recy.ShoppingBasketParentModel;
 import com.medhelp.medhelp.ui.view.shopping_basket.recy.ShoppingBasketTitleViewHolder;
-import com.medhelp.medhelp.ui.view.shopping_basket.sub.DataPaymentForRealm;
+import com.medhelp.medhelp.data.model.DataPaymentForRealm;
 import com.medhelp.medhelp.ui.view.shopping_basket.sub.ShoppingBasketFragmentListener;
 import com.medhelp.medhelp.ui.view.shopping_basket.sub.PaymentData;
 import com.medhelp.medhelp.utils.timber_log.LoggingTree;
+import com.medhelp.newmedhelp.model.VisitResponse;
+import com.medhelp.newmedhelp.model.VisitResponseAndroid;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.List;
-
-
-
 import ru.yoomoney.sdk.kassa.payments.Checkout;
 import ru.yoomoney.sdk.kassa.payments.TokenizationResult;
 import ru.yoomoney.sdk.kassa.payments.checkoutParameters.Amount;
@@ -69,7 +65,7 @@ public class ShoppingBasketFragment extends DialogFragment {
     public static final int REQUEST_CODE_3D_SECURE=84;
 
     View rootView;
-    List<VisitResponse> list;
+    List<VisitResponseAndroid> list;
 
     RecyclerView recy;
     Button cancel;
@@ -183,7 +179,7 @@ public class ShoppingBasketFragment extends DialogFragment {
                 }
             }
 
-            for(List<VisitResponse> tmp : sortTmp)
+            for(List<VisitResponseAndroid> tmp : sortTmp)
             {
                 parentModels.add(new ShoppingBasketParentModel(String.valueOf(tmp.get(0).getIdBranch()),tmp));
             }
@@ -196,7 +192,7 @@ public class ShoppingBasketFragment extends DialogFragment {
     {
         ShoppingBasketItemViewHolder.ChildListener listenerItem=new ShoppingBasketItemViewHolder.ChildListener() {
             @Override
-            public void deleteItem(VisitResponse itm) {
+            public void deleteItem(VisitResponseAndroid itm) {
                 deleteItm(itm);
             }
         };
@@ -451,7 +447,7 @@ public class ShoppingBasketFragment extends DialogFragment {
 
             if(brch.equals(lastPayment.getIdBranch()))
             {
-               List<VisitResponse> listV=tmp.getItems();
+               List<VisitResponseAndroid> listV=tmp.getItems();
                 for(VisitResponse tmp2 : listV)
                 {
                     tmp2.setStatus("p");
@@ -470,7 +466,7 @@ public class ShoppingBasketFragment extends DialogFragment {
         String idYsl="";
         String price="";
 
-        for(VisitResponse tmp : lastPayment.getVisitList()) {
+        for(VisitResponseAndroid tmp : lastPayment.getVisitList()) {
             idUser+=tmp.getIdUser();
             idUser+="&";
 

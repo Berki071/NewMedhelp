@@ -5,17 +5,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.VisitResponse;
-import com.medhelp.medhelp.data.model.yandex_cashbox.YandexKey;
+import com.medhelp.medhelp.data.model.YandexKey;
 import com.medhelp.medhelp.utils.timber_log.LoggingTree;
+import com.medhelp.newmedhelp.model.VisitResponse;
+import com.medhelp.newmedhelp.model.VisitResponseAndroid;
 import com.thoughtbot.expandablerecyclerview.MultiTypeExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import timber.log.Timber;
 
@@ -70,7 +68,7 @@ public class ShoppingBasketAdapter  extends MultiTypeExpandableRecyclerViewAdapt
 
     @Override
     public void onBindChildViewHolder(ShoppingBasketItemViewHolder holder, int flatPosition, ExpandableGroup group, int childIndex) {
-        VisitResponse visit = ((ShoppingBasketParentModel) group).getItems().get(childIndex);
+        VisitResponseAndroid visit = ((ShoppingBasketParentModel) group).getItems().get(childIndex);
         holder.onBind(visit);
     }
 

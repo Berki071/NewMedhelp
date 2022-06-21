@@ -9,6 +9,8 @@
 import Foundation
 import shared
 
+
+
 class SharedPreferenses{
     let CURRENT_LOGIN_KEY="CURRENT_LOGIN_KEY"
     let CURRENT_PASSWORD_KEY="CURRENT_PASSWORD_KEY"
@@ -134,7 +136,7 @@ class SharedPreferenses{
         
         get{
             
-            let res = defaults.string(forKey: CENTER_INFO_KEY)
+            let res : String? = defaults.string(forKey: CENTER_INFO_KEY)
             
             if res == nil {
                 return nil
@@ -148,8 +150,6 @@ class SharedPreferenses{
                 }
             }
         }
-        
-      
     }
     
     var yandexStoreIsWorks : Bool{

@@ -1,9 +1,8 @@
 package com.medhelp.medhelp.utils.timber_log;
 
 import android.content.Context;
-import android.os.Environment;
 
-import com.medhelp.medhelp.utils.main.TimesUtils;
+import com.medhelp.medhelp.utils.TimesUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

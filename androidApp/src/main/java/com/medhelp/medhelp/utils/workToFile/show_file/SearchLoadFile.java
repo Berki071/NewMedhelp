@@ -3,7 +3,6 @@ package com.medhelp.medhelp.utils.workToFile.show_file;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 

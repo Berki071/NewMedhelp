@@ -1,7 +1,7 @@
 //package com.medhelp.medhelp.data.db
 //
 //import android.content.Context
-//import com.medhelp.medhelp.ui.view.shopping_basket.sub.DataPaymentForRealm
+//import com.medhelp.medhelp.data.model.DataPaymentForRealm
 //import io.reactivex.Single
 //import java.util.ArrayList
 //

@@ -18,7 +18,7 @@ class TaxCertificateHolder(val view : View, val listener : TaxCertificateHolderL
     val btnTitle : FrameLayout = view.findViewById(R.id.btnTitle)
 
     var data : File? =null
-    val preferencesManager =PreferencesManager(view.context)
+    val preferencesManager = PreferencesManager(view.context)
     val showTooltipTax =ShowTooltipTax()
 
     init{
