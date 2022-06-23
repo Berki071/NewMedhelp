@@ -8,12 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-
-import com.medhelp.medhelp.data.model.CategoryResponse;
-
+import com.medhelp.newmedhelp.model.CategoryResponse;
 import java.util.List;
 
-class ServiceSpinnerAdapter extends BaseAdapter implements SpinnerAdapter {
+public class ServiceSpinnerAdapter extends BaseAdapter implements SpinnerAdapter {
 
     private final Context context;
     private List<CategoryResponse> list;

@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-
-import com.medhelp.medhelp.data.model.CategoryResponse;
-
+import com.medhelp.newmedhelp.model.CategoryResponse;
 import java.util.List;
+
 
 public class SearchSpinnerAdapter extends BaseAdapter implements SpinnerAdapter {
 

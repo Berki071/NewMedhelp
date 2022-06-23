@@ -140,26 +140,26 @@ class NetworkManager(val prefManager: PreferencesManager) {
             .getObjectObservable(ServiceList::class.java)
     }
 
-    fun getCategoryApiCall(): Observable<SpecialtyList> {
-        return Rx2AndroidNetworking.get(CenterEndPoint.CATEGORY)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-            .build()
-            .getObjectObservable(SpecialtyList::class.java)
-    }
+//    fun getCategoryApiCall(): Observable<SpecialtyList> {
+//        return Rx2AndroidNetworking.get(CenterEndPoint.CATEGORY)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
+//            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
+//            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
+//            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
+//            .build()
+//            .getObjectObservable(SpecialtyList::class.java)
+//    }
 
-    fun getCategoryApiCall(idDoctor: Int): Observable<SpecialtyList> {
-        return Rx2AndroidNetworking.get(CenterEndPoint.CATEGORY_BY_ID_DOCTOR)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-            .addPathParameter(ID_DOCTOR, idDoctor.toString())
-            .build()
-            .getObjectObservable(SpecialtyList::class.java)
-    }
+//    fun getCategoryApiCall(idDoctor: Int): Observable<SpecialtyList> {
+//        return Rx2AndroidNetworking.get(CenterEndPoint.CATEGORY_BY_ID_DOCTOR)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
+//            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
+//            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
+//            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
+//            .addPathParameter(ID_DOCTOR, idDoctor.toString())
+//            .build()
+//            .getObjectObservable(SpecialtyList::class.java)
+//    }
 
     fun getDoctorApiCall(idDoctor: Int): Observable<DoctorList> {
         return Rx2AndroidNetworking.get(CenterEndPoint.DOCTOR_BY_ID)
@@ -312,15 +312,15 @@ class NetworkManager(val prefManager: PreferencesManager) {
             .getObjectObservable(AnalysisListResponse::class.java)
     }
 
-    fun getAllDoctors(): Observable<AllDoctorsList> {
-        return Rx2AndroidNetworking.get(CenterEndPoint.GET_ALL_DOCTORS)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-            .build()
-            .getObjectObservable(AllDoctorsList::class.java)
-    }
+//    fun getAllDoctors(): Observable<AllDoctorsList> {
+//        return Rx2AndroidNetworking.get(CenterEndPoint.GET_ALL_DOCTORS)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
+//            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
+//            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
+//            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
+//            .build()
+//            .getObjectObservable(AllDoctorsList::class.java)
+//    }
 
     fun sendNewFavoriteHospitalBranch(
         oldIdUser: Int,

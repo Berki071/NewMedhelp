@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import shared
 
 struct MainUIView: View {
     @ObservedObject var mainPresenter = MainPresenter()
@@ -103,6 +104,11 @@ struct MainView: View {
         }else if(mainP.selectMenuPage == 2){
             ServicesPage()
                 .navigationBarTitle("Прейскурант на услуги", displayMode: .inline)
+               
+        }
+        else if(mainP.selectMenuPage == 3){
+            AnalisePrices()
+                .navigationBarTitle("Прейскурант на анализы", displayMode: .inline)
                
         }
     }

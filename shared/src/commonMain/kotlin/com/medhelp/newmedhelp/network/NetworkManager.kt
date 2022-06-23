@@ -239,5 +239,39 @@ class NetworkManager {
             })
         }
     }
+
+    @Throws(Exception::class) suspend fun getCategoryApiCall(h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : SpecialtyList{
+        return httpClient.get(Url( CenterEndPoint.BASE_URL + "specialty")) {
+            headers {
+                append(AUTH, h_Auth)
+                append(DB_NAME, h_dbName)
+                append(ID_KL, h_idKl)
+                append(ID_FILIAL, h_idFilial)
+            }
+        }
+    }
+
+    @Throws(Exception::class) suspend fun getCategoryApiCall(idDoctor: Int,
+                                                             h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : SpecialtyList{
+        return httpClient.get(Url( CenterEndPoint.BASE_URL + "specialty/doctor/"+idDoctor)) {
+            headers {
+                append(AUTH, h_Auth)
+                append(DB_NAME, h_dbName)
+                append(ID_KL, h_idKl)
+                append(ID_FILIAL, h_idFilial)
+            }
+        }
+    }
+
+    @Throws(Exception::class) suspend fun getAllDoctors(h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : AllDoctorsList{
+        return httpClient.get(Url( CenterEndPoint.BASE_URL + "doctors")) {
+            headers {
+                append(AUTH, h_Auth)
+                append(DB_NAME, h_dbName)
+                append(ID_KL, h_idKl)
+                append(ID_FILIAL, h_idFilial)
+            }
+        }
+    }
 }
 

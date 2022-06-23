@@ -5,12 +5,9 @@ import com.medhelp.medhelp.ui.doctor.adapters.DoctorsAdapter
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.medhelp.medhelp.data.model.AllDoctorsResponse
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.*
-import com.medhelp.medhelp.ui.doctor.DoctorsPresenter
 import com.medhelp.medhelp.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.medhelp.medhelp.utils.view.ItemListDecorator
@@ -18,7 +15,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import com.medhelp.medhelp.utils.view.RecyclerViewTouchListener
 import com.medhelp.medhelp.utils.view.RecyclerViewClickListener
 import com.medhelp.medhelp.ui.doctor.adapters.DocSpinnerAdapter
-import com.medhelp.medhelp.data.model.CategoryResponse
 import android.widget.*
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
@@ -27,8 +23,10 @@ import androidx.fragment.app.Fragment
 import com.medhelp.medhelp.ui._main_page.MainActivity
 import com.google.android.material.appbar.AppBarLayout
 import com.medhelp.medhelp.ui.base.BaseFragment
-import com.medhelp.medhelp.ui.doctor.DoctorsFragment
 import com.medhelp.medhelp.ui.doctor.alertDoc.AlertCardDoctor
+import com.medhelp.newmedhelp.model.AllDoctorsResponse
+import com.medhelp.newmedhelp.model.CategoryResponse
+import kotlinx.coroutines.cancel
 import timber.log.Timber
 import java.util.*
 
@@ -96,7 +94,7 @@ class DoctorsFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
             return
         }
         resList = response
-        adapter = DoctorsAdapter(response)
+        adapter = DoctorsAdapter(response as MutableList<AllDoctorsResponse>)
         recyclerView!!.addItemDecoration(ItemListDecorator(context))
         recyclerView!!.itemAnimator = DefaultItemAnimator()
         recyclerView!!.adapter = adapter
@@ -110,7 +108,7 @@ class DoctorsFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
                         val idSpec = (spinner!!.adapter as DocSpinnerAdapter).getIdSpec(
                             spinner!!.selectedItemPosition
                         )
-                        AlertCardDoctor(context, doc, idSpec, presenter!!.getUserToken())
+                        AlertCardDoctor(requireContext(), doc, idSpec, presenter!!.getUserToken())
                     }
 
                     override fun onLongClick(view: View, position: Int) {}
@@ -120,7 +118,7 @@ class DoctorsFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
 
     var spinnerAdapter: DocSpinnerAdapter? = null
     fun updateSpecialty(response: List<CategoryResponse>) {
-        spinnerAdapter = DocSpinnerAdapter(context, response)
+        spinnerAdapter = DocSpinnerAdapter(requireContext(), response)
         spinner!!.adapter = spinnerAdapter
         spinner!!.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -164,16 +162,13 @@ class DoctorsFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {}
     override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-    private fun filterDoctor(
-        models: List<AllDoctorsResponse>?,
-        query: String
-    ): List<AllDoctorsResponse> {
+    private fun filterDoctor(models: List<AllDoctorsResponse>?, query: String): List<AllDoctorsResponse> {
         var query = query
         query = query.lowercase(Locale.getDefault())
         val filteredModelList: MutableList<AllDoctorsResponse> = ArrayList()
         for (model in models!!) {
             if (model.fio_doctor != null) {
-                val text = model.fio_doctor.lowercase(Locale.getDefault())
+                val text = model.fio_doctor!!.lowercase(Locale.getDefault())
                 if (text.contains(query)) {
                     filteredModelList.add(model)
                 }
@@ -208,6 +203,11 @@ class DoctorsFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
 
     override fun userRefresh() {
         presenter!!.getSpecialtyByCenter()
+    }
+
+    override fun onDestroy() {
+        presenter?.mainScope?.cancel()
+        super.onDestroy()
     }
 
     companion object {

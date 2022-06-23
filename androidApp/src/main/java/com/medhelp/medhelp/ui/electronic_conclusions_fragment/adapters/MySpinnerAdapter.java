@@ -9,7 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.CategoryResponse;
 
 import java.util.ArrayList;
 import java.util.List;

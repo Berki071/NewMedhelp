@@ -4,17 +4,17 @@ interface CenterEndPoint {
     companion object {
         const val BASE_URL = "https://oneclick.tmweb.ru/medhelp_client/v1/"
         const val DOCTOR_BY_ID = BASE_URL + "sotr_info/{id_doctor}" //+
-        const val CATEGORY = BASE_URL + "specialty" //+
-        const val CATEGORY_BY_ID_DOCTOR = BASE_URL + "specialty/doctor/{id_doctor}" //+
+        //const val CATEGORY = BASE_URL + "specialty" //+
+        //const val CATEGORY_BY_ID_DOCTOR = BASE_URL + "specialty/doctor/{id_doctor}" //+
         const val PRICE = BASE_URL + "services/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_BRANCH + "}" //+
         const val PRICE_FAVORITE = BASE_URL + "IzbranPraisOnly/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_BRANCH + "}" //+
         const val PRICE_BY_DOCTOR = BASE_URL + "services/doctor/{id_doctor}/{" + NetworkManager.ID_BRANCH + "}/{" + NetworkManager.ID_USER + "}" //+
-        const val VISITS = BASE_URL + "visits/{id_user}/{" + NetworkManager.ID_BRANCH + "}" //+
+        //const val VISITS = BASE_URL + "visits/{id_user}/{" + NetworkManager.ID_BRANCH + "}" //+
         const val SALE = BASE_URL + "sale/{date}" //+
         const val SCHEDULE_DOCTOR = BASE_URL + "schedule/doctor/{id_doctor}/{date}/{adm}/{" + NetworkManager.ID_BRANCH + "}" //+
         const val SCHEDULE_SERVICE = BASE_URL + "schedule/service/{id_service}/{date}/{adm}/{" + NetworkManager.ID_BRANCH + "}" //+
-        const val VISITS_CANCEL = BASE_URL + "visits_cancel/{id_user}/{id_zapisi}/{message}/{datatoday}/{" + NetworkManager.ID_BRANCH + "}" //+
-        const val VISITS_OK = BASE_URL + "visits_ok/{id_user}/{id_zapisi}/{" + NetworkManager.ID_BRANCH + "}" //+
+        //const val VISITS_CANCEL = BASE_URL + "visits_cancel/{id_user}/{id_zapisi}/{message}/{datatoday}/{" + NetworkManager.ID_BRANCH + "}" //+
+        //const val VISITS_OK = BASE_URL + "visits_ok/{id_user}/{id_zapisi}/{" + NetworkManager.ID_BRANCH + "}" //+
         const val RECORD_TO_THE_DOCTOR = BASE_URL + "record/{" + NetworkManager.ID_DOCTOR + "}/{" + NetworkManager.DATE + "}/{" + NetworkManager.TIME + "}/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_SPEC + "}" +
                     "/{" + NetworkManager.ID_SERVICE + "}/{" + NetworkManager.DURATION + "}/{" + NetworkManager.ID_BRANCH + "}" //+
         const val GET_RESULT_ANALIZ = BASE_URL + "getResultAnaliz/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_BRANCH + "}" //+
@@ -25,7 +25,7 @@ interface CenterEndPoint {
         const val EXTERNAL_MSG = BASE_URL + "ChatNewTextKL/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_BRANCH + "}" //+
         const val SEND_MSG = BASE_URL + "ChatInsertNewText/{" + NetworkManager.ID_ROOM + "}/vvv/client/{" + NetworkManager.TYPE + "}" //+
         const val GET_ALL_NOTIFICATION = BASE_URL + "GetNotifications/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_BRANCH + "}" //+
-        const val DATE = BASE_URL + "date" //+
+       // const val DATE = BASE_URL + "date" //+
         const val IZBRAN_PRAIS_INSERT = BASE_URL + "IzbranPraisInsert/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_BRANCH + "}/{" + NetworkManager.ID_SERVICE + "}" //+
         const val IZBRAN_PRAIS_DELETE = BASE_URL + "IzbranPraisDelete/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_BRANCH + "}/{" + NetworkManager.ID_SERVICE + "}" //+
         const val CHECK_SPAM = BASE_URL + "CheckSpamZapis/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_BRANCH + "}/{" + NetworkManager.ID_SERVICE + "}" //+

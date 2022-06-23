@@ -88,7 +88,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
 
-    class ViewHolder extends BaseViewHolder {
+    public class ViewHolder extends BaseViewHolder {
         TextView tvTitle;
         TextView tvPrice;
         TextView tvRub;

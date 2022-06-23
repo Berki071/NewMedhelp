@@ -1,20 +1,13 @@
 package com.medhelp.medhelp.ui.doctor
 
-import android.content.Context
 import com.medhelp.medhelp.utils.timber_log.LoggingTree.Companion.getMessageForError
-import com.medhelp.medhelp.data.model.AllDoctorsResponse
 import com.medhelp.medhelp.data.pref.PreferencesManager
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import com.medhelp.medhelp.data.model.AllDoctorsList
-import com.medhelp.medhelp.utils.timber_log.LoggingTree
-import com.medhelp.medhelp.data.model.CategoryResponse
-import com.medhelp.medhelp.data.model.SpecialtyList
-import com.medhelp.medhelp.data.network.NetworkManager
+import com.medhelp.newmedhelp.model.AllDoctorsResponse
 import com.medhelp.shared.model.UserResponse
-import io.reactivex.schedulers.Schedulers
+import com.medhelp.shared.network.NetworkManager
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.Exception
 import java.util.ArrayList
 
 class DoctorsPresenter(val view: DoctorsFragment) {
@@ -22,14 +15,38 @@ class DoctorsPresenter(val view: DoctorsFragment) {
     var prefManager: PreferencesManager
     var networkManager: NetworkManager
 
+    val mainScope = MainScope()
+
     init {
         prefManager = PreferencesManager(view.requireContext())
-        networkManager = NetworkManager(prefManager)
+        networkManager = NetworkManager()
     }
 
     fun removePassword() {
         prefManager.currentPassword = ""
         prefManager.usersLogin = null
+    }
+
+    fun getSpecialtyByCenter() {
+        view!!.showLoading()
+
+        mainScope.launch {
+            kotlin.runCatching {
+                networkManager.getCategoryApiCall(prefManager.currentUserInfo!!.apiKey!!, prefManager.centerInfo!!.db_name!!,prefManager.currentUserInfo!!.idUser.toString(),prefManager.currentUserInfo!!.idBranch.toString())
+            }
+                .onSuccess {
+                    try {
+                        view!!.updateSpecialty(it.spec)
+                    } catch (e: Exception) {
+                        Timber.tag("my")
+                            .e(getMessageForError(e, "DoctorsPresenter\$getSpecialtyByCenter$1 "))
+                    }
+                }.onFailure {
+                    view!!.hideLoading()
+                    Timber.tag("my").e(getMessageForError(it, "DoctorsPresenter\$getSpecialtyByCenter$2 "))
+                    view!!.showErrorScreen()
+                }
+        }
     }
 
     fun getDoctorList(idSpec: Int) {
@@ -44,76 +61,48 @@ class DoctorsPresenter(val view: DoctorsFragment) {
             return
         }
         view!!.showLoading()
-        val cd = CompositeDisposable()
-        cd.add(networkManager
-            .getAllDoctors()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { response: AllDoctorsList ->
-                    if (response.responses.size <= 0) {
+
+        mainScope.launch {
+            kotlin.runCatching {
+                networkManager.getAllDoctors(
+                    prefManager.currentUserInfo!!.apiKey!!,
+                    prefManager.centerInfo!!.db_name!!,
+                    prefManager.currentUserInfo!!.idUser.toString(),
+                    prefManager.currentUserInfo!!.idBranch.toString()
+                )
+            }
+                .onSuccess {
+                    if (it.mResponses.size <= 0) {
                         view!!.updateView(null)
                     } else {
-                        allDoc = response.responses
-                        if (view != null) view!!.updateView(response.responses)
+                        allDoc = it.mResponses
+                        if (view != null) view!!.updateView(it.mResponses)
                     }
                     view!!.hideLoading()
-                    cd.dispose()
+                }.onFailure {
+                    Timber.tag("my").e(getMessageForError(it, "DoctorsPresenter\$getDoctorList "))
+                    view!!.hideLoading()
+                    view!!.showErrorScreen()
                 }
-            ) { throwable: Throwable? ->
-                Timber.tag("my").e(getMessageForError(throwable, "DoctorsPresenter\$getDoctorList "))
-                view!!.hideLoading()
-                view!!.showErrorScreen()
-                cd.dispose()
-            }
-        )
+        }
     }
 
     private fun sortAllDoc(idSpec: Int): List<AllDoctorsResponse> {
         val sortList: MutableList<AllDoctorsResponse> = ArrayList()
         for (i in allDoc!!.indices) {
             val doc = allDoc!![i]
-            if (doc.id_specialties_int_list == null) continue
-            if (doc.id_specialties_int_list.size == 1 && doc.id_specialties_int_list[0] == idSpec) {
+            if (doc.getIdSpecialtiesIntList() == null) continue
+            if (doc.getIdSpecialtiesIntList()!!.size == 1 && doc.getIdSpecialtiesIntList()!![0] == idSpec) {
                 sortList.add(doc)
                 continue
             }
-            for (j in doc.id_specialties_int_list.indices) {
-                if (doc.id_specialties_int_list[j] == idSpec) {
+            for (j in doc.getIdSpecialtiesIntList()!!.indices) {
+                if (doc.getIdSpecialtiesIntList()!![j] == idSpec) {
                     sortList.add(doc)
                 }
             }
         }
         return sortList
-    }
-
-    fun getSpecialtyByCenter() {
-        view!!.showLoading()
-        val cd = CompositeDisposable()
-        cd.add(networkManager
-            .getCategoryApiCall()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { obj: SpecialtyList -> obj.spec }
-            .subscribe({ response: List<CategoryResponse> ->
-                try {
-                    view!!.updateSpecialty(response)
-                } catch (e: Exception) {
-                    Timber.tag("my")
-                        .e(getMessageForError(e, "DoctorsPresenter\$getSpecialtyByCenter$1 "))
-                }
-                cd.dispose()
-            }) { throwable: Throwable? ->
-                view!!.hideLoading()
-                Timber.tag("my").e(
-                    getMessageForError(
-                        throwable,
-                        "DoctorsPresenter\$getSpecialtyByCenter$2 "
-                    )
-                )
-                view!!.showErrorScreen()
-                cd.dispose()
-            })
     }
 
     fun unSubscribe() {

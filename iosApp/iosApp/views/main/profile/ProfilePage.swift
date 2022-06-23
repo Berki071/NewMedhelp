@@ -20,12 +20,37 @@ struct ProfilePage: View {
             
             VStack(spacing: 0){
                 HStack {
-                   
+                    Image("ico_root")
+                        .resizable(resizingMode: .stretch)
+                        .frame(width: 100.0, height: 72.0)
+                    VStack(alignment: .leading){
+                        HStack{
+                            Image("account_balance-account_balance_symbol")
+                                .foregroundColor(.white)
+                            Text(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/)
+                                .foregroundColor(Color.white)
+                        }
+                        HStack{
+                            Image("call-call_symbol")
+                                .foregroundColor(.white)
+                            Text("Placeholder")
+                                .foregroundColor(Color.white)
+                        }
+                        HStack{
+                            Image("web-web_symbol")
+                                .foregroundColor(.white)
+                            Text("Placeholder")
+                                .foregroundColor(Color.white)
+                        }
+                    }
+                    .padding(.leading, 16.0)
+                    
+                    Spacer()
                 }
                 .frame(maxWidth: .infinity)
                 .background(Color("color_primary"))
                 
-            
+                
                 List {
                     if(mainPresenter.actualReceptions.count > 0){
                         Section(header: Text("Предстоящие")) {
@@ -47,23 +72,23 @@ struct ProfilePage: View {
                 }
                 .listStyle(.sidebar)
                 .frame(maxWidth: .infinity)
-        
+                
+            }
+            .background(.white)
+            
+            if(self.mainPresenter.showDialogLoading == true){
+                LoadingView()
+            }
+            
+            if(isShowAlertRecomend != nil){
+                StandartAlert(dataOb: isShowAlertRecomend!)
+            }
+            
         }
-        .background(.white)
-        
-        if(self.mainPresenter.showDialogLoading == true){
-            LoadingView()
-        }
-        
-        if(isShowAlertRecomend != nil){
-            StandartAlert(dataOb: isShowAlertRecomend!)
-        }
+        //.edgesIgnoringSafeArea(.all)
         
     }
-    //.edgesIgnoringSafeArea(.all)
     
-}
-
 }
 
 struct ProfilePage_Previews: PreviewProvider {

@@ -212,5 +212,101 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "682E09B8-22D3-4ADA-BA2C-E18D9FEAFEB1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/views/main/doctors/DoctorsPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "getSpecialtyByCenter()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "682E09B8-22D3-4ADA-BA2C-E18D9FEAFEB1 - 21a47939d4e854c9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedSpecialtyList&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.DoctorsPresenter.getSpecialtyByCenter() -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/main/doctors/DoctorsPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "175">
+               </Location>
+               <Location
+                  uuid = "682E09B8-22D3-4ADA-BA2C-E18D9FEAFEB1 - 21a47939d4e854c9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedSpecialtyList&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.DoctorsPresenter.getSpecialtyByCenter() -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/main/doctors/DoctorsPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "1040">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "51AA5FB4-9E03-4BE9-8635-1C7C4C6A93C8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/views/main/doctors/DoctorsPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "getDoctorList(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "51AA5FB4-9E03-4BE9-8635-1C7C4C6A93C8 - ac7bd869f30a327d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedAllDoctorsList&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.DoctorsPresenter.getDoctorList(Swift.Int) -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/main/doctors/DoctorsPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "126">
+               </Location>
+               <Location
+                  uuid = "51AA5FB4-9E03-4BE9-8635-1C7C4C6A93C8 - ac7bd869f30a327d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.SharedAllDoctorsList&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in iosApp.DoctorsPresenter.getDoctorList(Swift.Int) -&gt; ()"
+                  moduleName = "iosApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/main/doctors/DoctorsPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "1042">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

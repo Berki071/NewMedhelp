@@ -90,6 +90,28 @@ struct MenuView: View {
                     }
                     
                     ZStack(alignment: .leading){
+                        if(selectitem == 3){
+                            Color("textSideMenu10")
+                        }
+                        HStack {
+                            Spacer()
+                                .frame(width: 8.0)
+                            Image("list-list_symbol")
+                                .imageScale(.large)
+                                .foregroundColor(Color("textSideMenu"))
+                            Text("Прейскурант на анализы")
+                                .foregroundColor(Color("textSideMenu"))
+                                .font(.headline)
+                        }
+                    }
+                    .frame(height: 50.0)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        selectitem = 3
+                        showMenu=false
+                    }
+                    
+                    ZStack(alignment: .leading){
                         HStack {
                             Spacer()
                                 .frame(width: 8.0)
@@ -103,8 +125,7 @@ struct MenuView: View {
                     }
                     .frame(height: 50.0)
                     .contentShape(Rectangle())
-                    .onTapGesture {
-                        //selectitem = 3
+                    .onTapGesture { 
                         selectMenuAlert=1
                         showMenu=false
                     }
