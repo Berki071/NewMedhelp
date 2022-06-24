@@ -1,12 +1,10 @@
 package com.medhelp.medhelp.ui.doctor.service_activity
 
-import android.content.Context
-import com.medhelp.medhelp.data.model.ServiceList
+import com.medhelp.medhelp.data.model._heritable.ServiceResponseAndroid
 import com.medhelp.medhelp.data.pref.PreferencesManager
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import com.medhelp.newmedhelp.model.CategoryResponse
-import com.medhelp.medhelp.data.model.ServiceResponse
 import com.medhelp.medhelp.data.model.osn.CheckSpamRecordList
 import com.medhelp.medhelp.data.model.settings.SimpleResponseBoolean
 import com.medhelp.medhelp.data.network.NetworkManager
@@ -19,8 +17,8 @@ import timber.log.Timber
 
 class ServicePresenter(val view: ServiceActivity) {
 
-    lateinit var prefManager: PreferencesManager
-    lateinit var networkManager: NetworkManager
+    var prefManager: PreferencesManager
+    var networkManager: NetworkManager
     var newNetworkManager = NewNetworkManager()
 
     val mainScope = MainScope()
@@ -58,57 +56,40 @@ class ServicePresenter(val view: ServiceActivity) {
                     view!!.showErrorScreen()
                 }
         }
-
-//        val cd = CompositeDisposable()
-//        cd.add(networkManager
-//            .getCategoryApiCall(idDoctor)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe({ response ->
-//                if (response != null) {
-//                    getPrice(response.getSpec(), idDoctor, idBranch, idUser)
-//                } else {
-//                    view!!.hideLoading()
-//                }
-//                cd.dispose()
-//            }) { throwable ->
-//                Timber.tag("my").e(getMessageForError(throwable, "ServicePresenter\$getFilesForRecy "))
-//                if (view == null) {
-//                    return@subscribe
-//                }
-//                view!!.hideLoading()
-//                view!!.showErrorScreen()
-//                cd.dispose()
-//            })
     }
 
-    private fun getPrice(
-        categoryResponse: List<CategoryResponse>,
-        idDoctor: Int,
-        idBranch: Int,
-        idUser: Int
-    ) {
-        val cd = CompositeDisposable()
-        cd.add(networkManager
-            .getPriceApiCall(idDoctor, idBranch, idUser)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ response: ServiceList ->
-                view!!.updateView(categoryResponse, response.services)
-                view!!.hideLoading()
-                cd.dispose()
-            }) { throwable: Throwable? ->
-                Timber.tag("my").e(getMessageForError(throwable, "ServicePresenter\$getPrice "))
-                if (view == null) {
-                    return@subscribe
+    private fun getPrice(categoryResponse: List<CategoryResponse>, idDoctor: Int, idBranch: Int, idUser: Int) {
+
+        mainScope.launch {
+            kotlin.runCatching {
+                newNetworkManager.getPriceApiCall(
+                    idDoctor, idBranch, idUser,
+                    prefManager.currentUserInfo!!.apiKey!!,
+                    prefManager.centerInfo!!.db_name!!,
+                    prefManager.currentUserInfo!!.idUser.toString(),
+                    prefManager.currentUserInfo!!.idBranch.toString()
+                )
+            }
+                .onSuccess {
+                    var listNew = mutableListOf<ServiceResponseAndroid>()
+                    for(i in it.services!!){
+                        listNew.add(ServiceResponseAndroid(i))
+                    }
+
+                    view!!.updateView(categoryResponse, listNew)
+                    view!!.hideLoading()
+                }.onFailure {
+                    Timber.tag("my").e(getMessageForError(it, "ServicePresenter\$getPrice "))
+                    if (view == null) {
+                        return@onFailure
+                    }
+                    view!!.hideLoading()
+                    view!!.showErrorScreen()
                 }
-                view!!.hideLoading()
-                view!!.showErrorScreen()
-                cd.dispose()
-            })
+        }
     }
 
-    fun changeFabFavorites(item: ServiceResponse) {
+    fun changeFabFavorites(item: ServiceResponseAndroid) {
         if (item.favorites == "1") {
             val cd = CompositeDisposable()
             cd.add(networkManager

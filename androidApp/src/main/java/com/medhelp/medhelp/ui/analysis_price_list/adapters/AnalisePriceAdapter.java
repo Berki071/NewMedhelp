@@ -7,12 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.analise_price.AnalisePriceResponse;
 import com.medhelp.medhelp.data.pref.PreferencesManager;
 import com.medhelp.medhelp.ui.base.BaseViewHolder;
-
+import com.medhelp.newmedhelp.model.AnalisePriceResponse;
 import java.util.ArrayList;
 import java.util.List;
 

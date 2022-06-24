@@ -11,12 +11,12 @@ import shared
 
 struct DoctorsPage: View {
     @ObservedObject var mainPresenter = DoctorsPresenter()
-
+    
     
     var body: some View {
-    
+        
         ZStack{
-                
+            
             VStack{
                 List(mainPresenter.doctorListForRecy) {
                     DoctorsItem(item: $0)
@@ -28,16 +28,14 @@ struct DoctorsPage: View {
             .padding(.top, 45.0)
             .frame(maxWidth: .infinity)
             .background(.white)
-
+            
             VStack{
                 DropdownSelector(placeholder: "Все", options: mainPresenter.categoryList, onOptionSelected : { option in
                     mainPresenter.selctSpinnerItem(option)
                 })
                 Spacer()
             }
-           
 
-            
             
             if(self.mainPresenter.showDialogLoading == true){
                 LoadingView()
@@ -46,7 +44,7 @@ struct DoctorsPage: View {
             if(self.mainPresenter.isShowAlertRecomend != nil){
                 StandartAlert(dataOb: mainPresenter.isShowAlertRecomend!)
             }
-
+            
         }
     }
 }

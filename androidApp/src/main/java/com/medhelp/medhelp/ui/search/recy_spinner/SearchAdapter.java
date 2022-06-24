@@ -14,12 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.medhelp.medhelp.Constants;
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.ServiceResponse;
+import com.medhelp.medhelp.data.model._heritable.ServiceResponseAndroid;
 import com.medhelp.medhelp.data.pref.PreferencesManager;
 import com.medhelp.medhelp.ui._main_page.MainActivity;
 import com.medhelp.medhelp.ui.base.BaseViewHolder;
 import com.medhelp.medhelp.ui.schedule.ScheduleFragment;
 import com.medhelp.medhelp.utils.timber_log.LoggingTree;
+import com.medhelp.newmedhelp.model.ServiceResponse;
+
 import java.util.ArrayList;
 import java.util.List;
 import it.sephiroth.android.library.xtooltip.ClosePolicy;
@@ -28,11 +30,10 @@ import timber.log.Timber;
 
 public class SearchAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
-
     //SearchPresenter presenter;
 
     private static final int VIEW_TYPE_NORMAL = 11;
-    private List<ServiceResponse> response;
+    private List<ServiceResponseAndroid> response;
 
     private Context context;
 
@@ -40,7 +41,7 @@ public class SearchAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private ItemListener listener;
 
-    public SearchAdapter(List<ServiceResponse> response,Context context, ItemListener listener) {
+    public SearchAdapter(List<ServiceResponseAndroid> response,Context context, ItemListener listener) {
         this.response = response;
         this.context=context;
         this.listener=listener;
@@ -77,7 +78,7 @@ public class SearchAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         return response.size();
     }
 
-    public void addItems(List<ServiceResponse> repoList) {
+    public void addItems(List<ServiceResponseAndroid> repoList) {
         response.clear();
         response.addAll(repoList);
         notifyDataSetChanged();
@@ -104,7 +105,7 @@ public class SearchAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         ConstraintLayout rootVisible;
         ImageView tab;
 
-        ServiceResponse repo;
+        ServiceResponseAndroid repo;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -187,7 +188,7 @@ public class SearchAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
             if (repo != null) {
                 tvTitle.setText(repo.getTitle());
-                tvPrice.setText(repo.getValue());
+                tvPrice.setText(repo.getValue() + "");
                 hint.setText(repo.getHint());
             }
 
@@ -257,7 +258,7 @@ public class SearchAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             });
         }
 
-        private void installTab(ServiceResponse repo)
+        private void installTab(ServiceResponseAndroid repo)
         {
             if(repo.getFavorites().equals("0"))
             {
@@ -270,11 +271,6 @@ public class SearchAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
 
     }
-
-
-
-
-
 
     class EmptyViewHolder extends BaseViewHolder {
         TextView errMessage;
@@ -289,7 +285,7 @@ public class SearchAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
-    public void setFilter(List<ServiceResponse> filterService) {
+    public void setFilter(List<ServiceResponseAndroid> filterService) {
         if(filterService==null)
             return;
 

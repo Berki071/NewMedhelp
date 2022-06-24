@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.medhelp.medhelp.R
-import com.medhelp.medhelp.data.model.ServiceResponse
+import com.medhelp.medhelp.data.model._heritable.ServiceResponseAndroid
 import com.medhelp.medhelp.ui._main_page.MainActivity
 import com.medhelp.medhelp.ui.base.BaseActivity
 import com.medhelp.medhelp.ui.schedule.ScheduleFragment
@@ -45,7 +45,7 @@ class ServiceActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
     private var adapter: ServiceAdapter? = null
     private var filterList: MutableList<CategoryResponse>? = null
-    private var serviceCash: List<ServiceResponse>? = null
+    private var serviceCash: List<ServiceResponseAndroid>? = null
     private var idDoctor = 0
     private var idService = 0
     var idBranch = 0
@@ -74,7 +74,7 @@ class ServiceActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
        // idService = getIntent().getExtras()?.getInt(EXTRA_DATA_SERVICE)
         spinner.setVisibility(View.GONE)
         setupToolbar()
-        serviceCash = ArrayList<ServiceResponse>()
+        serviceCash = ArrayList<ServiceResponseAndroid>()
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
         recyclerView.setLayoutManager(layoutManager)
         val bundle: Bundle? = getIntent().getExtras()
@@ -142,7 +142,7 @@ class ServiceActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
                 spinner.setSelection(0)
-                val filteredModelList: List<ServiceResponse> = filterService(serviceCash!!, newText)
+                val filteredModelList: List<ServiceResponseAndroid> = filterService(serviceCash!!, newText)
                 if (filteredModelList != null && filteredModelList.size > 0) {
                     adapter!!.setFilter(filteredModelList)
                 }
@@ -156,17 +156,17 @@ class ServiceActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
     override fun onNothingSelected(adapterView: AdapterView<*>?) {}
     var spinnerAdapter: ServiceSpinnerAdapter? = null
     var latchFirstChoiceSpinner = false
-    fun updateView(categories: List<CategoryResponse>?, services: MutableList<ServiceResponse>) {
+    fun updateView(categories: List<CategoryResponse>?, services: MutableList<ServiceResponseAndroid>) {
         errMessage.setVisibility(View.GONE)
         errLoadBtn!!.visibility = View.GONE
         spinner.setVisibility(View.VISIBLE)
         recyclerView.setVisibility(View.VISIBLE)
-        if (services[0].getTitle() == null) {
+        if (services[0].title == null) {
             if (noServices != null) noServices.setVisibility(View.VISIBLE)
             return
         }
         adapter = ServiceAdapter(serviceCash, idDoctor, object : ServiceAdapter.ItemListener {
-            override fun clickFab(item: ServiceResponse) {
+            override fun clickFab(item: ServiceResponseAndroid) {
                 presenter!!.changeFabFavorites(item)
             }
 
@@ -199,9 +199,9 @@ class ServiceActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
                 } else if (position == 1) {
                     adapter!!.addItems(selectItemWithTab(sortByWight(services)))
                 } else {
-                    val serviceList: MutableList<ServiceResponse> = ArrayList<ServiceResponse>()
+                    val serviceList: MutableList<ServiceResponseAndroid> = ArrayList<ServiceResponseAndroid>()
                     for (serviceResponse in services) {
-                        if (serviceResponse.getIdSpec() == filterList!![position].id) {
+                        if (serviceResponse.idSpec == filterList!![position].id) {
                             serviceList.add(serviceResponse)
                         }
                     }
@@ -213,14 +213,14 @@ class ServiceActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         })
     }
 
-    private fun sortByWight(list: MutableList<ServiceResponse>): List<ServiceResponse> {
-        var tmp: ServiceResponse
+    private fun sortByWight(list: MutableList<ServiceResponseAndroid>): List<ServiceResponseAndroid> {
+        var tmp: ServiceResponseAndroid
         for (j in 0..list.size - 2) {
             var i = list.size - 1
             while (j < i) {
-                val wight1 = if (list[i].getPoryadok() == 0) 0 else 11 - list[i].getPoryadok()
+                val wight1 = if (list[i].poryadok == 0) 0 else 11 - list[i].poryadok
                 val wight2 =
-                    if (list[i - 1].getPoryadok() == 0) 0 else 11 - list[i - 1].getPoryadok()
+                    if (list[i - 1].poryadok == 0) 0 else 11 - list[i - 1].poryadok
                 if (wight1 > wight2) {
                     tmp = list[i - 1]
                     list[i - 1] = list[i]
@@ -232,10 +232,10 @@ class ServiceActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         return list
     }
 
-    private fun selectItemWithTab(services: List<ServiceResponse>): List<ServiceResponse> {
-        val newList: MutableList<ServiceResponse> = ArrayList<ServiceResponse>()
+    private fun selectItemWithTab(services: List<ServiceResponseAndroid>): List<ServiceResponseAndroid> {
+        val newList: MutableList<ServiceResponseAndroid> = ArrayList<ServiceResponseAndroid>()
         for (item in services) {
-            if (item.getFavorites() == "1") {
+            if (item.favorites == "1") {
                 newList.add(item)
             }
         }
@@ -290,12 +290,12 @@ class ServiceActivity : BaseActivity(), AdapterView.OnItemSelectedListener {
         startActivity(intent)
     }
 
-    private fun filterService(models: List<ServiceResponse>, query: String): List<ServiceResponse> {
+    private fun filterService(models: List<ServiceResponseAndroid>, query: String): List<ServiceResponseAndroid> {
         var query = query
         query = query.lowercase(Locale.getDefault())
-        val filteredModelList: MutableList<ServiceResponse> = ArrayList<ServiceResponse>()
+        val filteredModelList: MutableList<ServiceResponseAndroid> = ArrayList<ServiceResponseAndroid>()
         for (model in models) {
-            val text: String = model.getTitle().lowercase(Locale.getDefault())
+            val text: String = model.title!!.lowercase(Locale.getDefault())
             if (text.contains(query)) {
                 filteredModelList.add(model)
             }

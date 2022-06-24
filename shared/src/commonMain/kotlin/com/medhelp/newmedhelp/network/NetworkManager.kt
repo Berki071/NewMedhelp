@@ -273,5 +273,40 @@ class NetworkManager {
             }
         }
     }
+
+    @Throws(Exception::class) suspend fun getPriceApiCall(h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : ServiceList{
+        return httpClient.get(Url( CenterEndPoint.BASE_URL + "services/" + h_idKl+ "/" + h_idFilial)) {
+            headers {
+                append(AUTH, h_Auth)
+                append(DB_NAME, h_dbName)
+                append(ID_KL, h_idKl)
+                append(ID_FILIAL, h_idFilial)
+            }
+        }
+    }
+
+    @Throws(Exception::class) suspend fun getPriceApiCall(idDoctor: Int, idBranch: Int, idUser: Int,
+        h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : ServiceList{
+
+        return httpClient.get(Url( CenterEndPoint.BASE_URL + "services/doctor/" + idDoctor + "/" + idBranch + "/" + idUser))  {
+            headers {
+                append(AUTH, h_Auth)
+                append(DB_NAME, h_dbName)
+                append(ID_KL, h_idKl)
+                append(ID_FILIAL, h_idFilial)
+            }
+        }
+    }
+
+    @Throws(Exception::class) suspend fun getAnalisePrice(h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : AnalisePriceList {
+        return httpClient.get(Url( CenterEndPoint.BASE_URL + "getAnalizPrice"))  {
+            headers {
+                append(AUTH, h_Auth)
+                append(DB_NAME, h_dbName)
+                append(ID_KL, h_idKl)
+                append(ID_FILIAL, h_idFilial)
+            }
+        }
+    }
 }
 

@@ -9,7 +9,6 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import android.widget.TextView
 import com.medhelp.medhelp.ui.search.recy_spinner.SearchAdapter
 import com.medhelp.newmedhelp.model.CategoryResponse
-import com.medhelp.medhelp.data.model.ServiceResponse
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
@@ -27,8 +26,10 @@ import android.content.Intent
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import com.medhelp.medhelp.data.model._heritable.ServiceResponseAndroid
 import com.medhelp.medhelp.ui.base.BaseFragment
 import com.medhelp.medhelp.ui.search.SearchFragment
+import com.medhelp.newmedhelp.model.ServiceResponse
 import kotlinx.coroutines.cancel
 import timber.log.Timber
 import java.util.*
@@ -44,7 +45,7 @@ class SearchFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
     var errLoadBtn: TextView? = null
     private var adapter: SearchAdapter? = null
     private var filterList: MutableList<CategoryResponse>? = null
-    private var serviceCash: List<ServiceResponse>? = null
+    private var serviceCash: List<ServiceResponseAndroid>? = null
     var activity: Activity? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -136,7 +137,7 @@ class SearchFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
         errLoadBtn!!.setOnClickListener { v: View? -> presenter!!.getData() }
     }
 
-    fun updateView(categories: List<CategoryResponse>, services: List<ServiceResponse>) {
+    fun updateView(categories: List<CategoryResponse>, services: List<ServiceResponseAndroid>) {
         spinner!!.visibility = View.VISIBLE
         recyclerView!!.visibility = View.VISIBLE
         errMessage!!.visibility = View.GONE
@@ -173,7 +174,7 @@ class SearchFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
                 } else if (position == 1) {
                     adapter!!.addItems(sortByWight(selectItemWithTab(services)))
                 } else {
-                    val serviceList: MutableList<ServiceResponse> = ArrayList()
+                    val serviceList: MutableList<ServiceResponseAndroid> = ArrayList()
                     for (serviceResponse in services) {
                         if (serviceResponse.idSpec == filterList!!.get(position).id) {
                             serviceList.add(serviceResponse)
@@ -187,8 +188,8 @@ class SearchFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    private fun sortByWight(list: MutableList<ServiceResponse>): List<ServiceResponse> {
-        var tmp: ServiceResponse
+    private fun sortByWight(list: MutableList<ServiceResponseAndroid>): List<ServiceResponseAndroid> {
+        var tmp: ServiceResponseAndroid
         for (j in 0..list.size - 2) {
             var i = list.size - 1
             while (j < i) {
@@ -205,8 +206,8 @@ class SearchFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
         return list
     }
 
-    private fun selectItemWithTab(services: List<ServiceResponse>): MutableList<ServiceResponse> {
-        val newList: MutableList<ServiceResponse> = ArrayList()
+    private fun selectItemWithTab(services: List<ServiceResponseAndroid>): MutableList<ServiceResponseAndroid> {
+        val newList: MutableList<ServiceResponseAndroid> = ArrayList()
         for (item in services) {
             if (item.favorites == "1") {
                 newList.add(item)
@@ -220,14 +221,14 @@ class SearchFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun filterService(
-        models: List<ServiceResponse>?,
+        models: List<ServiceResponseAndroid>?,
         query: String
-    ): List<ServiceResponse> {
+    ): List<ServiceResponseAndroid> {
         var query = query
         query = query.lowercase(Locale.getDefault())
-        val filteredModelList: MutableList<ServiceResponse> = ArrayList()
+        val filteredModelList: MutableList<ServiceResponseAndroid> = ArrayList()
         for (model in models!!) {
-            val text = model.title.lowercase(Locale.getDefault())
+            val text = model.title!!.lowercase(Locale.getDefault())
             if (text.contains(query)) {
                 filteredModelList.add(model)
             }

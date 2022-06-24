@@ -17,7 +17,8 @@ import android.widget.TextView;
 
 import com.medhelp.medhelp.Constants;
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.ServiceResponse;
+
+import com.medhelp.medhelp.data.model._heritable.ServiceResponseAndroid;
 import com.medhelp.medhelp.data.pref.PreferencesManager;
 import com.medhelp.medhelp.ui._main_page.MainActivity;
 import com.medhelp.medhelp.ui.base.BaseViewHolder;
@@ -36,11 +37,11 @@ import static com.medhelp.medhelp.ui._main_page.MainActivity.POINTER_TO_PAGE;
 public class ServiceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int VIEW_TYPE_NORMAL = 11;
     private int idDoctor;
-    private List<ServiceResponse> response;
+    private List<ServiceResponseAndroid> response;
 
     private ServiceAdapter.ItemListener listener;
 
-    ServiceAdapter(List<ServiceResponse> response, int idDoc, ServiceAdapter.ItemListener listener) {
+    ServiceAdapter(List<ServiceResponseAndroid> response, int idDoc, ServiceAdapter.ItemListener listener) {
         this.response = response;
         this.listener = listener;
         idDoctor = idDoc;
@@ -75,14 +76,14 @@ public class ServiceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         return response.size();
     }
 
-    void addItems(List<ServiceResponse> repoList) {
+    void addItems(List<ServiceResponseAndroid> repoList) {
         response.clear();
         response.addAll(repoList);
         notifyDataSetChanged();
     }
 
     public interface ItemListener {
-        void clickFab(ServiceResponse item);
+        void clickFab(ServiceResponseAndroid item);
 
         void clickRecord(ServiceAdapter.ViewHolder holder, int service, int limit);
     }
@@ -162,7 +163,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             });
         }
 
-        private void installTab(ServiceResponse repo) {
+        private void installTab(ServiceResponseAndroid repo) {
             if (repo.getFavorites().equals("0")) {
                 tab.setImageResource(R.drawable.ic_turned_in_not_grey_500_24dp);
             } else {
@@ -176,7 +177,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             hint.setText("");
         }
 
-        ServiceResponse repo;
+        ServiceResponseAndroid repo;
 
         public void onBind(int position) {
             super.onBind(position);
@@ -190,7 +191,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
             if (repo != null) {
                 tvTitle.setText(repo.getTitle());
-                tvPrice.setText(repo.getValue());
+                tvPrice.setText(repo.getValue()+"");
                 hint.setText(repo.getHint());
             }
 
@@ -245,7 +246,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             });
         }
 
-        private void startScheduleActivity(ServiceResponse repo) {
+        private void startScheduleActivity(ServiceResponseAndroid repo) {
             if (repo != null) {
 //                Intent intent = ScheduleFragment.getStartIntent(recordButton.getContext());
 //                intent.putExtra(ScheduleFragment.EXTRA_DATA_ID_SERVICE, repo.getId());
@@ -287,7 +288,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
-    void setFilter(List<ServiceResponse> filterService) {
+    void setFilter(List<ServiceResponseAndroid> filterService) {
         response = new ArrayList<>();
         response.addAll(filterService);
         notifyDataSetChanged();

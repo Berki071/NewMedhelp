@@ -4,7 +4,6 @@ import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.OkHttpResponseListener
 import com.medhelp.medhelp.data.model.*
-import com.medhelp.medhelp.data.model.analise_price.AnalisePriceList
 import com.medhelp.medhelp.data.model.chat.MessageFromServerList
 import com.medhelp.medhelp.data.model.chat.SimpleResBoolean
 import com.medhelp.medhelp.data.model.notification.NotificationMsgList
@@ -99,22 +98,30 @@ class NetworkManager(val prefManager: PreferencesManager) {
 //            .getObjectObservable(DateList::class.java)
 //    }
 
-    fun getPriceApiCall(
-        idDoctor: Int,
-        idBranch: Int,
-        idUser: Int
-    ): Observable<ServiceList> {
-        return Rx2AndroidNetworking.get(CenterEndPoint.PRICE_BY_DOCTOR)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-            .addPathParameter(ID_DOCTOR, idDoctor.toString())
-            .addPathParameter(ID_BRANCH, idBranch.toString())
-            .addPathParameter(ID_USER, idUser.toString())
-            .build()
-            .getObjectObservable(ServiceList::class.java)
-    }
+//    fun getPriceApiCall(idDoctor: Int, idBranch: Int, idUser: Int): Observable<ServiceList> {
+//        return Rx2AndroidNetworking.get(CenterEndPoint.PRICE_BY_DOCTOR)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
+//            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
+//            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
+//            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
+//            .addPathParameter(ID_DOCTOR, idDoctor.toString())
+//            .addPathParameter(ID_BRANCH, idBranch.toString())
+//            .addPathParameter(ID_USER, idUser.toString())
+//            .build()
+//            .getObjectObservable(ServiceList::class.java)
+//    }
+
+    //    fun getPriceApiCall(): Observable<ServiceList> {
+//        return Rx2AndroidNetworking.get(CenterEndPoint.PRICE)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
+//            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
+//            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
+//            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
+//            .addPathParameter(ID_USER, prefManager.currentUserInfo!!.idUser.toString())
+//            .addPathParameter(ID_BRANCH, prefManager.currentUserInfo!!.idBranch.toString())
+//            .build()
+//            .getObjectObservable(ServiceList::class.java)
+//    }
 
     fun getTabPrice(): Observable<AllTabsList> {
         return Rx2AndroidNetworking.get(CenterEndPoint.PRICE_FAVORITE)
@@ -126,18 +133,6 @@ class NetworkManager(val prefManager: PreferencesManager) {
             .addPathParameter(ID_USER, prefManager.currentUserInfo!!.idUser.toString())
             .build()
             .getObjectObservable(AllTabsList::class.java)
-    }
-
-    fun getPriceApiCall(): Observable<ServiceList> {
-        return Rx2AndroidNetworking.get(CenterEndPoint.PRICE)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-            .addPathParameter(ID_USER, prefManager.currentUserInfo!!.idUser.toString())
-            .addPathParameter(ID_BRANCH, prefManager.currentUserInfo!!.idBranch.toString())
-            .build()
-            .getObjectObservable(ServiceList::class.java)
     }
 
 //    fun getCategoryApiCall(): Observable<SpecialtyList> {
@@ -433,17 +428,17 @@ class NetworkManager(val prefManager: PreferencesManager) {
             .getObjectObservable(CheckSpamRecordList::class.java)
     }
 
-    fun getAnalisePrice(): Observable<AnalisePriceList> {
-        return Rx2AndroidNetworking.get(CenterEndPoint.GET_ALL_ALALISE_PRICE)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
-            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
-            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
-            .addPathParameter(ID_USER, prefManager.currentUserInfo!!.idUser.toString())
-            .addPathParameter(ID_BRANCH, prefManager.currentUserInfo!!.idBranch.toString())
-            .build()
-            .getObjectObservable(AnalisePriceList::class.java)
-    }
+//    fun getAnalisePrice(): Observable<AnalisePriceList> {
+//        return Rx2AndroidNetworking.get(CenterEndPoint.GET_ALL_ALALISE_PRICE)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
+//            .addHeaders(AUTH, prefManager.currentUserInfo!!.apiKey)
+//            .addHeaders(ID_KL, prefManager.currentUserInfo!!.idUser.toString())
+//            .addHeaders(ID_FILIAL, prefManager.currentUserInfo!!.idBranch.toString())
+////            .addPathParameter(ID_USER, prefManager.currentUserInfo!!.idUser.toString())
+////            .addPathParameter(ID_BRANCH, prefManager.currentUserInfo!!.idBranch.toString())
+//            .build()
+//            .getObjectObservable(AnalisePriceList::class.java)
+//    }
 
     fun sendImageToService(ip: String, json: JSONObject): Observable<Boolean> {
         return Rx2AndroidNetworking.post(ip)

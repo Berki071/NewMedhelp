@@ -26,7 +26,7 @@ open class AllDoctorsResponse {
         name_specialties: String?,
         dop_info: String?,
         image_url: String?,
-    ) {
+    ) {                     //for ios
         this.id = id
         this.fio_doctor = fio_doctor
         this.id_specialties_string = id_specialties_string
