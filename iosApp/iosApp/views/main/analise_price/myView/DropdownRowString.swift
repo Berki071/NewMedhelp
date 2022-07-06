@@ -1,18 +1,16 @@
 //
-//  DropdownRow.swift
+//  DropdownRowString.swift
 //  iosApp
 //
-//  Created by Михаил Хари on 22.06.2022.
+//  Created by Михаил Хари on 24.06.2022.
 //  Copyright © 2022 orgName. All rights reserved.
 //
 
 import SwiftUI
-import shared
 
-struct DropdownRow: View {
-    var option: CategoryResponse
-    var onOptionSelected: ((_ option: CategoryResponse) -> Void)?
-
+struct DropdownRowString: View {
+    var option: String
+    var onOptionSelected: ((_ option: String) -> Void)?
     
     var body: some View {
         Button(action: {
@@ -21,7 +19,7 @@ struct DropdownRow: View {
             }
         }) {
             HStack {
-                Text(option.title!)
+                Text(option)
                     .font(.system(size: 14))
                     .foregroundColor(Color.black)
                 Spacer()
@@ -32,10 +30,9 @@ struct DropdownRow: View {
     }
 }
 
-struct DropdownRow_Previews: PreviewProvider {
+struct DropdownRowString_Previews: PreviewProvider {
     static var previews: some View {
-        let tmpCat = CategoryResponse(title: "testTitle")
-        
-        DropdownRow(option : tmpCat)
+        let tmpCat = "testTitle"
+        DropdownRowString(option: tmpCat)
     }
 }

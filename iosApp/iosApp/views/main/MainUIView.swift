@@ -8,15 +8,14 @@
 
 import SwiftUI
 import shared
+//import FirebaseDatabaseSwift
 
 struct MainUIView: View {
-    @ObservedObject var mainPresenter = MainPresenter()
+    @StateObject var mainPresenter = MainPresenter()
+    // @State var showDialogLoading: Bool = false
     
     init() {
-        // for navigation bar title color
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
-       // For navigation bar background color
-        //UINavigationBar.appearance().backgroundColor = .green
+
     }
     
     
@@ -30,17 +29,17 @@ struct MainUIView: View {
                 }
                 
                 if $0.translation.width > 100 {
-                    withAnimation {
+                    //withAnimation {
                         self.mainPresenter.showMenu = true
-                    }
+                   // }
                 }
             }
         
         if(self.mainPresenter.nextPage == "Login"){
             LoginUiView()
         }else{
-            
-            NavigationView {
+            ZStack{
+                
                 GeometryReader { geometry in
                     ZStack(alignment: .leading) {
                         
@@ -52,7 +51,8 @@ struct MainUIView: View {
                         
                         
                         if self.mainPresenter.showMenu {
-                            MenuView(selectitem : self.$mainPresenter.selectMenuPage, selectMenuAlert: self.$mainPresenter.selectMenuAlert, showMenu: self.$mainPresenter.showMenu)
+                            MenuView(selectitem : self.$mainPresenter.selectMenuPage, selectMenuAlert: self.$mainPresenter.selectMenuAlert, showMenu: self.$mainPresenter.showMenu,
+                                     curentUserInfo: self.$mainPresenter.curentUserInfo)
                             //.frame(width: geometry.size.width/1.4)
                                 .transition(.move(edge: .leading))
                         }
@@ -67,21 +67,7 @@ struct MainUIView: View {
                         }
                     }
                     .gesture(drag)
-                    .navigationBarItems(leading: (
-                        Button(action: {
-                            withAnimation {
-                                self.mainPresenter.showMenu.toggle()
-                            }
-                        }) {
-                            Image(systemName: "line.horizontal.3")
-                                .foregroundColor(Color.white)
-                                .imageScale(.large)
-                        }
-                    ))
-                    
-                    
-                }
-                
+                }    
             }
         }
         
@@ -89,27 +75,40 @@ struct MainUIView: View {
     }
 }
 
+
 struct MainView: View {
-    @ObservedObject var mainP : MainPresenter
+    @StateObject var mainP : MainPresenter
+    //@Binding var selectMenuPage : Int
+    
     
     var body: some View {
-        if(mainP.selectMenuPage == 0){
-            ProfilePage()
-                .navigationBarTitle(mainP.titleTop, displayMode: .inline)
+ 
+        if(self.mainP.selectMenuPage == 0){
+            ProfilePage(isShowAlertRecomend : nil, clickButterMenu:{() -> Void in
+                //withAnimation {
+                    self.mainP.showMenu = true
+                //}
+            })
+        }else if(self.mainP.selectMenuPage == 1){
+            DoctorsPage(clickButterMenu:{() -> Void in
+               // withAnimation {
+                    self.mainP.showMenu = true
+               // }
+            })
             
-        }else if(mainP.selectMenuPage == 1){
-            DoctorsPage()
-                .navigationBarTitle("Специалисты", displayMode: .inline)
-              
-        }else if(mainP.selectMenuPage == 2){
-            ServicesPage()
-                .navigationBarTitle("Прейскурант на услуги", displayMode: .inline)
-               
+        }else if(self.mainP.selectMenuPage == 2){
+            ServicesPage(clickButterMenu:{() -> Void in
+             //   withAnimation {
+                    self.mainP.showMenu = true
+              //  }
+            })
         }
-        else if(mainP.selectMenuPage == 3){
-            AnalisePrices()
-                .navigationBarTitle("Прейскурант на анализы", displayMode: .inline)
-               
+        else if(self.mainP.selectMenuPage == 3){
+            AnalisePrices(clickButterMenu:{() -> Void in
+              // withAnimation {
+                    self.mainP.showMenu = true
+                //}
+            })
         }
     }
 }

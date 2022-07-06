@@ -11,13 +11,20 @@ import shared
 
 struct DoctorsItem: View {
     var item : AllDoctorsResponseIos
+    @ObservedObject var mainPresenter : DoctorsItemPresenter
+    
+    init(item : AllDoctorsResponseIos){
+        self.item = item
+        mainPresenter = DoctorsItemPresenter(item: item)
+    }
     
     var body: some View {
         ZStack{
             HStack(spacing: 0){
                 
-                Image("sh_doc")
-                    .resizable(resizingMode: .stretch)
+                Image(uiImage: self.mainPresenter.iuImageLogo)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .padding(8.0)
                     .frame(width: 56.0, height: 56.0)
 

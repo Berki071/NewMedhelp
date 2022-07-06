@@ -9,9 +9,16 @@
 import SwiftUI
 
 struct ProfileItem: View {
-    
     var item : VisitResponseIos
     @Binding var isShowAlertRecomend : StandartAlertData?
+    @ObservedObject var mainPresenter : ProfileItemPresenter
+    
+    
+    init(item : VisitResponseIos, isShowAlertRecomend : Binding<StandartAlertData?>){
+        self.item = item
+        self._isShowAlertRecomend = isShowAlertRecomend
+        mainPresenter = ProfileItemPresenter(item: item)
+    }
     
     var body: some View {
         if(item.idRecord == 0){
@@ -27,8 +34,9 @@ struct ProfileItem: View {
                     
                     HStack(alignment: .top){
                         
-                        Image("sh_doc")
+                        Image(uiImage: self.mainPresenter.iuImageLogo)
                             .resizable()
+                            .aspectRatio(contentMode: .fit)
                             .padding(8.0)
                             .frame(width: 72.0, height: 72.0)
                         

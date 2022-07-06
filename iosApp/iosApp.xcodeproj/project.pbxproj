@@ -20,6 +20,10 @@
 		561AE9EC2852FDC10016F92F /* DoctorsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561AE9EB2852FDC10016F92F /* DoctorsPage.swift */; };
 		561AE9EE2852FDD60016F92F /* ServicesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561AE9ED2852FDD60016F92F /* ServicesPage.swift */; };
 		562784ED2840C43000F48910 /* SharedPreferenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562784EC2840C43000F48910 /* SharedPreferenses.swift */; };
+		56399EEE286AACD30077819E /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56399EED286AACD30077819E /* DownloadManager.swift */; };
+		56399EF0286C406B0077819E /* DoctorsItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56399EEF286C406B0077819E /* DoctorsItemPresenter.swift */; };
+		56399EF2286C48780077819E /* ProfileItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56399EF1286C48780077819E /* ProfileItemPresenter.swift */; };
+		56399EF4286D97D60077819E /* MyToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56399EF3286D97D60077819E /* MyToolBar.swift */; };
 		56511C6A28586D5C009BE7CD /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56511C6928586D5C009BE7CD /* ProfilePresenter.swift */; };
 		5663CF8B283E05F300EBD24B /* LoginUiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663CF8A283E05F300EBD24B /* LoginUiView.swift */; };
 		5663CFC5283F303800EBD24B /* SplashUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663CFC4283F303800EBD24B /* SplashUIView.swift */; };
@@ -27,13 +31,19 @@
 		5664383B2860898500FAA6F0 /* MDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5664383A2860898500FAA6F0 /* MDate.swift */; };
 		5664383D28616D2C00FAA6F0 /* ProfileTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5664383C28616D2C00FAA6F0 /* ProfileTitle.swift */; };
 		566438412861D89A00FAA6F0 /* DoctorsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566438402861D89A00FAA6F0 /* DoctorsPresenter.swift */; };
-		566438442862B7F600FAA6F0 /* DropdownSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566438432862B7F600FAA6F0 /* DropdownSelector.swift */; };
-		566438462862BE7700FAA6F0 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566438452862BE7700FAA6F0 /* Dropdown.swift */; };
-		566438482862BF8B00FAA6F0 /* DropdownRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566438472862BF8B00FAA6F0 /* DropdownRow.swift */; };
+		566438442862B7F600FAA6F0 /* DropdownSelectorCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566438432862B7F600FAA6F0 /* DropdownSelectorCategory.swift */; };
+		566438462862BE7700FAA6F0 /* DropdownCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566438452862BE7700FAA6F0 /* DropdownCategory.swift */; };
+		566438482862BF8B00FAA6F0 /* DropdownRowCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566438472862BF8B00FAA6F0 /* DropdownRowCategory.swift */; };
 		5675041C286437860065C360 /* AnalisePrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675041B286437860065C360 /* AnalisePrices.swift */; };
 		5675041E286557540065C360 /* ServicesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675041D286557540065C360 /* ServicesPresenter.swift */; };
 		56750420286569060065C360 /* ServiceResponseIos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675041F286569060065C360 /* ServiceResponseIos.swift */; };
 		56750423286574EA0065C360 /* ServicesItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56750422286574EA0065C360 /* ServicesItem.swift */; };
+		5675042528659AA90065C360 /* AnalisePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675042428659AA90065C360 /* AnalisePresenter.swift */; };
+		5675042728659F560065C360 /* AnalisePriceResponseIos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675042628659F560065C360 /* AnalisePriceResponseIos.swift */; };
+		5675042A2865A78C0065C360 /* AnaliseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567504292865A78C0065C360 /* AnaliseItem.swift */; };
+		5675042D2865B2320065C360 /* DropdownSelectorString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675042C2865B2320065C360 /* DropdownSelectorString.swift */; };
+		5675042F2865B30A0065C360 /* DropdownString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675042E2865B30A0065C360 /* DropdownString.swift */; };
+		567504312865B38C0065C360 /* DropdownRowString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567504302865B38C0065C360 /* DropdownRowString.swift */; };
 		56773887285C757700A02722 /* VisitResponseIos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56773886285C757700A02722 /* VisitResponseIos.swift */; };
 		5677388A285C86C700A02722 /* ProfileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56773889285C86C700A02722 /* ProfileItem.swift */; };
 		5685469B284878AF00E5DDFE /* NetMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5685469A284878AF00E5DDFE /* NetMonitor.swift */; };
@@ -78,6 +88,10 @@
 		561AE9EB2852FDC10016F92F /* DoctorsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoctorsPage.swift; path = iosApp/views/main/profile/DoctorsPage.swift; sourceTree = SOURCE_ROOT; };
 		561AE9ED2852FDD60016F92F /* ServicesPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesPage.swift; sourceTree = "<group>"; };
 		562784EC2840C43000F48910 /* SharedPreferenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPreferenses.swift; sourceTree = "<group>"; };
+		56399EED286AACD30077819E /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		56399EEF286C406B0077819E /* DoctorsItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsItemPresenter.swift; sourceTree = "<group>"; };
+		56399EF1286C48780077819E /* ProfileItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItemPresenter.swift; sourceTree = "<group>"; };
+		56399EF3286D97D60077819E /* MyToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToolBar.swift; sourceTree = "<group>"; };
 		56511C6928586D5C009BE7CD /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		5663CF8A283E05F300EBD24B /* LoginUiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUiView.swift; sourceTree = "<group>"; };
 		5663CFC4283F303800EBD24B /* SplashUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashUIView.swift; sourceTree = "<group>"; };
@@ -85,13 +99,19 @@
 		5664383A2860898500FAA6F0 /* MDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDate.swift; sourceTree = "<group>"; };
 		5664383C28616D2C00FAA6F0 /* ProfileTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTitle.swift; sourceTree = "<group>"; };
 		566438402861D89A00FAA6F0 /* DoctorsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsPresenter.swift; sourceTree = "<group>"; };
-		566438432862B7F600FAA6F0 /* DropdownSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownSelector.swift; sourceTree = "<group>"; };
-		566438452862BE7700FAA6F0 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
-		566438472862BF8B00FAA6F0 /* DropdownRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownRow.swift; sourceTree = "<group>"; };
+		566438432862B7F600FAA6F0 /* DropdownSelectorCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownSelectorCategory.swift; sourceTree = "<group>"; };
+		566438452862BE7700FAA6F0 /* DropdownCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownCategory.swift; sourceTree = "<group>"; };
+		566438472862BF8B00FAA6F0 /* DropdownRowCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownRowCategory.swift; sourceTree = "<group>"; };
 		5675041B286437860065C360 /* AnalisePrices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalisePrices.swift; sourceTree = "<group>"; };
 		5675041D286557540065C360 /* ServicesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesPresenter.swift; sourceTree = "<group>"; };
 		5675041F286569060065C360 /* ServiceResponseIos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceResponseIos.swift; sourceTree = "<group>"; };
 		56750422286574EA0065C360 /* ServicesItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesItem.swift; sourceTree = "<group>"; };
+		5675042428659AA90065C360 /* AnalisePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalisePresenter.swift; sourceTree = "<group>"; };
+		5675042628659F560065C360 /* AnalisePriceResponseIos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalisePriceResponseIos.swift; sourceTree = "<group>"; };
+		567504292865A78C0065C360 /* AnaliseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnaliseItem.swift; sourceTree = "<group>"; };
+		5675042C2865B2320065C360 /* DropdownSelectorString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownSelectorString.swift; sourceTree = "<group>"; };
+		5675042E2865B30A0065C360 /* DropdownString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownString.swift; sourceTree = "<group>"; };
+		567504302865B38C0065C360 /* DropdownRowString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownRowString.swift; sourceTree = "<group>"; };
 		56773886285C757700A02722 /* VisitResponseIos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitResponseIos.swift; sourceTree = "<group>"; };
 		56773889285C86C700A02722 /* ProfileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItem.swift; sourceTree = "<group>"; };
 		5685469A284878AF00E5DDFE /* NetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetMonitor.swift; sourceTree = "<group>"; };
@@ -132,18 +152,12 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		560049252853473D003937A8 /* views_and_dialogs */ = {
-			isa = PBXGroup;
-			children = (
-				560C7F4228508B2C002D6324 /* MenuView.swift */,
-			);
-			path = views_and_dialogs;
-			sourceTree = "<group>";
-		};
 		5600492828534C93003937A8 /* alerts_and_views */ = {
 			isa = PBXGroup;
 			children = (
+				560C7F4228508B2C002D6324 /* MenuView.swift */,
 				5600492928534CD2003937A8 /* StandartAlert.swift */,
+				56399EF3286D97D60077819E /* MyToolBar.swift */,
 			);
 			path = alerts_and_views;
 			sourceTree = "<group>";
@@ -151,7 +165,6 @@
 		560C7F4128508392002D6324 /* main */ = {
 			isa = PBXGroup;
 			children = (
-				560049252853473D003937A8 /* views_and_dialogs */,
 				561AE9E62852FCD00016F92F /* profile */,
 				561AE9E72852FD0F0016F92F /* doctors */,
 				561AE9E82852FD710016F92F /* services */,
@@ -215,9 +228,9 @@
 		566438422862B76200FAA6F0 /* myView */ = {
 			isa = PBXGroup;
 			children = (
-				566438432862B7F600FAA6F0 /* DropdownSelector.swift */,
-				566438452862BE7700FAA6F0 /* Dropdown.swift */,
-				566438472862BF8B00FAA6F0 /* DropdownRow.swift */,
+				566438432862B7F600FAA6F0 /* DropdownSelectorCategory.swift */,
+				566438452862BE7700FAA6F0 /* DropdownCategory.swift */,
+				566438472862BF8B00FAA6F0 /* DropdownRowCategory.swift */,
 			);
 			path = myView;
 			sourceTree = "<group>";
@@ -225,7 +238,10 @@
 		5675041A2864371A0065C360 /* analise_price */ = {
 			isa = PBXGroup;
 			children = (
+				5675042B2865AE3B0065C360 /* myView */,
+				567504282865A1C90065C360 /* recyAndSpin */,
 				5675041B286437860065C360 /* AnalisePrices.swift */,
+				5675042428659AA90065C360 /* AnalisePresenter.swift */,
 			);
 			path = analise_price;
 			sourceTree = "<group>";
@@ -238,12 +254,31 @@
 			path = recy;
 			sourceTree = "<group>";
 		};
+		567504282865A1C90065C360 /* recyAndSpin */ = {
+			isa = PBXGroup;
+			children = (
+				567504292865A78C0065C360 /* AnaliseItem.swift */,
+			);
+			path = recyAndSpin;
+			sourceTree = "<group>";
+		};
+		5675042B2865AE3B0065C360 /* myView */ = {
+			isa = PBXGroup;
+			children = (
+				5675042C2865B2320065C360 /* DropdownSelectorString.swift */,
+				5675042E2865B30A0065C360 /* DropdownString.swift */,
+				567504302865B38C0065C360 /* DropdownRowString.swift */,
+			);
+			path = myView;
+			sourceTree = "<group>";
+		};
 		56773885285C753400A02722 /* model */ = {
 			isa = PBXGroup;
 			children = (
 				56773886285C757700A02722 /* VisitResponseIos.swift */,
 				56FD66462862F90E0090044C /* AllDoctorsResponseIos.swift */,
 				5675041F286569060065C360 /* ServiceResponseIos.swift */,
+				5675042628659F560065C360 /* AnalisePriceResponseIos.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -253,6 +288,7 @@
 			children = (
 				56773889285C86C700A02722 /* ProfileItem.swift */,
 				5664383C28616D2C00FAA6F0 /* ProfileTitle.swift */,
+				56399EF1286C48780077819E /* ProfileItemPresenter.swift */,
 			);
 			path = recy;
 			sourceTree = "<group>";
@@ -284,6 +320,7 @@
 				5685469A284878AF00E5DDFE /* NetMonitor.swift */,
 				560C7F3F28505CAB002D6324 /* Utils.swift */,
 				5664383A2860898500FAA6F0 /* MDate.swift */,
+				56399EED286AACD30077819E /* DownloadManager.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -292,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				56FD66442862EE600090044C /* DoctorsItem.swift */,
+				56399EEF286C406B0077819E /* DoctorsItemPresenter.swift */,
 			);
 			path = recy;
 			sourceTree = "<group>";
@@ -468,34 +506,44 @@
 				562784ED2840C43000F48910 /* SharedPreferenses.swift in Sources */,
 				560C7F4328508B2C002D6324 /* MenuView.swift in Sources */,
 				5675041C286437860065C360 /* AnalisePrices.swift in Sources */,
+				5675042F2865B30A0065C360 /* DropdownString.swift in Sources */,
 				5664383D28616D2C00FAA6F0 /* ProfileTitle.swift in Sources */,
+				5675042A2865A78C0065C360 /* AnaliseItem.swift in Sources */,
 				56750420286569060065C360 /* ServiceResponseIos.swift in Sources */,
 				5663CF8B283E05F300EBD24B /* LoginUiView.swift in Sources */,
 				5600492A28534CD2003937A8 /* StandartAlert.swift in Sources */,
 				5677388A285C86C700A02722 /* ProfileItem.swift in Sources */,
 				5685469B284878AF00E5DDFE /* NetMonitor.swift in Sources */,
 				5675041E286557540065C360 /* ServicesPresenter.swift in Sources */,
+				5675042528659AA90065C360 /* AnalisePresenter.swift in Sources */,
 				5685469E28489C5200E5DDFE /* LoginPresenter.swift in Sources */,
 				56FD66452862EE600090044C /* DoctorsItem.swift in Sources */,
 				561AE9EC2852FDC10016F92F /* DoctorsPage.swift in Sources */,
 				56773887285C757700A02722 /* VisitResponseIos.swift in Sources */,
+				56399EF0286C406B0077819E /* DoctorsItemPresenter.swift in Sources */,
+				5675042728659F560065C360 /* AnalisePriceResponseIos.swift in Sources */,
 				56B05AC62840E14300CA0BB0 /* LoggingTree.swift in Sources */,
+				567504312865B38C0065C360 /* DropdownRowString.swift in Sources */,
 				561AE9E52852F6580016F92F /* MainPresenter.swift in Sources */,
 				561861F7284DB66500C3CA28 /* Constants.swift in Sources */,
+				56399EF2286C48780077819E /* ProfileItemPresenter.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				5664383B2860898500FAA6F0 /* MDate.swift in Sources */,
-				566438482862BF8B00FAA6F0 /* DropdownRow.swift in Sources */,
+				566438482862BF8B00FAA6F0 /* DropdownRowCategory.swift in Sources */,
 				566438412861D89A00FAA6F0 /* DoctorsPresenter.swift in Sources */,
+				56399EF4286D97D60077819E /* MyToolBar.swift in Sources */,
 				560C7F4028505CAC002D6324 /* Utils.swift in Sources */,
+				56399EEE286AACD30077819E /* DownloadManager.swift in Sources */,
 				561AE9EA2852FDAC0016F92F /* ProfilePage.swift in Sources */,
 				5663CFC5283F303800EBD24B /* SplashUIView.swift in Sources */,
+				5675042D2865B2320065C360 /* DropdownSelectorString.swift in Sources */,
 				56511C6A28586D5C009BE7CD /* ProfilePresenter.swift in Sources */,
 				5663CFC7283F314800EBD24B /* SplashPresenter.swift in Sources */,
 				56FD66472862F90E0090044C /* AllDoctorsResponseIos.swift in Sources */,
 				561AE9EE2852FDD60016F92F /* ServicesPage.swift in Sources */,
 				56B05AC32840D81000CA0BB0 /* MainUIView.swift in Sources */,
-				566438462862BE7700FAA6F0 /* Dropdown.swift in Sources */,
-				566438442862B7F600FAA6F0 /* DropdownSelector.swift in Sources */,
+				566438462862BE7700FAA6F0 /* DropdownCategory.swift in Sources */,
+				566438442862B7F600FAA6F0 /* DropdownSelectorCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

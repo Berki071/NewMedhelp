@@ -11,17 +11,21 @@ import shared
 import SwiftUI
 
 class ProfilePresenter: ObservableObject {
+    
     @Published var centerName : String = ""
-    @Published var urlImageLogo : String = ""  // получение в  base64
+    @Published var iuImageLogo : UIImage =  UIImage(named: "sh_center1")!
     @Published var nameBranch : String = ""
     @Published var centerPhone : String = ""
     @Published var centerSite : String = ""
     
     @Published var showDialogLoading: Bool = false
+    @Published var showDialogErrorScreen: Bool = false
+    @Published var showDialogEmptyScreen: Bool = false
     
-    //@Published var listRecy: [VisitResponseIos] = []
     @Published var actualReceptions : [VisitResponseIos] = []
     @Published var latestReceptions : [VisitResponseIos] = []
+    
+  //  var clickButterMenu: MainPresenter?
     
     let sdk: NetworkManager
     var sharePreferenses : SharedPreferenses
@@ -32,8 +36,11 @@ class ProfilePresenter: ObservableObject {
         sharePreferenses = SharedPreferenses()
         netConnection.startMonitoring()
     
-        updateHeader()
-        getVisits1()
+//        let tmp1 = actualReceptions.count
+//        let tmp2 = latestReceptions.count
+        
+        self.updateHeader()
+        self.getVisits1()
     }
     
     func updateHeader(){
@@ -58,8 +65,12 @@ class ProfilePresenter: ObservableObject {
             
             if(currentUserInfo != nil){
                 nameBranch = currentUserInfo!.nameBranch!
-                let ttt=centerInfo!.logo! + "&token=" + currentUserInfo!.apiKey!
-                urlImageLogo = ttt
+                let imagePathString = centerInfo!.logo! + "&token=" + currentUserInfo!.apiKey!
+                
+                DownloadManager(imagePathString, resultUiImage: {(tmp : UIImage) -> Void in
+                    self.iuImageLogo = tmp
+                })
+                
             }
         }
         
@@ -85,12 +96,12 @@ class ProfilePresenter: ObservableObject {
                     }
                     
                     self.showLoading(false)
-                    self.showErrorScreen()
+                    self.showErrorScreen(true)
                 }
             })
         }else{
             LoggingTree.e("ProfilePresenter/getVisits1 sharePreferenses.currentUserInfo == nil || sharePreferenses.centerInfo == nil")
-            self.showErrorScreen()
+            self.showErrorScreen(true)
             self.showLoading(false)
             return
         }
@@ -107,9 +118,11 @@ class ProfilePresenter: ObservableObject {
             if let res : VisitList = response {
                
                 if(!res.error){
-                    if res.response.count == 0{
-                        self.showEmptyScreen()
+                    if res.response.count == 0  || (res.response.count == 1 && res.response[0].nameServices == nil){
+                        self.showEmptyScreen(true)
                     }else{
+                        self.showEmptyScreen(false)
+                        
                         var tmpList : [VisitResponseIos] = []
                         
                         res.response.forEach{ i in
@@ -120,10 +133,11 @@ class ProfilePresenter: ObservableObject {
                     }
                     
                 }else{
-                    self.showErrorScreen()
+                    self.showErrorScreen(true)
                 }
                 
                 self.showLoading(false)
+                
                 
             } else {
                 if let t=error{
@@ -131,7 +145,7 @@ class ProfilePresenter: ObservableObject {
                 }
                 
                 self.showLoading(false)
-                self.showErrorScreen()
+                self.showErrorScreen(true)
             }
         })
     }
@@ -149,20 +163,30 @@ class ProfilePresenter: ObservableObject {
             }
         }
         
-        let c0 = array.count
-        let c1 = actualReceptionsTmp.count
-        let c2 = latestReceptionsTmp.count
         actualReceptions = actualReceptionsTmp
         latestReceptions = latestReceptionsTmp
        
     }
     
-    func showEmptyScreen(){
-        
+    func showEmptyScreen(_ isShow : Bool){
+        if isShow {
+            showDialogEmptyScreen = true
+            actualReceptions = []
+            latestReceptions = []
+        }else{
+            showDialogEmptyScreen = false
+        }
     }
     
-    func showErrorScreen(){
-        //todo erroe screen
+    func showErrorScreen(_ isShow : Bool){
+        if isShow {
+            showDialogErrorScreen = true
+            actualReceptions = []
+            latestReceptions = []
+        }else{
+            showDialogErrorScreen = false
+        }
+        
     }
     
     func showLoading(_ isShow : Bool){
@@ -171,5 +195,10 @@ class ProfilePresenter: ObservableObject {
         }else{
             self.showDialogLoading = false
         }
+    }
+    
+    
+    func showMenu(){
+        //clickButterMenu()
     }
 }

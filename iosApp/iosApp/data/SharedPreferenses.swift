@@ -108,7 +108,7 @@ class SharedPreferenses{
         set(nVal){
             if nVal != nil{
                 do{
-                    var str : String? = try MUtils.companion.userResponseToString(cl: nVal!)
+                    let str : String? = try MUtils.companion.userResponseToString(cl: nVal!)
                     defaults.set(str, forKey: CURRENT_USER_INFO_KEY)
                 }catch{
                     print("Неожиданная ошибка: \(error).")
@@ -123,7 +123,7 @@ class SharedPreferenses{
         set(nVal){
             if nVal != nil{
                 do{
-                    var str : String? = try MUtils.companion.centerResponseToString(cl: nVal!)
+                    let str : String? = try MUtils.companion.centerResponseToString(cl: nVal!)
                     defaults.set(str, forKey: CENTER_INFO_KEY)
                 }catch{
                     print("Неожиданная ошибка: \(error).")

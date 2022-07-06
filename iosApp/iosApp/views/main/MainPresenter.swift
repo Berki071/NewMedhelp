@@ -17,7 +17,7 @@ class MainPresenter : ObservableObject{
     @Published var showMenu = false
     @Published var selectMenuPage = 0
     @Published var selectMenuAlert = 0  //1 алер выхода
-    
+    @Published var curentUserInfo : UserResponse
     
     let sdk: NetworkManager
     var sharePreferenses : SharedPreferenses
@@ -27,6 +27,8 @@ class MainPresenter : ObservableObject{
         sdk=NetworkManager()
         sharePreferenses = SharedPreferenses()
         netConnection.startMonitoring()
+        
+        curentUserInfo = sharePreferenses.currentUserInfo!
     
         if(sharePreferenses.centerInfo != nil && sharePreferenses.centerInfo!.title != nil){
             titleTop=sharePreferenses.centerInfo!.title!

@@ -1,20 +1,20 @@
 //
-//  DropdownSelector.swift
+//  DropdownSelectorString.swift
 //  iosApp
 //
-//  Created by Михаил Хари on 22.06.2022.
+//  Created by Михаил Хари on 24.06.2022.
 //  Copyright © 2022 orgName. All rights reserved.
 //
 
 import SwiftUI
-import shared
 
-struct DropdownSelector: View {
+struct DropdownSelectorString: View {
+    
     @State private var shouldShowDropdown = false
-    @State private var selectedOption: CategoryResponse? = nil
+    @State private var selectedOption: String? = nil
     var placeholder: String
-    var options: [CategoryResponse]
-    var onOptionSelected: ((_ option: CategoryResponse) -> Void)?
+    var options: [String]
+    var onOptionSelected: ((_ option: String) -> Void)?
     private let buttonHeight: CGFloat = 45
     
     var body: some View {
@@ -22,7 +22,7 @@ struct DropdownSelector: View {
                    self.shouldShowDropdown.toggle()
                }) {
                    HStack {
-                       Text(selectedOption == nil ? placeholder : selectedOption!.title!)
+                       Text(selectedOption == nil ? placeholder : selectedOption!)
                            .font(.system(size: 14))
                            .foregroundColor(Color.white)
 
@@ -46,7 +46,7 @@ struct DropdownSelector: View {
                    VStack {
                        if self.shouldShowDropdown  {
                            Spacer(minLength: buttonHeight )  //+10
-                           Dropdown(options: self.options, onOptionSelected: { option in
+                           DropdownString(options: self.options, onOptionSelected: { option in
                                shouldShowDropdown = false
                                selectedOption = option
                                self.onOptionSelected?(option)
@@ -60,15 +60,15 @@ struct DropdownSelector: View {
     }
 }
 
-struct DropdownSelector_Previews: PreviewProvider {
+struct DropdownSelectorString_Previews: PreviewProvider {
     static var previews: some View {
         let hint = "hint my"
         
-        let cat1 = CategoryResponse(title: "cat1")
-        let cat2 = CategoryResponse(title: "cat2")
-        let cat3 = CategoryResponse(title: "cat3")
+        let cat1 = "cat1"
+        let cat2 = "cat2"
+        let cat3 = "cat3"
         let arr = [cat1,cat2,cat3]
         
-        DropdownSelector(placeholder : hint, options : arr)
+        DropdownSelectorString(placeholder : hint, options : arr)
     }
 }

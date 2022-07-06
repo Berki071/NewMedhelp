@@ -206,8 +206,8 @@
             filePath = "iosApp/views/main/profile/recy/ProfileItem.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -222,13 +222,13 @@
             filePath = "iosApp/views/main/doctors/DoctorsPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "getSpecialtyByCenter()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "682E09B8-22D3-4ADA-BA2C-E18D9FEAFEB1 - 21a47939d4e854c9"
+                  uuid = "682E09B8-22D3-4ADA-BA2C-E18D9FEAFEB1 - 21a47939d4e85655"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -238,12 +238,12 @@
                   urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/main/doctors/DoctorsPresenter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
                   offsetFromSymbolStart = "175">
                </Location>
                <Location
-                  uuid = "682E09B8-22D3-4ADA-BA2C-E18D9FEAFEB1 - 21a47939d4e854c9"
+                  uuid = "682E09B8-22D3-4ADA-BA2C-E18D9FEAFEB1 - 21a47939d4e85655"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -253,8 +253,8 @@
                   urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/main/doctors/DoctorsPresenter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
                   offsetFromSymbolStart = "1040">
                </Location>
             </Locations>
@@ -270,13 +270,13 @@
             filePath = "iosApp/views/main/doctors/DoctorsPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "getDoctorList(_:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "51AA5FB4-9E03-4BE9-8635-1C7C4C6A93C8 - ac7bd869f30a327d"
+                  uuid = "51AA5FB4-9E03-4BE9-8635-1C7C4C6A93C8 - ac7bd869f30a346c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -286,12 +286,12 @@
                   urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/main/doctors/DoctorsPresenter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "109"
-                  endingLineNumber = "109"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124"
                   offsetFromSymbolStart = "126">
                </Location>
                <Location
-                  uuid = "51AA5FB4-9E03-4BE9-8635-1C7C4C6A93C8 - ac7bd869f30a327d"
+                  uuid = "51AA5FB4-9E03-4BE9-8635-1C7C4C6A93C8 - ac7bd869f30a346c"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -301,11 +301,27 @@
                   urlString = "file:///Users/mihailhari/Desktop/project/NewMedhelp/iosApp/iosApp/views/main/doctors/DoctorsPresenter.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "109"
-                  endingLineNumber = "109"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124"
                   offsetFromSymbolStart = "1042">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D8DFEFB6-B7FC-425F-8AD8-9210FE88F9E3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iosApp/views/main/profile/ProfilePresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "getVisits1()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

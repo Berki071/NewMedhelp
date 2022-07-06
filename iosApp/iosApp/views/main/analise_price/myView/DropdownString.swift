@@ -1,24 +1,23 @@
 //
-//  Dropdown.swift
+//  DropdownString.swift
 //  iosApp
 //
-//  Created by Михаил Хари on 22.06.2022.
+//  Created by Михаил Хари on 24.06.2022.
 //  Copyright © 2022 orgName. All rights reserved.
 //
 
 import SwiftUI
-import shared
 
-struct Dropdown: View {
-    var options: [CategoryResponse]
-    var onOptionSelected: ((_ option: CategoryResponse) -> Void)?
+struct DropdownString: View {
+    var options: [String]
+    var onOptionSelected: ((_ option: String) -> Void)?
 
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(self.options, id: \.self) { option in
-                    DropdownRow(option: option, onOptionSelected: self.onOptionSelected)
+                    DropdownRowString(option: option, onOptionSelected: self.onOptionSelected)
                 }
             }
         }
@@ -33,15 +32,15 @@ struct Dropdown: View {
     }
 }
 
-struct Dropdown_Previews: PreviewProvider {
+struct DropdownString_Previews: PreviewProvider {
     static var previews: some View {
-        let cat1 = CategoryResponse(title: "cat1")
-        let cat2 = CategoryResponse(title: "cat2")
-        let cat3 = CategoryResponse(title: "cat3")
-        let cat4 = CategoryResponse(title: "cat4")
-        let cat5 = CategoryResponse(title: "cat5")
+        let cat1 = "cat1"
+        let cat2 = "cat2"
+        let cat3 = "cat3"
+        let cat4 = "cat4"
+        let cat5 = "cat5"
         let arr = [cat1,cat2,cat3,cat4,cat5]
         
-        Dropdown(options : arr)
+        DropdownString(options: arr)
     }
 }

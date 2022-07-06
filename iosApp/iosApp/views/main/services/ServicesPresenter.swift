@@ -11,12 +11,19 @@ import shared
 
 class ServicesPresenter : ObservableObject{
     @Published var showDialogLoading: Bool = false
+    @Published var showDialogErrorScreen: Bool = false
     @Published var isShowAlertRecomend: StandartAlertData? = nil
     @Published var categoryList :[CategoryResponse] = []
     var serviceList : [ServiceResponseIos] = []
     @Published var serviceListForRecy : [ServiceResponseIos] = []
     
     var selectedOption: CategoryResponse?
+    var textSearch: String = "" {
+         willSet(newValue) {
+             //print(">>> " + textSearch)
+             self.filterList()
+         }
+    }
     
     
     let sdk: NetworkManager
@@ -62,7 +69,7 @@ class ServicesPresenter : ObservableObject{
                 }
                 
                 self.showLoading(false)
-                self.showErrorScreen()
+                self.showErrorScreen(true)
             }
         })
     }
@@ -92,34 +99,45 @@ class ServicesPresenter : ObservableObject{
                     self.serviceListForRecy = tmpList
                 }
                 self.showLoading(false)
+                
+               
+                
             } else {
                 if let t=error{
                     LoggingTree.e("ServicesPresenter/getPrice", t)
                 }
                 
                 self.showLoading(false)
-                self.showErrorScreen()
+                self.showErrorScreen(true)
             }
         })
     }
     
     
     
-    func selctSpinnerItem(_ selectedOption: CategoryResponse){
-        self.selectedOption = selectedOption
+    func filterList(){
         
-        if(selectedOption.id == -1){
-            serviceListForRecy = serviceList
-            return
-        }
-
-        var tmpList :[ServiceResponseIos] = []
-
-        serviceList.forEach{i in
-            if(i.idSpec != nil && i.idSpec == selectedOption.id) {
-                tmpList.append(i)
-                return
+        var tmpList : [ServiceResponseIos] = []
+        
+        if(self.selectedOption == nil || self.selectedOption!.id == -1){
+            tmpList = serviceList
+        }else{
+            serviceList.forEach{i in
+                if(i.idSpec != nil && i.idSpec == self.selectedOption!.id) {
+                    tmpList.append(i)
+                    return
+                }
             }
+        }
+        
+        if(!textSearch.isEmpty && tmpList.count>0){
+            var tmpList2 :[ServiceResponseIos] = []
+            tmpList.forEach{ i in
+                if(i.title!.lowercased().contains(textSearch.lowercased())){
+                    tmpList2.append(i)
+                }
+            }
+            tmpList = tmpList2
         }
 
         serviceListForRecy = tmpList
@@ -134,11 +152,14 @@ class ServicesPresenter : ObservableObject{
         }
     }
     
-    func showEmptyScreen(){
-        
+    
+    func showErrorScreen(_ isShow : Bool){
+        if isShow {
+            showDialogErrorScreen = true
+            serviceListForRecy = []
+        }else{
+            showDialogErrorScreen = false
+        }
     }
     
-    func showErrorScreen(){
-        //todo erroe screen
-    }
 }

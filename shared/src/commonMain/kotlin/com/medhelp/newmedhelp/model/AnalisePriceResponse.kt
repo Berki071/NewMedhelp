@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-class AnalisePriceResponse {
+open class AnalisePriceResponse {
     @SerialName("gryppa")
     var group: String? = null
 
@@ -23,4 +23,12 @@ class AnalisePriceResponse {
         price = item.price
         time = item.time
     }
+
+    constructor(title: String, price: Int, time: Int) {   //for ios
+        this.title = title
+        this.price = price
+        this.time = time
+    }
+
+
 }
