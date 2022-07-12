@@ -3,6 +3,7 @@ package com.medhelp.newmedhelp.model
 import android.os.Parcel
 import android.os.Parcelable
 import com.medhelp.medhelp.utils.TimesUtils
+import kotlinx.android.parcel.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -83,25 +84,25 @@ class VisitResponseAndroid() : VisitResponse(),Comparable<VisitResponseAndroid>,
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(idRecord)
-        parcel.writeInt(idServices)
+        parcel.writeInt(idRecord ?: 0)
+        parcel.writeInt(idServices ?: 0)
         parcel.writeString(nameServices)
-        parcel.writeInt(id_specialty)
+        parcel.writeInt(id_specialty ?: 0)
         parcel.writeString(dateOfReceipt)
         parcel.writeString(timeOfReceipt)
         parcel.writeString(status)
         parcel.writeString(call)
-        parcel.writeInt(idSotr)
+        parcel.writeInt(idSotr ?: 0)
         parcel.writeString(photoSotr)
         parcel.writeString(nameSotr)
         parcel.writeString(works)
-        parcel.writeInt(idUser)
-        parcel.writeInt(idBranch)
+        parcel.writeInt(idUser ?: 0)
+        parcel.writeInt(idBranch ?: 0)
         parcel.writeString(nameBranch)
         parcel.writeString(cabinet)
         parcel.writeString(comment)
-        parcel.writeInt(durationService)
-        parcel.writeInt(price)
+        parcel.writeInt(durationService ?: 0)
+        parcel.writeInt(price ?: 0)
         parcel.writeString(dop)
         parcel.writeLong(timeMils)
         parcel.writeString(userName)

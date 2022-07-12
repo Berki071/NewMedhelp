@@ -8,6 +8,7 @@
 
 import Foundation
 import shared
+import SwiftUI
 
 class MainPresenter : ObservableObject{
     @Published var nextPage : String = "" //переход на след страницу
@@ -17,7 +18,8 @@ class MainPresenter : ObservableObject{
     @Published var showMenu = false
     @Published var selectMenuPage = 0
     @Published var selectMenuAlert = 0  //1 алер выхода
-    @Published var curentUserInfo : UserResponse
+ 
+    var listBonuses : [BonusesItem]? = nil
     
     let sdk: NetworkManager
     var sharePreferenses : SharedPreferenses
@@ -28,11 +30,13 @@ class MainPresenter : ObservableObject{
         sharePreferenses = SharedPreferenses()
         netConnection.startMonitoring()
         
-        curentUserInfo = sharePreferenses.currentUserInfo!
+        
     
         if(sharePreferenses.centerInfo != nil && sharePreferenses.centerInfo!.title != nil){
             titleTop=sharePreferenses.centerInfo!.title!
         }
+        
+        getAllBonuses()
     }
     
     func logOut(){
@@ -45,4 +49,27 @@ class MainPresenter : ObservableObject{
         nextPage = "Login"
     }
     
+    
+    func getAllBonuses(){
+        let idUser=String(Int.init(truncating: self.sharePreferenses.currentUserInfo?.idUser ?? -1))
+        let h_dbName = self.sharePreferenses.centerInfo?.db_name ?? "-1"
+        
+        let tmp = Int(self.sharePreferenses.centerInfo?.idCenter ?? -1)
+        let idCenter = String(tmp)
+         
+        sdk.getAllBonuses(h_dbName: h_dbName, h_idKl: idUser, idCenter:  idCenter,
+                          completionHandler: { response, error in
+            if let res : BonusesResponse = response {
+                if(res.response!.count > 1 || res.response![0].date != nil){
+                    self.listBonuses = res.response
+                }
+            } else {
+                if let t=error{
+                    LoggingTree.e("MainPresenter/getAllBonuses", t)
+                }
+            }
+        })
+        
+    }
+
 }

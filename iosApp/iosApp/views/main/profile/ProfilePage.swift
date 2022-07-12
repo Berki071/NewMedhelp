@@ -13,16 +13,19 @@ struct ProfilePage: View {
     @StateObject var mainPresenter : ProfilePresenter  = ProfilePresenter()
     var clickButterMenu: (() -> Void)?
     
+    
     init(isShowAlertRecomend: StandartAlertData?, clickButterMenu: (() -> Void)?){
         self.isShowAlertRecomend = isShowAlertRecomend
         self.clickButterMenu = clickButterMenu
+        
+        //mainPresenter.checkCurrentUser()
     }
     
     var body: some View {
         ZStack{
-            //Color("color_primary")
-            
-            
+
+            let  _ = self.mainPresenter.checkCurrentUser()
+ 
             VStack(spacing: 0){
                 MyToolBar(title1: self.mainPresenter.centerName, isShowSearchBtn: false, clickHumburger: {() -> Void in
                     self.clickButterMenu?()
@@ -159,7 +162,7 @@ struct ProfilePage: View {
 }
 
 struct ProfilePage_Previews: PreviewProvider {
-
+    @State static private var na = 0
     static var previews: some View {
         
         ProfilePage(isShowAlertRecomend : nil, clickButterMenu: nil)

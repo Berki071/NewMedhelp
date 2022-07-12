@@ -19,7 +19,7 @@ struct ServicesItem: View {
                     Spacer()
                 }
                 
-                Text(String(describing: NSNumber.init(value: item.value)) + "р")
+                Text(String(describing: item.value!) + "р")
                     .foregroundColor(Color("textItemBlue"))
             }
             .padding(.all, 12.0)

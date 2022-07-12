@@ -31,7 +31,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.BonusesItem;
+import com.medhelp.medhelp.data.model._heritable.BonusesItemAndroid;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -303,10 +303,10 @@ public final class MainUtils {
         }
     }
 
-    public static String getSumBonuses(List<BonusesItem> list) {
+    public static String getSumBonuses(List<BonusesItemAndroid> list) {
         int sum = 0;
 
-        for (BonusesItem item : list) {
+        for (BonusesItemAndroid item : list) {
             if (item.getStatus().equals("popoln"))
                 sum += item.getValue();
             else if (item.getStatus().equals("snyatie"))

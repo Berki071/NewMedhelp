@@ -4,20 +4,17 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.BonusesItem;
-
+import com.medhelp.medhelp.data.model._heritable.BonusesItemAndroid;
 import java.util.List;
 
 public class AdapterBonuses extends RecyclerView.Adapter<HolderBonuses> {
     Context context;
-    List<BonusesItem> list;
+    List<BonusesItemAndroid> list;
 
-    public AdapterBonuses(Context context, List<BonusesItem> list) {
+    public AdapterBonuses(Context context, List<BonusesItemAndroid> list) {
         this.context = context;
         this.list = list;
     }

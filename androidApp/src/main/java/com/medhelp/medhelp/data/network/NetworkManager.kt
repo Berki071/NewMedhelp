@@ -580,14 +580,14 @@ class NetworkManager(val prefManager: PreferencesManager) {
             .getObjectObservable(FCMResponse::class.java)
     }
 
-    fun getAllBonuses(): Observable<BonusesResponse> {
-        return Rx2AndroidNetworking.get(CenterEndPoint.GET_ALL_BONUSES)
-            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
-            .addPathParameter(ID_USER, prefManager.currentUserInfo!!.idUser.toString())
-            .addPathParameter(ID_CENTER, prefManager.currentUserInfo!!.idCenter.toString())
-            .build()
-            .getObjectObservable(BonusesResponse::class.java)
-    }
+//    fun getAllBonuses(): Observable<BonusesResponse> {
+//        return Rx2AndroidNetworking.get(CenterEndPoint.GET_ALL_BONUSES)
+//            .addHeaders(DB_NAME, prefManager.centerInfo!!.db_name)
+//            .addPathParameter(ID_USER, prefManager.currentUserInfo!!.idUser.toString())
+//            .addPathParameter(ID_CENTER, prefManager.currentUserInfo!!.idCenter.toString())
+//            .build()
+//            .getObjectObservable(BonusesResponse::class.java)
+//    }
 
     fun getResultZakl(): Observable<ResultZaklResponse> {
         return Rx2AndroidNetworking.get(CenterEndPoint.GET_RESULT_ZAKL)

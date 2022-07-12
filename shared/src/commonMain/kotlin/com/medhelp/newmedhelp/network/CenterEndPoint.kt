@@ -37,7 +37,7 @@ interface CenterEndPoint {
                     "}/{" + NetworkManager.ID_SERVICE + "}/{" + NetworkManager.AMOUNT + "}/{" + NetworkManager.QUANTITY + "}" //+
         const val I_AM_HERE = BASE_URL + "iamhere/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_ZAPISI + "}/{" + NetworkManager.ID_BRANCH + "}" //+
        // const val SEND_FCM_ID = BASE_URL + "UpdateFCMuser/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_BRANCH + "}/{" + NetworkManager.ID_FCM + "}"
-        const val GET_ALL_BONUSES = BASE_URL + "BonusCardHistory/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_CENTER + "}"
+        //const val GET_ALL_BONUSES = BASE_URL + "BonusCardHistory/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_CENTER + "}"
         const val SEND_DATA_FOR_TAX_CERTIFICATE = BASE_URL + "SpravkaNalog/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_BRANCH + "}/{" + NetworkManager.FROM + "}/{" + NetworkManager.TO + "}/{" + NetworkManager.INN +
                     "}/{" + NetworkManager.USERNAME + "}/{" + NetworkManager.USERNAME2 + "}" //..fio_pac/:fio_nalog;
         const val GET_RESULT_ZAKL = BASE_URL + "getResultZakl/{" + NetworkManager.ID_USER + "}/{" + NetworkManager.ID_BRANCH + "}"

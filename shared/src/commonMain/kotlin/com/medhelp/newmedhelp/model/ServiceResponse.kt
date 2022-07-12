@@ -13,7 +13,7 @@ open class ServiceResponse {
     @SerialName("admission")
     var admission = 0
     @SerialName("value")
-    var value = 0
+    var value: String? = null
     @SerialName("title")
     var title: String? = null
     @SerialName("komment")
@@ -26,6 +26,8 @@ open class ServiceResponse {
     var max_zapis = 0
     @SerialName("poryadok")
     var poryadok = 0
+    @SerialName("name_spec")
+    var name_spec: String? = null
 
     constructor(item : ServiceResponse) {
         id = item.id
@@ -38,11 +40,12 @@ open class ServiceResponse {
         favorites = item.favorites
         max_zapis = item.max_zapis
         poryadok = item.poryadok
+        name_spec=item.name_spec
     }
 
     constructor(title: String, value: Int) {
         this.title = title
-        this.value = value
+        this.value = value.toString()
     }
 
     constructor(){}

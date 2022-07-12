@@ -19,26 +19,30 @@ struct SplashUIView: View {
     
     
     var body: some View {
-        
+
         if(self.splashPresenter.nextPage != ""){
             if(self.splashPresenter.nextPage == "Login"){
                 //self.splashPresenter.netConnection.stopMonitoring()
                 LoginUiView()
             }else{
-                
+
                 MainUIView()
             }
         }else{
-            
-            VStack {
-                Image("splash")
+
+            ZStack {
+                Image("splash_bg")
                     .resizable()
                     .ignoresSafeArea()
+                
+                Image("splash_front")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
             }
             .alert(item : $splashPresenter.selectedShow){ show in
                 Alert(title: Text(show.titel), message: Text(show.text), dismissButton: .cancel())
             }
-        }
+       }
     }
     
 }

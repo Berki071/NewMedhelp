@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.medhelp.medhelp.R;
-import com.medhelp.medhelp.data.model.BonusesItem;
+import com.medhelp.medhelp.data.model._heritable.BonusesItemAndroid;
 import com.medhelp.medhelp.ui._main_page.bonuses_alert.recy.AdapterBonuses;
 import com.medhelp.medhelp.utils.main.MainUtils;
 
@@ -28,9 +28,9 @@ import java.util.Objects;
 
 
 public class BonusesAlert extends DialogFragment {
-    List<BonusesItem> list;
+    List<BonusesItemAndroid> list;
 
-    public void setList(List<BonusesItem> list) {
+    public void setList(List<BonusesItemAndroid> list) {
         this.list = list;
     }
 

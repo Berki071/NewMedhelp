@@ -44,7 +44,7 @@ class VisitResponseIos :  VisitResponse ,Identifiable{
         self.durationSec = item.durationSec
     }
     
-    init(servName : String, nameSotr : String, date : String, time : String, branch : String, cost : Int32){
+    init(servName : String, nameSotr : String, date : String, time : String, branch : String, cost : KotlinInt?){
         super.init()
         
         self.nameServices = servName
@@ -60,12 +60,16 @@ class VisitResponseIos :  VisitResponse ,Identifiable{
     }
     
     func getPriceString() -> String{
-        return String(price)
+        if price == nil {
+            return "0"
+        }
+            
+        return String(Int(truncating: price!))
     }
     
-    func isCurrentListVisit() -> Bool{
+    func getTimeAndDateInDateFormat() -> Date? {
         if( self.timeOfReceipt==nil || self.dateOfReceipt == nil){
-            return false
+            return nil
         }
         
         let dateStrCur = self.timeOfReceipt! + " " +  self.dateOfReceipt!
@@ -73,8 +77,17 @@ class VisitResponseIos :  VisitResponse ,Identifiable{
         dateFormatter.dateFormat = MDate.DATE_FORMAT_HHmm_ddMMyyyy
         let date = dateFormatter.date(from: dateStrCur)!
         
+        return date
+    }
+    
+    func isCurrentListVisit() -> Bool{
+        let date = getTimeAndDateInDateFormat()
+        if(date == nil){
+            return false
+        }
+        
         let curDate = Date()
         
-        return date >= curDate
+        return date! >= curDate
     }
 }

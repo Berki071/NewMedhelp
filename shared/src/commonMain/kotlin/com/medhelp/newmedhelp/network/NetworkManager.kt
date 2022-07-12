@@ -308,5 +308,13 @@ class NetworkManager {
             }
         }
     }
+
+    @Throws(Exception::class) suspend fun getAllBonuses( h_dbName : String, h_idKl : String, idCenter : String) : BonusesResponse {
+        return httpClient.get(Url(CenterEndPoint.BASE_URL + "BonusCardHistory/" + h_idKl + "/" + idCenter)) {
+            headers {
+                append(DB_NAME, h_dbName)
+            }
+        }
+    }
 }
 

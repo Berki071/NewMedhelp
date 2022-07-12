@@ -12,9 +12,11 @@ import shared
 struct DoctorsItem: View {
     var item : AllDoctorsResponseIos
     @ObservedObject var mainPresenter : DoctorsItemPresenter
+    let someFuncOk: () -> Void
     
-    init(item : AllDoctorsResponseIos){
+    init(item : AllDoctorsResponseIos, someFuncOk: @escaping () -> Void){
         self.item = item
+        self.someFuncOk = someFuncOk
         mainPresenter = DoctorsItemPresenter(item: item)
     }
     
@@ -49,6 +51,12 @@ struct DoctorsItem: View {
             RoundedRectangle(cornerRadius: 0)
                 .stroke(Color("black_bg25"), lineWidth: 1)
         )
+        .contentShape(Rectangle())
+        .onTapGesture {
+            let alertLogind = DoctorInfoAlert(infoDoctor: item, ,someFuncOk: {() -> Void in self.isShowAlertRecomend = nil})
+            
+            self.isShowAlertRecomend = alertLogind
+        }
     }
 }
 

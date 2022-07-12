@@ -25,20 +25,18 @@ class ProfilePresenter: ObservableObject {
     @Published var actualReceptions : [VisitResponseIos] = []
     @Published var latestReceptions : [VisitResponseIos] = []
     
-  //  var clickButterMenu: MainPresenter?
-    
     let sdk: NetworkManager
     var sharePreferenses : SharedPreferenses
     let netConnection = NetMonitor.shared
+    
+    var currentUser : UserResponse
 
     init(){
         sdk=NetworkManager()
         sharePreferenses = SharedPreferenses()
         netConnection.startMonitoring()
-    
-//        let tmp1 = actualReceptions.count
-//        let tmp2 = latestReceptions.count
         
+        self.currentUser = sharePreferenses.currentUserInfo ?? UserResponse()
         self.updateHeader()
         self.getVisits1()
     }
@@ -140,6 +138,8 @@ class ProfilePresenter: ObservableObject {
                 
                 
             } else {
+                print(">>> \(error)")
+                
                 if let t=error{
                     LoggingTree.e("ProfilePresenter/getVisits2", t)
                 }
@@ -160,6 +160,18 @@ class ProfilePresenter: ObservableObject {
 
             }else{
                 latestReceptionsTmp.append(i)
+            }
+        }
+        
+        if(actualReceptionsTmp.count > 1){
+            actualReceptionsTmp.sort{
+                $0.getTimeAndDateInDateFormat()! < $1.getTimeAndDateInDateFormat()!
+            }
+        }
+        
+        if(latestReceptionsTmp.count > 1){
+            latestReceptionsTmp.sort{
+                $0.getTimeAndDateInDateFormat()! > $1.getTimeAndDateInDateFormat()!
             }
         }
         
@@ -197,8 +209,12 @@ class ProfilePresenter: ObservableObject {
         }
     }
     
-    
-    func showMenu(){
-        //clickButterMenu()
+    func checkCurrentUser(){
+        let tt = sharePreferenses.currentUserInfo ?? UserResponse()
+        
+        if(currentUser.idUser != tt.idUser && !(self.sharePreferenses.currentPassword == nil || self.sharePreferenses.currentPassword!.isEmpty)){
+            currentUser = tt
+            self.getVisits1()
+        }
     }
 }

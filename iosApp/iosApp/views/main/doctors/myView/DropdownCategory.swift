@@ -19,10 +19,11 @@ struct DropdownCategory: View {
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(self.options, id: \.self) { option in
                     DropdownRowCategory(option: option, onOptionSelected: self.onOptionSelected)
+                        
                 }
             }
         }
-        .frame(height: CGFloat(28 * options.count))
+        .frame(height: getHeightScroll())
         .padding(.vertical, 5)
         .background(Color("lightGray"))
         .cornerRadius(0)
@@ -30,6 +31,17 @@ struct DropdownCategory: View {
             RoundedRectangle(cornerRadius: 0)
                 .stroke(Color.gray, lineWidth: 1)
         )
+    }
+    
+    func getHeightScroll() -> CGFloat {
+        let maxH = UIScreen.main.bounds.size.height - 140
+        let maxByCount =  CGFloat(28 * options.count)
+        
+        if(maxByCount > maxH){
+            return maxH
+        }else{
+            return maxByCount
+        }
     }
 }
 

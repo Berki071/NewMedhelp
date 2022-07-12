@@ -20,10 +20,12 @@
 		561AE9EC2852FDC10016F92F /* DoctorsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561AE9EB2852FDC10016F92F /* DoctorsPage.swift */; };
 		561AE9EE2852FDD60016F92F /* ServicesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561AE9ED2852FDD60016F92F /* ServicesPage.swift */; };
 		562784ED2840C43000F48910 /* SharedPreferenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562784EC2840C43000F48910 /* SharedPreferenses.swift */; };
+		5636043B287C206B004F34AE /* DoctorInfoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5636043A287C206B004F34AE /* DoctorInfoAlert.swift */; };
 		56399EEE286AACD30077819E /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56399EED286AACD30077819E /* DownloadManager.swift */; };
 		56399EF0286C406B0077819E /* DoctorsItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56399EEF286C406B0077819E /* DoctorsItemPresenter.swift */; };
 		56399EF2286C48780077819E /* ProfileItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56399EF1286C48780077819E /* ProfileItemPresenter.swift */; };
 		56399EF4286D97D60077819E /* MyToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56399EF3286D97D60077819E /* MyToolBar.swift */; };
+		56399EF728768BAD0077819E /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 56399EF628768BAD0077819E /* SwiftUIPager */; };
 		56511C6A28586D5C009BE7CD /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56511C6928586D5C009BE7CD /* ProfilePresenter.swift */; };
 		5663CF8B283E05F300EBD24B /* LoginUiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663CF8A283E05F300EBD24B /* LoginUiView.swift */; };
 		5663CFC5283F303800EBD24B /* SplashUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663CFC4283F303800EBD24B /* SplashUIView.swift */; };
@@ -88,6 +90,7 @@
 		561AE9EB2852FDC10016F92F /* DoctorsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoctorsPage.swift; path = iosApp/views/main/profile/DoctorsPage.swift; sourceTree = SOURCE_ROOT; };
 		561AE9ED2852FDD60016F92F /* ServicesPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesPage.swift; sourceTree = "<group>"; };
 		562784EC2840C43000F48910 /* SharedPreferenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPreferenses.swift; sourceTree = "<group>"; };
+		5636043A287C206B004F34AE /* DoctorInfoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorInfoAlert.swift; sourceTree = "<group>"; };
 		56399EED286AACD30077819E /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		56399EEF286C406B0077819E /* DoctorsItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsItemPresenter.swift; sourceTree = "<group>"; };
 		56399EF1286C48780077819E /* ProfileItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItemPresenter.swift; sourceTree = "<group>"; };
@@ -135,6 +138,7 @@
 				56B05AD12844666100CA0BB0 /* FirebaseCrashlytics in Frameworks */,
 				56B05AD32844666100CA0BB0 /* FirebaseMessaging in Frameworks */,
 				568546A12849CB9200E5DDFE /* InputMask in Frameworks */,
+				56399EF728768BAD0077819E /* SwiftUIPager in Frameworks */,
 				56B05ACF2844666100CA0BB0 /* FirebaseAppCheck in Frameworks */,
 				56B05ACD2844666100CA0BB0 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				561861F5284A128300C3CA28 /* AnyFormatKitSwiftUI in Frameworks */,
@@ -155,8 +159,8 @@
 		5600492828534C93003937A8 /* alerts_and_views */ = {
 			isa = PBXGroup;
 			children = (
+				56360439287C203C004F34AE /* alerts */,
 				560C7F4228508B2C002D6324 /* MenuView.swift */,
-				5600492928534CD2003937A8 /* StandartAlert.swift */,
 				56399EF3286D97D60077819E /* MyToolBar.swift */,
 			);
 			path = alerts_and_views;
@@ -214,6 +218,15 @@
 				561861F6284DB66100C3CA28 /* Constants.swift */,
 			);
 			path = data;
+			sourceTree = "<group>";
+		};
+		56360439287C203C004F34AE /* alerts */ = {
+			isa = PBXGroup;
+			children = (
+				5600492928534CD2003937A8 /* StandartAlert.swift */,
+				5636043A287C206B004F34AE /* DoctorInfoAlert.swift */,
+			);
+			path = alerts;
 			sourceTree = "<group>";
 		};
 		5663CFC8283F314F00EBD24B /* splash */ = {
@@ -401,6 +414,7 @@
 				568546A02849CB9200E5DDFE /* InputMask */,
 				568546A52849F0B400E5DDFE /* iPhoneNumberField */,
 				561861F4284A128300C3CA28 /* AnyFormatKitSwiftUI */,
+				56399EF628768BAD0077819E /* SwiftUIPager */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* iosApp.app */;
@@ -435,6 +449,7 @@
 				5685469F2849CB9100E5DDFE /* XCRemoteSwiftPackageReference "input-mask-ios" */,
 				568546A42849F0B400E5DDFE /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
 				561861F3284A128300C3CA28 /* XCRemoteSwiftPackageReference "AnyFormatKitSwiftUI" */,
+				56399EF528768BAA0077819E /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -516,6 +531,7 @@
 				5685469B284878AF00E5DDFE /* NetMonitor.swift in Sources */,
 				5675041E286557540065C360 /* ServicesPresenter.swift in Sources */,
 				5675042528659AA90065C360 /* AnalisePresenter.swift in Sources */,
+				5636043B287C206B004F34AE /* DoctorInfoAlert.swift in Sources */,
 				5685469E28489C5200E5DDFE /* LoginPresenter.swift in Sources */,
 				56FD66452862EE600090044C /* DoctorsItem.swift in Sources */,
 				561AE9EC2852FDC10016F92F /* DoctorsPage.swift in Sources */,
@@ -748,6 +764,14 @@
 				minimumVersion = 0.5.3;
 			};
 		};
+		56399EF528768BAA0077819E /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		5685469F2849CB9100E5DDFE /* XCRemoteSwiftPackageReference "input-mask-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RedMadRobot/input-mask-ios";
@@ -779,6 +803,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 561861F3284A128300C3CA28 /* XCRemoteSwiftPackageReference "AnyFormatKitSwiftUI" */;
 			productName = AnyFormatKitSwiftUI;
+		};
+		56399EF628768BAD0077819E /* SwiftUIPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56399EF528768BAA0077819E /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			productName = SwiftUIPager;
 		};
 		568546A02849CB9200E5DDFE /* InputMask */ = {
 			isa = XCSwiftPackageProductDependency;

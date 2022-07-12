@@ -6,13 +6,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 open class VisitResponse()  {
     @SerialName("id_zapisi")
-    var idRecord = 0
+    var idRecord : Int? = 0
     @SerialName("idysl")
-    var idServices = 0
+    var idServices : Int? = 0
     @SerialName("naim_ysl")
     var nameServices: String? = null
     @SerialName("id_specialty")
-    var id_specialty = 0
+    var id_specialty : Int? = 0
     @SerialName("adm_date")
     var dateOfReceipt: String? = null
     @SerialName("adm_time")
@@ -22,7 +22,7 @@ open class VisitResponse()  {
     @SerialName("call")
     var call: String? = null
     @SerialName("idsotr")
-    var idSotr = 0
+    var idSotr : Int? = 0
     @SerialName("image_url")
     var photoSotr: String? = null
     @SerialName("full_name")
@@ -30,9 +30,9 @@ open class VisitResponse()  {
     @SerialName("rabotaet")
     var works: String? = null
     @SerialName("id_kl")
-    var idUser = 0
+    var idUser : Int? = 0
     @SerialName("id_filial")
-    var idBranch = 0
+    var idBranch : Int? = 0
     @SerialName("naim_filial")
     var nameBranch: String? = null
     @SerialName("kabinet")
@@ -40,9 +40,9 @@ open class VisitResponse()  {
     @SerialName("komment")
     var comment: String? = null
     @SerialName("dlit")
-    var durationService = 0
+    var durationService : Int? = 0
     @SerialName("price")
-    var price = 0
+    var price : Int? = 0
     @SerialName("dop")
     var dop: String? = null
 

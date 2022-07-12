@@ -67,12 +67,13 @@ struct DoctorsPage: View {
                 }
             }
             
-            if(self.mainPresenter.showDialogLoading == true){
-                LoadingView()
-            }
-            
+           
             if(self.mainPresenter.isShowAlertRecomend != nil){
                 StandartAlert(dataOb: mainPresenter.isShowAlertRecomend!)
+            }
+            
+            if(self.mainPresenter.showDialogLoading == true){
+                LoadingView()
             }
             
         }

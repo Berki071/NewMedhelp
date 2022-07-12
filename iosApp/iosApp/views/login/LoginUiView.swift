@@ -22,7 +22,7 @@ struct LoginUiView: View {
             NavigationView {
                 ZStack {
                     VStack {
-                        Page(loginP: loginPresenter)
+                        PageMy(loginP: loginPresenter)
                     }
                     .padding()
                     
@@ -167,7 +167,7 @@ struct SentToSupportAlert : View{
 }
 
 
-struct Page : View {
+struct PageMy : View {
     @ObservedObject var loginP: LoginPresenter
     
     var body: some View{

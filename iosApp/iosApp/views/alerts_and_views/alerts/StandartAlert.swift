@@ -45,32 +45,34 @@ struct StandartAlert: View {
                        }
                        .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                        
-                       HStack{
-                           if(dataOb.isShowCansel){
-                               Button("Закрыть") {
-                                   dataOb.someFuncCancel()
-                               }
-                               .foregroundColor(.white)
-                               .padding()
-                               .frame(maxWidth: .infinity)
-                               .background(Color("color_primary"))
-                               .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                   HStack{
+                       if(dataOb.isShowCansel){
+                           Button(action: {
+                               dataOb.someFuncCancel()
+                           }) {
+                               Text("Закрыть")
+                                 .frame(minWidth: 100, maxWidth: .infinity, minHeight: 44, maxHeight: 44, alignment: .center)
+                                 .foregroundColor(Color.white)
+                                 .background(Color("color_primary"))
+                                 .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                            }
-                           Button("OK") {
-                               dataOb.someFuncOk()
-                           }
-                           .foregroundColor(.white)
-                           .padding()
-                           .frame(maxWidth: .infinity)
-                           .background(Color("color_primary"))
-                           .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                           
                        }
-                       .padding(.horizontal, 16.0)
+                       Button(action: {
+                           dataOb.someFuncOk()
+                       }) {
+                           Text("OK")
+                             .frame(minWidth: 100, maxWidth: .infinity, minHeight: 44, maxHeight: 44, alignment: .center)
+                             .foregroundColor(Color.white)
+                             .background(Color("color_primary"))
+                             .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                       }
+                       //.padding()
+                   }
+                   .padding(.horizontal, 16.0)
                }
            }
            .padding(.horizontal, 16.0)
-           .frame(height: 200.0)
+           //.frame(height: 200.0)
            
        }
        .ignoresSafeArea()

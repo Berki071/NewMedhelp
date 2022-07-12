@@ -8,25 +8,39 @@
 
 import SwiftUI
 import shared
+import SwiftUIPager
 
 struct MenuView: View {
     var selectitem : Binding<Int>
     var selectMenuAlert : Binding<Int>
     var showMenu : Binding<Bool>
-    var curentUserInfo : Binding<UserResponse>
-    
-    @State var visible = false
-    
-    var name : String = ""
+    var listBonuses : [BonusesItem]? = nil
+    var selectedNewUser : (() -> Void)?
+
     var bonuses : String? = nil
+    var curentUserInfo : UserResponse
+    var allUsers : [UserResponse]
     
-    init(selectitem : Binding<Int>, selectMenuAlert: Binding<Int>, showMenu : Binding<Bool>, curentUserInfo : Binding<UserResponse>){
+    var sharePreferenses : SharedPreferenses
+    
+    @ObservedObject var page: Page = .first()
+    
+    init(selectitem : Binding<Int>, selectMenuAlert: Binding<Int>, showMenu : Binding<Bool>,listBonuses: [BonusesItem]?,
+         selectedNewUser: (() -> Void)?){
         self.selectitem = selectitem
         self.selectMenuAlert = selectMenuAlert
         self.showMenu = showMenu
-        self.curentUserInfo = curentUserInfo
+        self.listBonuses = listBonuses
+        self.selectedNewUser = selectedNewUser
         
-        name = curentUserInfo.wrappedValue.name! + " " + (curentUserInfo.wrappedValue.patronymic ?? " ")
+        sharePreferenses = SharedPreferenses()
+        
+        curentUserInfo = sharePreferenses.currentUserInfo ?? UserResponse()
+        allUsers = sharePreferenses.usersLogin ?? []
+    
+        self.page.update(.move(increment: getSelectItmIndex(item: curentUserInfo)))
+        
+        bonuses = self.getSumBonuses(listBonuses: listBonuses)
     }
     
     var body: some View {
@@ -39,33 +53,52 @@ struct MenuView: View {
                 VStack(alignment: .leading) {
                     Spacer()
                         .frame(height: 40.0)
-                    HStack{
-                        Spacer()
-                        VStack{
-                            VStack(alignment: .center){
-                                Text(stringToInitials(str: name))
-                                    .font(.title)
-                                    .foregroundColor(Color.white)
-                                
+                    VStack{
+                        Pager(page: page,
+                              data: allUsers,
+                              id: \.self,
+                              content: { index in
+                            let curName = (index.name ?? " ") + " " + (index.patronymic ?? " ")
+                           // let _ = testSelectedUser(item : index)
+                            
+                            HStack{
+                                VStack{
+                                    VStack(alignment: .center){
+                                        Text(stringToInitials(str: curName))
+                                            .font(.title)
+                                            .foregroundColor(Color.white)
+
+                                    }
+                                    .frame(width: 80.0, height: 80.0)
+                                    .background(getColor(idex: getSelectItmIndex(item: index)))
+                                    .cornerRadius(40)
+
+                                    Text(curName)
+                                        .foregroundColor(Color.white)
+                                }
                             }
-                            .frame(width: 80.0, height: 80.0)
-                            .background(Color("lightGeen"))
-                            .cornerRadius(40)
+                            .frame(width: 300.0, height: 120.0)
+                        })
+                            .itemAspectRatio(0.9)
+                            .itemSpacing(60)
+                            .interactive(scale: 0.7)
+                            .onPageChanged({ pageIndex in
+                                let tt : Int = pageIndex
+                                let _ = testSelectedUser(item : tt)
+                                })
+                            .frame(height: 130.0)
                             
-                            
-                            Text(name)
-                                .foregroundColor(Color.white)
-                            if(bonuses != nil) {
+
+                        if(bonuses != nil) {
                             Text("Бонусная карта:  \(bonuses!) \u{20BD}")
                                 .foregroundColor(Color.white)
-                            }
-                            
-                            Spacer()
-                                .frame(height: 10.0)
                         }
+
                         Spacer()
+                            .frame(height: 10.0)
+
                     }.background(Color("color_primary"))
-            
+                    
                     
                     ZStack(alignment: .leading){
                         if(selectitem.wrappedValue == 0){
@@ -169,11 +202,11 @@ struct MenuView: View {
                     }
                     .frame(height: 50.0)
                     .contentShape(Rectangle())
-                    .onTapGesture { 
+                    .onTapGesture {
                         selectMenuAlert.wrappedValue = 1
                         showMenu.wrappedValue = false
                     }
-                                
+                    
                     Spacer()
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -186,7 +219,7 @@ struct MenuView: View {
                 
                 Spacer()
                     .frame(width: 70.0)
-    
+                
             }
             .animation( Animation.easeInOut(duration: 0.4))
             
@@ -213,6 +246,49 @@ struct MenuView: View {
             return s1
         }
     }
+    
+    func getSumBonuses(listBonuses: [BonusesItem]?) -> String?{
+        if(listBonuses == nil ){
+            return nil
+        }
+        
+        if listBonuses!.count == 0 {
+            return "0"
+        }
+        
+        var sum : Int32 = 0
+        listBonuses!.forEach(){i in
+            if (i.status == "popoln"){
+                sum += i.value;
+            }else if (i.status == "snyatie"){
+                sum -= i.value;
+            }
+        }
+        
+        let tmp : Int = Int(sum)
+        
+        return String(tmp)
+    }
+    
+    func getColor(idex : Int) -> Color{
+        switch(idex%5){
+        case 0 : return Color("1BgC")
+        case 1 : return Color("2BgC")
+        case 2 : return Color("3BgC")
+        case 3 : return Color("4BgC")
+        case 4 : return Color("5BgC")
+        default : return Color("1BgC")
+        }
+    }
+    func getSelectItmIndex(item : UserResponse) -> Int{
+        return allUsers.firstIndex(where: {$0.idUser == item.idUser}) ?? 0
+    }
+    
+
+    func testSelectedUser(item : Int){
+        sharePreferenses.currentUserInfo = allUsers[item]
+        selectedNewUser?()
+    }
 }
 
 struct MenuView_Previews: PreviewProvider {
@@ -223,6 +299,6 @@ struct MenuView_Previews: PreviewProvider {
     //selectMenuAlert нажатие на элемент где реакция показ алерта
     
     static var previews: some View {
-        MenuView(selectitem: $na, selectMenuAlert: $ni, showMenu: $no, curentUserInfo: $trr)
+        MenuView(selectitem: $na, selectMenuAlert: $ni, showMenu: $no, listBonuses: nil, selectedNewUser: nil)
     }
 }

@@ -51,9 +51,9 @@ struct MainUIView: View {
                         
                         
                         if self.mainPresenter.showMenu {
-                            MenuView(selectitem : self.$mainPresenter.selectMenuPage, selectMenuAlert: self.$mainPresenter.selectMenuAlert, showMenu: self.$mainPresenter.showMenu,
-                                     curentUserInfo: self.$mainPresenter.curentUserInfo)
-                            //.frame(width: geometry.size.width/1.4)
+                            MenuView(selectitem : self.$mainPresenter.selectMenuPage, selectMenuAlert: self.$mainPresenter.selectMenuAlert, showMenu: self.$mainPresenter.showMenu, listBonuses: self.mainPresenter.listBonuses, selectedNewUser: {() -> Void in
+                               // self.mainPresenter.updateInfoInCurrentPage()
+                            })
                                 .transition(.move(edge: .leading))
                         }
                         
@@ -78,17 +78,18 @@ struct MainUIView: View {
 
 struct MainView: View {
     @StateObject var mainP : MainPresenter
-    //@Binding var selectMenuPage : Int
-    
-    
+   
     var body: some View {
  
         if(self.mainP.selectMenuPage == 0){
+            //self.mainP.currentShowPage =
             ProfilePage(isShowAlertRecomend : nil, clickButterMenu:{() -> Void in
-                //withAnimation {
                     self.mainP.showMenu = true
-                //}
-            })
+        })
+           // self.mainP.currentShowPage = tt.mainPresenter
+            
+            
+            //self.mainP.currentShowPage = tt
         }else if(self.mainP.selectMenuPage == 1){
             DoctorsPage(clickButterMenu:{() -> Void in
                // withAnimation {

@@ -46,11 +46,15 @@ struct ProfileItem: View {
                                 Spacer()
                             }
                             
-                            HStack {
+                            HStack() {
                                 Text(item.nameServices!)
                                     .font(.callout)
                                     .fontWeight(.bold)
+                        
                                     .multilineTextAlignment(.center)
+                                    .lineLimit(2)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    //.frame(maxWidth: .infinity, horizontal: false)
                             }
                             .frame(maxWidth: .infinity)
                             

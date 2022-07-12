@@ -21,14 +21,16 @@ class DownloadManager {
         
         let nameFile = getNameFile()
         
-        let res1 = checkFile(nameFile)
-        
-        if res1 != nil{
-            DispatchQueue.main.async {
-                self.resultUiImage(res1!)
+        if(nameFile != nil && !nameFile.isEmpty){
+            let res1 = checkFile(nameFile)
+            
+            if res1 != nil{
+                DispatchQueue.main.async {
+                    self.resultUiImage(res1!)
+                }
+            }else{
+                downloadFile(nameFile)
             }
-        }else{
-            downloadFile(nameFile)
         }
     }
     
@@ -40,15 +42,23 @@ class DownloadManager {
     }
     
     func checkFile(_ fileName : String) -> UIImage?{
+        if fileName == nil || fileName.isEmpty {
+            return nil
+        }
+        
         let docsUrl = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
 
         let destinationUrl = docsUrl?.appendingPathComponent(fileName)
         if let destinationUrl = destinationUrl {
             if (FileManager().fileExists(atPath: destinationUrl.path)) {
-                let data = try! Data.init(contentsOf: destinationUrl)
-                let photo = UIImage.init(data: data)
-
-                return photo
+                do {
+                    let data = try! Data.init(contentsOf: destinationUrl)
+                    let photo = UIImage.init(data: data)
+                    
+                    return photo
+                } catch {
+                    return nil
+                }
             } else {
                 return nil
             }
@@ -58,6 +68,10 @@ class DownloadManager {
     }
 
     func downloadFile(_ fileName : String){
+        if(imagePathServerString == nil || imagePathServerString.isEmpty){
+            return
+        }
+        
         isDownloading = true
         
         let docsUrl = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
@@ -65,46 +79,47 @@ class DownloadManager {
         
         if let destinationUrl = destinationUrl {
             
-            let urlRequest = URLRequest(url: URL(string: imagePathServerString)!)
-            
-            let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-                if let error = error {
-                    print("Request error: ", error)
-                    self.isDownloading = false
-                    return
-                }
+            if let urlString = imagePathServerString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: urlString) {
                 
-                guard let response = response as? HTTPURLResponse else { return }
+                let urlRequest = URLRequest(url: url)
                 
-                if response.statusCode == 200 {
-                    guard let data = data else {
+                let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+                    if let error = error {
+                        print("Request error: ", error)
                         self.isDownloading = false
                         return
                     }
                     
-                    DispatchQueue.main.async {
-                        let strBase64 : String = String(decoding: data, as: UTF8.self)
+                    guard let response = response as? HTTPURLResponse else { return }
+                    
+                    if response.statusCode == 200 {
+                        guard let data = data else {
+                            self.isDownloading = false
+                            return
+                        }
                         
-                        let dataDecoded : NSData = NSData(base64Encoded: strBase64, options: NSData.Base64DecodingOptions(rawValue: 0))!
-                        let decodedimage : UIImage = UIImage(data: dataDecoded as Data)!
-            
-                        if let data = decodedimage.pngData() {
-                            try? data.write(to: destinationUrl)
-                            let data = try! Data.init(contentsOf: destinationUrl)
-                            let photo = UIImage.init(data: data)
+                        DispatchQueue.main.async {
+                            let strBase64 : String = String(decoding: data, as: UTF8.self)
+                            
+                            let dataDecoded : NSData = NSData(base64Encoded: strBase64, options: NSData.Base64DecodingOptions(rawValue: 0))!
+                            let decodedimage : UIImage = UIImage(data: dataDecoded as Data)!
+                
+                            if let data = decodedimage.pngData() {
+                                try? data.write(to: destinationUrl)
+                                let data = try! Data.init(contentsOf: destinationUrl)
+                                let photo = UIImage.init(data: data)
 
-                            DispatchQueue.main.async {
-                                self.resultUiImage(photo!)
+                                DispatchQueue.main.async {
+                                    self.resultUiImage(photo!)
+                                }
                             }
                         }
+                        
                     }
-                    
                 }
+                dataTask.resume()
             }
-            dataTask.resume()
-            
         }
-        
     }
     
     
