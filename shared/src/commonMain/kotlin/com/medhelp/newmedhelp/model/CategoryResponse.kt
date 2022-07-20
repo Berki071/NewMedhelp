@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 open class CategoryResponse {
     @SerialName("id_spec")
-    var id = -1
+    var id: Int? = null
 
     @SerialName("title")
     var title: String? = null

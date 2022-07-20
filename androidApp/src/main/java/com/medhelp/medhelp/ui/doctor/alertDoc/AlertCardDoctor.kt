@@ -77,7 +77,7 @@ class AlertCardDoctor(val context: Context, val doc: AllDoctorsResponse, val idS
         if (preferences.centerInfo!!.button_zapis == 0) doc_info_btn_record?.setVisibility(View.GONE)
         doc_info_btn_close?.setOnClickListener(View.OnClickListener { c: View? -> alertDialog!!.cancel() })
         doc_info_btn_record?.setOnClickListener(View.OnClickListener { c: View? ->
-            showServiceActivity(doc.id)
+            showServiceActivity(doc.id!!)
             alertDialog!!.cancel()
         })
     }

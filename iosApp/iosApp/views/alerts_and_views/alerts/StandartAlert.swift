@@ -24,17 +24,11 @@ struct StandartAlert: View {
            Color("black_bg")
            
            ZStack{
-               Color(.white)
-                   .cornerRadius(5)
-                   .overlay(
-                       RoundedRectangle(cornerRadius: 5)
-                           .stroke(Color("black_bg2"), lineWidth: 2)
-                   )
-               
                VStack{
                        Text(dataOb.titel)
                        .font(.headline)
                        .multilineTextAlignment(.center)
+                       .padding(.top)
                        
                        HStack{
                            Image("new_releases_symbol")
@@ -43,7 +37,8 @@ struct StandartAlert: View {
                                .font(.subheadline)
                                .multilineTextAlignment(.center)
                        }
-                       .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                       .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
+                       .padding(.top, 1.0)
                        
                    HStack{
                        if(dataOb.isShowCansel){
@@ -68,11 +63,14 @@ struct StandartAlert: View {
                        }
                        //.padding()
                    }
-                   .padding(.horizontal, 16.0)
+                   .padding([.leading, .bottom, .trailing])
+                   
                }
            }
-           .padding(.horizontal, 16.0)
            //.frame(height: 200.0)
+           .background(Color(.white))
+           .cornerRadius(6)
+           .padding([.leading, .bottom, .trailing], 16.0)
            
        }
        .ignoresSafeArea()

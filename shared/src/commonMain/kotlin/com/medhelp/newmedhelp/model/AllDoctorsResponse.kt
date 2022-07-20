@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 open class AllDoctorsResponse {
-    @SerialName("id_doctor") var id = 0
+    @SerialName("id_doctor") var id: Int? = null
     @SerialName("full_name") var fio_doctor: String? = null
     @SerialName("id_spec") var id_specialties_string: String? = null
     @SerialName("stag") var experience: String? = null

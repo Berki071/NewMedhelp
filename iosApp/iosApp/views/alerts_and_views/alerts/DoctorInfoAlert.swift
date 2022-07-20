@@ -10,17 +10,17 @@ import SwiftUI
 
 struct DoctorInfoAlertData{
     let infoDoctor : AllDoctorsResponseIos
-    let someFuncOk: () -> Void
+    let someFuncCancel: () -> Void
+    var selectDocttorForRecord: Binding<AllDoctorsResponseIos?>
 }
 
 struct DoctorInfoAlert: View {
     var dataOb : DoctorInfoAlertData
-    @State var iuImageLogo : UIImage =  UIImage(named: "sh_doc")!
+    @State var iuImageLogo : UIImage
     
     init(dataOb : DoctorInfoAlertData){
         self.dataOb = dataOb
-        
-        initImage()
+        self.iuImageLogo = dataOb.infoDoctor.iuImageLogo ?? UIImage(named: "sh_doc")!
     }
     
     var body: some View {
@@ -29,7 +29,7 @@ struct DoctorInfoAlert: View {
             Color("black_bg")
             
             ZStack{
-                VStack(alignment: .leading){
+                VStack(alignment: .leading, spacing: 0){
                     HStack {
                         Spacer()
                     }
@@ -37,76 +37,99 @@ struct DoctorInfoAlert: View {
                     HStack{
                         Spacer()
                         Image(uiImage: self.iuImageLogo)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
                             .frame(width: 150.0, height: 150.0)
                         Spacer()
                     }
+                    .padding(.bottom, 12.0)
                     
                     
                     HStack{
                         Text("ФИО: ")
+                            .fontWeight(.bold)
                         Text(dataOb.infoDoctor.fio_doctor ?? "")
                     }
+                    .padding(.bottom, 4.0)
                     
                     HStack{
                         Text("Стаж: ")
+                            .fontWeight(.bold)
                         Text(dataOb.infoDoctor.experience ?? "")
                     }
+                    .padding(.bottom, 4.0)
                     
                     HStack{
                         Text("Специальность: ")
+                            .fontWeight(.bold)
                         Text(dataOb.infoDoctor.name_specialties ?? "")
                     }
+                    .padding(.bottom, 4.0)
                     
-                    HStack{
-                        Text("Дополнительно: ")
-                        Text(dataOb.infoDoctor.dop_info ?? "")
+                    VStack(spacing: 0){
+                        HStack {
+                            Spacer()
+                        }
+                        
+                        HStack{
+                            Text("Дополнительно: ")
+                                .fontWeight(.bold)
+                            Spacer()
+                        }
+                        if(dataOb.infoDoctor.dop_info != nil && !dataOb.infoDoctor.dop_info!.isEmpty){
+                            ScrollView{
+                                Text(dataOb.infoDoctor.dop_info ?? "")
+                                
+                            }
+                            .frame(maxHeight: 200)
+                        }
+                    
                     }
+                    .padding(.bottom, 16.0)
                     
                     HStack{
                         Button(action: {
-                            //dataOb.someFuncOk()
+                            dataOb.someFuncCancel()
                         }) {
-                            Text("OK")
+                            Text("Закрыть")
                                 .frame(minWidth: 100, maxWidth: .infinity, minHeight: 44, maxHeight: 44, alignment: .center)
                                 .foregroundColor(Color.white)
                                 .background(Color("color_primary"))
                                 .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                         }
-                        //.padding()
+                        
+                        Button(action: {
+                            dataOb.selectDocttorForRecord.wrappedValue = dataOb.infoDoctor
+                        }) {
+                            Text("Записаться")
+                                .frame(minWidth: 100, maxWidth: .infinity, minHeight: 44, maxHeight: 44, alignment: .center)
+                                .foregroundColor(Color.white)
+                                .background(Color("color_primary"))
+                                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                        }
+                        
                     }
                     
                 }
                 .padding(16.0)
             }
+            .background(Color(.white))
+            .cornerRadius(6)
             .overlay(
                 RoundedRectangle(cornerRadius: 6)
                     .stroke(Color("black_bg3"), lineWidth: 3)
             )
             .padding(.horizontal, 8.0)
-        }
-    }
-    
-    func initImage() {
-        let sharePreferenses = SharedPreferenses()
-        
-        let currentUserInfo = sharePreferenses.currentUserInfo
-        
-        if(currentUserInfo != nil && dataOb.infoDoctor.image_url != nil){
-            let imagePathString = dataOb.infoDoctor.image_url! + "&token=" + currentUserInfo!.apiKey!
             
-            DownloadManager(imagePathString,  resultUiImage: { (tmp : UIImage) -> Void in
-
-                self.iuImageLogo = tmp
-            })
         }
+        .ignoresSafeArea()
     }
 }
 
 struct DoctorInfoAlert_Previews: PreviewProvider {
-    let someFuncCancel = {() -> Void in }
-    let item = AllDoctorsResponseIos(fio_doctor: "fio_doctor", titleSpec: "titleSpec")
-    
-    let tmp = DoctorInfoAlertData(infoDoctor : item, someFuncOk : someFuncCancel)
+    @State static private var tmp2: AllDoctorsResponseIos? = nil
+    static let tmp = DoctorInfoAlertData(infoDoctor: AllDoctorsResponseIos(fio_doctor: "fio_doctor", titleSpec: "titleSpec"),
+                                         someFuncCancel: {() -> Void in }, selectDocttorForRecord: $tmp2)
     
     static var previews: some View {
         DoctorInfoAlert(dataOb: tmp)

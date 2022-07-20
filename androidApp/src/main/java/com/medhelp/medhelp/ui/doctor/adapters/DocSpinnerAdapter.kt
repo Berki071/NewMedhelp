@@ -68,6 +68,6 @@ class DocSpinnerAdapter(val context: Context, list: List<CategoryResponse>) : Ba
     }
 
     fun getIdSpec(numberInList: Int): Int {
-        return list[numberInList].id
+        return list[numberInList].id!!
     }
 }

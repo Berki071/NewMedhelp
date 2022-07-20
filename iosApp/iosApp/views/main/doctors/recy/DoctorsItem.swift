@@ -12,11 +12,13 @@ import shared
 struct DoctorsItem: View {
     var item : AllDoctorsResponseIos
     @ObservedObject var mainPresenter : DoctorsItemPresenter
-    let someFuncOk: () -> Void
+    @Binding var doctorInfoAlertData : DoctorInfoAlertData?
+    @Binding var selectDocttorForRecord: AllDoctorsResponseIos?
     
-    init(item : AllDoctorsResponseIos, someFuncOk: @escaping () -> Void){
+    init(item : AllDoctorsResponseIos,  doctorInfoAlertData : Binding<DoctorInfoAlertData?>, selectDocttorForRecord: Binding<AllDoctorsResponseIos?> ){
         self.item = item
-        self.someFuncOk = someFuncOk
+        self._doctorInfoAlertData = doctorInfoAlertData
+        self._selectDocttorForRecord = selectDocttorForRecord
         mainPresenter = DoctorsItemPresenter(item: item)
     }
     
@@ -53,17 +55,22 @@ struct DoctorsItem: View {
         )
         .contentShape(Rectangle())
         .onTapGesture {
-            let alertLogind = DoctorInfoAlert(infoDoctor: item, ,someFuncOk: {() -> Void in self.isShowAlertRecomend = nil})
-            
-            self.isShowAlertRecomend = alertLogind
+            let tmp = DoctorInfoAlertData(infoDoctor: item, someFuncCancel: {() -> Void in
+                self.doctorInfoAlertData = nil
+            }, selectDocttorForRecord: $selectDocttorForRecord)
+       
+            self.doctorInfoAlertData = tmp
         }
     }
 }
 
 struct DoctorsItem_Previews: PreviewProvider {
+    static let tmp = AllDoctorsResponseIos(fio_doctor: "Recardo", titleSpec: "vain doctor")
+    @State static private var tmp1: DoctorInfoAlertData? = nil
+    @State static private var tmp2: AllDoctorsResponseIos? = nil
+    
     static var previews: some View {
-        let tmp = AllDoctorsResponseIos(fio_doctor: "Recardo", titleSpec: "vain doctor")
         
-        DoctorsItem(item: tmp)
+        DoctorsItem(item: tmp, doctorInfoAlertData: $tmp1, selectDocttorForRecord: $tmp2)
     }
 }

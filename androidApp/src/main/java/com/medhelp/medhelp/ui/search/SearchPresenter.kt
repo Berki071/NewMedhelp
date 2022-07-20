@@ -108,7 +108,7 @@ class SearchPresenter(val view: SearchFragment) {
         if (item.favorites == "1") {
             val cd = CompositeDisposable()
             cd.add(networkManager
-                .insertFavoritesService(item.id)
+                .insertFavoritesService(item.id!!)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -134,7 +134,7 @@ class SearchPresenter(val view: SearchFragment) {
         } else {
             val cd = CompositeDisposable()
             cd.add(networkManager
-                .deleteFavoritesService(item.id)
+                .deleteFavoritesService(item.id!!)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

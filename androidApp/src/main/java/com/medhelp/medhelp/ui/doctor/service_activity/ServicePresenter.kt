@@ -63,7 +63,7 @@ class ServicePresenter(val view: ServiceActivity) {
         mainScope.launch {
             kotlin.runCatching {
                 newNetworkManager.getPriceApiCall(
-                    idDoctor, idBranch, idUser,
+                    idDoctor.toString(), idBranch.toString(), idUser.toString(),
                     prefManager.currentUserInfo!!.apiKey!!,
                     prefManager.centerInfo!!.db_name!!,
                     prefManager.currentUserInfo!!.idUser.toString(),
@@ -93,7 +93,7 @@ class ServicePresenter(val view: ServiceActivity) {
         if (item.favorites == "1") {
             val cd = CompositeDisposable()
             cd.add(networkManager
-                .insertFavoritesService(item.id)
+                .insertFavoritesService(item.id!!)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -114,7 +114,7 @@ class ServicePresenter(val view: ServiceActivity) {
         } else {
             val cd = CompositeDisposable()
             cd.add(networkManager
-                .deleteFavoritesService(item.id)
+                .deleteFavoritesService(item.id!!)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

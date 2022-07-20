@@ -12,12 +12,21 @@ struct ProfileItem: View {
     var item : VisitResponseIos
     @Binding var isShowAlertRecomend : StandartAlertData?
     @ObservedObject var mainPresenter : ProfileItemPresenter
+    var isUpcoming : Bool
+    var clickConfirmBtn: ((VisitResponseIos) -> Void)?
+    var clickIAmHere: ((VisitResponseIos) -> Void)?
+    var clickReceptionCancel: ((VisitResponseIos) -> Void)?
     
     
-    init(item : VisitResponseIos, isShowAlertRecomend : Binding<StandartAlertData?>){
+    init(item : VisitResponseIos, isShowAlertRecomend : Binding<StandartAlertData?>, isUpcoming: Bool, timeAndDateServer: Date?, clickConfirmBtn:  ((VisitResponseIos) -> Void)?, clickIAmHere: ((VisitResponseIos) -> Void)?, clickReceptionCancel: ((VisitResponseIos) -> Void)?){
         self.item = item
         self._isShowAlertRecomend = isShowAlertRecomend
-        mainPresenter = ProfileItemPresenter(item: item)
+        self.isUpcoming = isUpcoming
+        self.clickConfirmBtn = clickConfirmBtn
+        self.clickIAmHere = clickIAmHere
+        self.clickReceptionCancel = clickReceptionCancel
+        
+        mainPresenter = ProfileItemPresenter(item: item, timeAndDateServer: timeAndDateServer)
     }
     
     var body: some View {
@@ -50,11 +59,11 @@ struct ProfileItem: View {
                                 Text(item.nameServices!)
                                     .font(.callout)
                                     .fontWeight(.bold)
-                        
+                                
                                     .multilineTextAlignment(.center)
                                     .lineLimit(2)
                                     .fixedSize(horizontal: false, vertical: true)
-                                    //.frame(maxWidth: .infinity, horizontal: false)
+                                //.frame(maxWidth: .infinity, horizontal: false)
                             }
                             .frame(maxWidth: .infinity)
                             
@@ -133,64 +142,94 @@ struct ProfileItem: View {
                     }
                     .frame(maxWidth: .infinity)
                     
+                    if(isUpcoming){
+                        HStack{
+                            if(item.call == "нет" && self.mainPresenter.isTheTimeConfirm(item.getTimeAndDateInDateFormat())){
+                                Button("Подтвердить") {
+                                    self.clickConfirmBtn?(item)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 15.0)
+                                .padding(.all, 12)
+                                .foregroundColor(.white)
+                                .background(Color("color_primary"))
+                                .cornerRadius(5.0)
+                            }
+                            
+                            if(self.mainPresenter.isTheTimeCancel(item.getTimeAndDateInDateFormat())){
+                                Button("Отменить") {
+                                    self.clickReceptionCancel?(item)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 15.0)
+                                .padding(.all, 12)
+                                .foregroundColor(.white)
+                                .background(Color("color_primary"))
+                                .cornerRadius(5.0)
+                            }else{
+                                
+                                if(item.status == "wk" || item.status == "wkp"){
+                                    Button("Я пришел") {
+                                        self.clickIAmHere?(item)
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 15.0)
+                                    .padding(.all, 12)
+                                    .foregroundColor(.white)
+                                    .background(Color("color_primary"))
+                                    .cornerRadius(5.0)
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 8.0)
+                        .padding(.bottom, 12.0)
+                        
+                        //                        HStack{
+                        //
+                        //
+                        //                            //Button("Оплатить") {
+                        //                            //
+                        //                            //}
+                        //                            //.frame(maxWidth: .infinity)
+                        //                            //.frame(height: 15.0)
+                        //                            //.padding(.all, 12)
+                        //                            //.foregroundColor(.white)
+                        //                            //.background(Color("color_primary"))
+                        //                            //.cornerRadius(5.0)
+                        ////                            Button("Перенести") {
+                        ////
+                        ////                            }
+                        ////                            .frame(maxWidth: .infinity)
+                        ////                            .frame(height: 15.0)
+                        ////                            .padding(.all, 12)
+                        ////                            .foregroundColor(.white)
+                        ////                            .background(Color("color_primary"))
+                        ////                            .cornerRadius(5.0)
+                        //
+                        //                        }
+                        //                        .padding(.horizontal, 8.0)
+                        //                        .padding(.bottom, 8.0)
+                        //                    }
+                        
+                        
+                        
+                        
+                    }
                     
-                    //                HStack{
-                    //                    Button("Оплатить") {
-                    //
-                    //                    }
-                    //                    .frame(maxWidth: .infinity)
-                    //                    .padding(.all, 12)
-                    //                    .foregroundColor(.white)
-                    //                    .background(Color("color_primary"))
-                    //                    .cornerRadius(5.0)
-                    //
-                    //
-                    //                    Button("Подтвердить") {
-                    //
-                    //                    }
-                    //                    .frame(maxWidth: .infinity)
-                    //                    .padding(.all, 12)
-                    //                    .foregroundColor(.white)
-                    //                    .background(Color("color_primary"))
-                    //                    .cornerRadius(5.0)
-                    //
-                    //                }
-                    //                .padding(.horizontal, 8.0)
-                    //                HStack{
-                    //                    Button("Отменить") {
-                    //
-                    //                    }
-                    //                    .frame(maxWidth: .infinity)
-                    //                    .padding(.all, 12)
-                    //                    .foregroundColor(.white)
-                    //                    .background(Color("color_primary"))
-                    //                    .cornerRadius(5.0)
-                    //
-                    //                    Button("Перенести") {
-                    //
-                    //                    }
-                    //                    .frame(maxWidth: .infinity)
-                    //                    .padding(.all, 12)
-                    //                    .foregroundColor(.white)
-                    //                    .background(Color("color_primary"))
-                    //                    .cornerRadius(5.0)
-                    //
-                    //                }
-                    //                .padding(.horizontal, 8.0)
-                    //                .padding(.bottom, 8.0)
+                    
                     
                 }
-                
-                
+                .overlay(
+                    RoundedRectangle(cornerRadius: 6)
+                        .stroke(Color("black_bg3"), lineWidth: 3)
+                )
+                .padding(.horizontal, 8.0)
+                .padding(.vertical, 4.0)
                 
             }
-            .overlay(
-                RoundedRectangle(cornerRadius: 6)
-                    .stroke(Color("black_bg3"), lineWidth: 3)
-            )
-            .padding(.horizontal, 8.0)
-            
         }
+        
+        
     }
 }
 
@@ -200,6 +239,7 @@ struct ProfileItem_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        ProfileItem(item : ite, isShowAlertRecomend : $isShowAlertRecomen)
+        ProfileItem(item : ite, isShowAlertRecomend : $isShowAlertRecomen, isUpcoming: true, timeAndDateServer: nil, clickConfirmBtn: nil,
+                    clickIAmHere: nil, clickReceptionCancel: nil)
     }
 }

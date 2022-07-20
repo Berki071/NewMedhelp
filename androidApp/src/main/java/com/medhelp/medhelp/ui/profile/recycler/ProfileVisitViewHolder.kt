@@ -85,9 +85,9 @@ class ProfileVisitViewHolder(val itemView: View, val today: String, val time: St
             if (receptionCancel!!.getText().toString() == "Отмена") {
                 if (!statusIsPaid(visitRes!!.status!!)) {
                     itemClickListener.cancelBtnClick(
-                        visitRes!!.idUser,
-                        visitRes!!.idRecord,
-                        visitRes!!.idBranch
+                        visitRes!!.idUser!!,
+                        visitRes!!.idRecord!!,
+                        visitRes!!.idBranch!!
                     )
                 } else {
                     showAlertActionProhibited()
@@ -97,9 +97,7 @@ class ProfileVisitViewHolder(val itemView: View, val today: String, val time: St
             }
         })
         receptionConfirm?.setOnClickListener(View.OnClickListener { c: View? ->
-            itemClickListener.confirmBtnClick(
-                visitRes!!.idUser, visitRes!!.idRecord, visitRes!!.idBranch, visitRes!!.comment
-            )
+            itemClickListener.confirmBtnClick(visitRes!!.idUser!!, visitRes!!.idRecord!!, visitRes!!.idBranch!!, visitRes!!.comment)
         })
         receptionEnrollAgain?.setOnClickListener(View.OnClickListener { c: View? ->
             itemClickListener.enrollAgainBtnClick(visitRes)

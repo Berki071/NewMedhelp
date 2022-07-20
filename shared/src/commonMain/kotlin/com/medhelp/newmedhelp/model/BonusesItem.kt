@@ -14,6 +14,8 @@ open class BonusesItem {
     @SerialName("statys_bonus")
     var status: String? = null
 
+    constructor() {} // for ios
+
     constructor(item: BonusesItem) {
         date = item.date
         value = item.value

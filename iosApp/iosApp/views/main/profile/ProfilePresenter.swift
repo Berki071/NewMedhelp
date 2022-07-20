@@ -21,15 +21,20 @@ class ProfilePresenter: ObservableObject {
     @Published var showDialogLoading: Bool = false
     @Published var showDialogErrorScreen: Bool = false
     @Published var showDialogEmptyScreen: Bool = false
+    @Published var showDialogCancelReceptionData: ShowDialogCancelReceptionData? = nil
     
     @Published var actualReceptions : [VisitResponseIos] = []
     @Published var latestReceptions : [VisitResponseIos] = []
+    
+    @Published var isShowAlertRecomend: StandartAlertData? = nil
     
     let sdk: NetworkManager
     var sharePreferenses : SharedPreferenses
     let netConnection = NetMonitor.shared
     
     var currentUser : UserResponse
+    var timeAndDateServer: Date? = nil
+  
 
     init(){
         sdk=NetworkManager()
@@ -87,7 +92,12 @@ class ProfilePresenter: ObservableObject {
             sdk.getCurrentDateApiCall(h_Auth: apiKey, h_dbName: h_dbName, h_idKl: idUser, h_idFilial:  idBranch,
                                       completionHandler: { response, error in
                 if let res : DateList = response {
-                    self.getVisits2(res.response!.time!, res.response!.today!)
+                    let dateStrCur = res.response!.time! + " " +  res.response!.today!
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = MDate.DATE_FORMAT_HHmm_ddMMyyyy
+                    self.timeAndDateServer = dateFormatter.date(from: dateStrCur)!
+                    
+                    self.getVisits2()
                 } else {
                     if let t=error{
                         LoggingTree.e("ProfilePresenter/getVisits1", t)
@@ -105,7 +115,7 @@ class ProfilePresenter: ObservableObject {
         }
     }
     
-    func getVisits2(_ time : String, _ today : String ){
+    func getVisits2(){
         let apiKey = String.init(self.sharePreferenses.currentUserInfo!.apiKey!)
         let h_dbName = self.sharePreferenses.centerInfo!.db_name!
         let idUser=String(Int.init(truncating: self.sharePreferenses.currentUserInfo!.idUser!))
@@ -178,6 +188,160 @@ class ProfilePresenter: ObservableObject {
         actualReceptions = actualReceptionsTmp
         latestReceptions = latestReceptionsTmp
        
+    }
+    
+    func confirmBtnClick(_ item : VisitResponseIos){
+        
+        showLoading(true)
+        
+        if(self.sharePreferenses.currentUserInfo != nil &&  self.sharePreferenses.centerInfo != nil){
+            let apiKey = String.init(self.sharePreferenses.currentUserInfo!.apiKey!)
+            let idUser=String(Int.init(truncating: self.sharePreferenses.currentUserInfo!.idUser!))
+            let idBranch=String(Int.init(truncating: self.sharePreferenses.currentUserInfo!.idBranch!))
+            let h_dbName = self.sharePreferenses.centerInfo!.db_name!
+            
+            sdk.sendConfirmationOfVisit(user: String(Int(item.idUser!)), id_zapisi: String(Int(item.idRecord!)), idBranch: String(Int(item.idBranch!)),
+                h_Auth: apiKey, h_dbName: h_dbName, h_idKl: idUser, h_idFilial:  idBranch,
+                                      completionHandler: { response, error in
+                if let res : SimpleResponseBoolean = response {
+                    self.showLoading(false)
+                    
+                    var strTmp : String
+                    if(item.comment == nil || item.comment!.isEmpty){
+                        strTmp = ""
+                    }else{
+                        strTmp = "Обратите внимание на рекомендации перед приемом: \(item.comment)"
+                    }
+                    
+                    self.isShowAlertRecomend = StandartAlertData(titel: "Ваш прием подтвержден", text: strTmp, isShowCansel: false ,  someFuncOk: {() -> Void in
+                        self.isShowAlertRecomend = nil
+                        self.getVisits1()
+                    }, someFuncCancel: {() -> Void in})
+                    
+                    
+                } else {
+                    if let t=error{
+                        LoggingTree.e("ProfilePresenter/confirmBtnClick", t)
+                    }
+                    
+                    self.showLoading(false)
+                    self.showStandartAlert("", "Произошла ошибка при выполнении операции, попробуйте повторить")
+                }
+            })
+        }else{
+            LoggingTree.e("ProfilePresenter/confirmBtnClick sharePreferenses.currentUserInfo == nil || sharePreferenses.centerInfo == nil")
+            self.showStandartAlert("", "Произошла ошибка при выполнении операции, попробуйте повторить")
+            self.showLoading(false)
+            return
+        }
+    }
+    
+    func iAmHereBtnClick(_ item : VisitResponseIos){
+        showLoading(true)
+        
+        if(self.sharePreferenses.currentUserInfo != nil &&  self.sharePreferenses.centerInfo != nil){
+            let apiKey = String.init(self.sharePreferenses.currentUserInfo!.apiKey!)
+            let idUser=String(Int.init(truncating: self.sharePreferenses.currentUserInfo!.idUser!))
+            let idBranch=String(Int.init(truncating: self.sharePreferenses.currentUserInfo!.idBranch!))
+            let h_dbName = self.sharePreferenses.centerInfo!.db_name!
+            
+            sdk.sendIAmHere(user: String(Int(item.idUser!)), id_zapisi: String(Int(item.idRecord!)), idBranch: String(Int(item.idBranch!)),
+                h_Auth: apiKey, h_dbName: h_dbName, h_idKl: idUser, h_idFilial:  idBranch,
+                                      completionHandler: { response, error in
+                if let res : SimpleResponseBoolean = response {
+                    self.showLoading(false)
+                    
+                    var strTmp : String
+                    if(self.statusIsPaid(item.status!)){
+                        strTmp = "Вы можете сразу пройти к кабинету \(item.cabinet) и ожидать приглашения врача"
+                    }else{
+                        strTmp = "Необходимо подойти к регистратуре для оформления документов"
+                    }
+                    
+                    self.isShowAlertRecomend = StandartAlertData(titel: "Рады приветствовать Вас в нашем медицинском центре!", text: strTmp, isShowCansel: false ,  someFuncOk: {() -> Void in
+                        self.isShowAlertRecomend = nil
+                        self.getVisits1()
+                    }, someFuncCancel: {() -> Void in})
+                    
+                    
+                } else {
+                    if let t=error{
+                        LoggingTree.e("ProfilePresenter/iAmHereBtnClick", t)
+                    }
+                    
+                    self.showLoading(false)
+                    self.showStandartAlert("", "Произошла ошибка при выполнении операции, попробуйте повторить")
+                }
+            })
+        }else{
+            LoggingTree.e("ProfilePresenter/iAmHereBtnClick sharePreferenses.currentUserInfo == nil || sharePreferenses.centerInfo == nil")
+            self.showStandartAlert("", "Произошла ошибка при выполнении операции, попробуйте повторить")
+            self.showLoading(false)
+            return
+        }
+    }
+    
+
+    
+    func cancelBtnClick(_ item : VisitResponseIos){
+        if(!statusIsPaid(item.status!)){
+            self.showDialogCancelReceptionData = ShowDialogCancelReceptionData(item: item,
+                                                                               someFuncOk: {(i: String) -> Void in
+                self.cancelBtnClickRequest(self.showDialogCancelReceptionData!.item, i)
+                self.showDialogCancelReceptionData = nil},
+                                                                               someFuncCancel: {() -> Void in
+                self.showDialogCancelReceptionData = nil}
+            )
+        }else{
+            self.showStandartAlert("", "Для отмены или переноса оплаченного приема необходимо обратиться к администраторам медицинского центра")
+        }
+    }
+    func cancelBtnClickRequest(_ item : VisitResponseIos, _ reason : String){
+        showLoading(true)
+        
+        if(self.sharePreferenses.currentUserInfo != nil &&  self.sharePreferenses.centerInfo != nil){
+            let apiKey = String.init(self.sharePreferenses.currentUserInfo!.apiKey!)
+            let idUser=String(Int.init(truncating: self.sharePreferenses.currentUserInfo!.idUser!))
+            let idBranch=String(Int.init(truncating: self.sharePreferenses.currentUserInfo!.idBranch!))
+            let h_dbName = self.sharePreferenses.centerInfo!.db_name!
+            
+            let date1 = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = MDate.DATE_FORMAT_ddMMyy
+            let date = dateFormatter.string(from: date1)
+            
+            
+            sdk.sendCancellationOfVisit(user: String(Int(item.idUser!)), id_zapisi: String(Int(item.idRecord!)), cause: reason, currentData: date, idBranch: String(Int(item.idBranch!)),
+                h_Auth: apiKey, h_dbName: h_dbName, h_idKl: idUser, h_idFilial:  idBranch,
+                                      completionHandler: { response, error in
+                if let res : SimpleResponseBoolean = response {
+                    LoggingTree.v("Отмена приема id записи \(String(Int(item.idRecord!))) причина \(reason)")
+                        self.getVisits1()
+                } else {
+                    if let t=error{
+                        LoggingTree.e("ProfilePresenter/cancelBtnClickRequest", t)
+                    }
+                    
+                    self.showLoading(false)
+                    self.showStandartAlert("", "Произошла ошибка при выполнении операции, попробуйте повторить")
+                }
+            })
+        }else{
+            LoggingTree.e("ProfilePresenter/cancelBtnClickRequest sharePreferenses.currentUserInfo == nil || sharePreferenses.centerInfo == nil")
+            self.showStandartAlert("", "Произошла ошибка при выполнении операции, попробуйте повторить")
+            self.showLoading(false)
+            return
+        }
+    }
+    
+    func statusIsPaid(_ status: String) -> Bool {
+        return status == "p" || status == "wkp" || status == "kpp"
+    }
+    
+    func showStandartAlert(_ title: String, _ text: String){
+        self.isShowAlertRecomend = StandartAlertData(titel: title, text: text, isShowCansel: false ,  someFuncOk: {() -> Void in
+            self.isShowAlertRecomend = nil
+        }, someFuncCancel: {() -> Void in})
     }
     
     func showEmptyScreen(_ isShow : Bool){

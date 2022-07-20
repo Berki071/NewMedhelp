@@ -11,11 +11,11 @@ import shared
 //import FirebaseDatabaseSwift
 
 struct MainUIView: View {
-    @StateObject var mainPresenter = MainPresenter()
-    // @State var showDialogLoading: Bool = false
+    @StateObject var mainPresenter: MainPresenter
+   
     
-    init() {
-
+    init(startPage: Int) {
+        _mainPresenter = StateObject(wrappedValue: MainPresenter(startPage: startPage))
     }
     
     
@@ -51,10 +51,15 @@ struct MainUIView: View {
                         
                         
                         if self.mainPresenter.showMenu {
-                            MenuView(selectitem : self.$mainPresenter.selectMenuPage, selectMenuAlert: self.$mainPresenter.selectMenuAlert, showMenu: self.$mainPresenter.showMenu, listBonuses: self.mainPresenter.listBonuses, selectedNewUser: {() -> Void in
-                               // self.mainPresenter.updateInfoInCurrentPage()
+                            MenuView(selectitem : self.$mainPresenter.selectMenuPage, selectMenuAlert: self.$mainPresenter.selectMenuAlert, showMenu: self.$mainPresenter.showMenu, listBonuses: self.mainPresenter.listBonuses, clickBonus: {() -> Void in
+                                self.mainPresenter.showMenu = false
+                                self.mainPresenter.showBonusesList()
                             })
                                 .transition(.move(edge: .leading))
+                        }
+                        
+                        if self.mainPresenter.isShowBonusesListAlert != nil {
+                            BonusesListAlert(dataOb: self.mainPresenter.isShowBonusesListAlert!)
                         }
                         
                         if(self.mainPresenter.selectMenuAlert == 1){
@@ -82,14 +87,10 @@ struct MainView: View {
     var body: some View {
  
         if(self.mainP.selectMenuPage == 0){
-            //self.mainP.currentShowPage =
-            ProfilePage(isShowAlertRecomend : nil, clickButterMenu:{() -> Void in
+            ProfilePage( clickButterMenu:{() -> Void in
                     self.mainP.showMenu = true
         })
-           // self.mainP.currentShowPage = tt.mainPresenter
-            
-            
-            //self.mainP.currentShowPage = tt
+        
         }else if(self.mainP.selectMenuPage == 1){
             DoctorsPage(clickButterMenu:{() -> Void in
                // withAnimation {
@@ -116,6 +117,6 @@ struct MainView: View {
 
 struct MainUIView_Previews: PreviewProvider {
     static var previews: some View {
-        MainUIView()
+        MainUIView(startPage: 0)
     }
 }

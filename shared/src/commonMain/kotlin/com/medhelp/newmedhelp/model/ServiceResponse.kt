@@ -7,11 +7,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 open class ServiceResponse {
     @SerialName("id_service")
-    var id = 0
+    var id: Int? = null
     @SerialName("id_spec")
-    var idSpec = 0
+    var idSpec: Int? = null
     @SerialName("admission")
-    var admission = 0
+    var admission: Int? = null
     @SerialName("value")
     var value: String? = null
     @SerialName("title")
@@ -23,9 +23,9 @@ open class ServiceResponse {
     @SerialName("izbrannoe")
     var favorites: String? = null
     @SerialName("max_zapis")
-    var max_zapis = 0
+    var max_zapis: Int? = null
     @SerialName("poryadok")
-    var poryadok = 0
+    var poryadok: Int? = null
     @SerialName("name_spec")
     var name_spec: String? = null
 
@@ -44,6 +44,12 @@ open class ServiceResponse {
     }
 
     constructor(title: String, value: Int) {
+        this.title = title
+        this.value = value.toString()
+    }
+
+    constructor(id: Int, title: String, value: Int) {
+        this.id = id
         this.title = title
         this.value = value.toString()
     }

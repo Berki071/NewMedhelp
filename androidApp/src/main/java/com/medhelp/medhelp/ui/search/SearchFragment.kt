@@ -193,8 +193,8 @@ class SearchFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
         for (j in 0..list.size - 2) {
             var i = list.size - 1
             while (j < i) {
-                val wight1 = if (list[i].poryadok == 0) 0 else 11 - list[i].poryadok
-                val wight2 = if (list[i - 1].poryadok == 0) 0 else 11 - list[i - 1].poryadok
+                val wight1 = if (list[i].poryadok == 0) 0 else 11 - list[i].poryadok!!
+                val wight2 = if (list[i - 1].poryadok == 0) 0 else 11 - list[i - 1].poryadok!!
                 if (wight1 > wight2) {
                     tmp = list[i - 1]
                     list[i - 1] = list[i]

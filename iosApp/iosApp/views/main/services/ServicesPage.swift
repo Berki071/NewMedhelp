@@ -12,8 +12,6 @@ struct ServicesPage: View {
     
     @StateObject var mainPresenter = ServicesPresenter()
     
-   // @State var textSearch = ""
-    
     var clickButterMenu: (() -> Void)?
     
     init(clickButterMenu: (() -> Void)?){

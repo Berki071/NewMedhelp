@@ -17,7 +17,7 @@ struct LoginUiView: View {
     
     var body: some View {
         if self.loginPresenter.nextPage == "Main" {
-            MainUIView()
+            MainUIView(startPage: 0)
         }else{
             NavigationView {
                 ZStack {

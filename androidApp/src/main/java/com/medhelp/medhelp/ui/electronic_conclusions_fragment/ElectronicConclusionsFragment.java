@@ -114,6 +114,9 @@ public class ElectronicConclusionsFragment extends BaseFragment {
 
     ElectronicConclusionsAdapter electronicConclusionsAdapter;
     public void initRecy(List<DataClassForElectronicRecy> list){
+        errMessage.setVisibility(View.GONE);
+        errLoadBtn.setVisibility(View.GONE);
+
         if(list==null){
             showEmpty(true);
             return;

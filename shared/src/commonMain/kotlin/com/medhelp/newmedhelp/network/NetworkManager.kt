@@ -106,8 +106,9 @@ class NetworkManager {
         }
     }
 
-    @Throws(Exception::class)  suspend fun getBranchByIdService(idService: Int, h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : SettingsAllBaranchHospitalList{
-        return httpClient.get(Url( CenterEndPoint.BASE_URL + "FilialByIdYsl/" + idService.toString())) {
+    @Throws(Exception::class)  suspend fun getBranchByIdService(idService: String,
+                                                                h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : SettingsAllBaranchHospitalList{
+        return httpClient.get(Url( CenterEndPoint.BASE_URL + "FilialByIdYsl/" + idService)) {
             headers {
                 append(AUTH, h_Auth)
                 append(DB_NAME, h_dbName)
@@ -117,7 +118,8 @@ class NetworkManager {
         }
     }
 
-    @Throws(Exception::class) suspend fun getBranchByIdServiceIdDoc(idService: Int, idDoc: Int, h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : SettingsAllBaranchHospitalList{
+    @Throws(Exception::class) suspend fun getBranchByIdServiceIdDoc(idService: String, idDoc: String,
+                                                                    h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : SettingsAllBaranchHospitalList{
         return httpClient.get(Url( CenterEndPoint.BASE_URL + "FilialByIdYslIdSotr/" + idService+ "/" + idDoc)) {
             headers {
                 append(AUTH, h_Auth)
@@ -285,8 +287,10 @@ class NetworkManager {
         }
     }
 
-    @Throws(Exception::class) suspend fun getPriceApiCall(idDoctor: Int, idBranch: Int, idUser: Int,
+    @Throws(Exception::class) suspend fun getPriceApiCall(idDoctor: String, idBranch: String, idUser: String,
         h_Auth : String, h_dbName : String, h_idKl : String, h_idFilial : String) : ServiceList{
+
+      print("")
 
         return httpClient.get(Url( CenterEndPoint.BASE_URL + "services/doctor/" + idDoctor + "/" + idBranch + "/" + idUser))  {
             headers {

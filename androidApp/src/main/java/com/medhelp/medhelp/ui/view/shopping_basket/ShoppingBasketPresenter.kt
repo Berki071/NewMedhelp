@@ -185,7 +185,7 @@ class ShoppingBasketPresenter  {
                     val list: MutableList<YandexKey> = ArrayList()
                     for (tmp in it.response) {
                         val ya = YandexKey()
-                        ya.idBranch = tmp.idBranch
+                        ya.idBranch = tmp.idBranch!!
                         ya.idShop = tmp.idShop
                         ya.keyShop = tmp.keyShope
                         ya.keyAppYandex = tmp.keyAppYandex

@@ -8,7 +8,8 @@
 
 import Foundation
 import shared
+import SwiftUI
 
 class AllDoctorsResponseIos : AllDoctorsResponse, Identifiable {
-    
+    var iuImageLogo : UIImage?
 }

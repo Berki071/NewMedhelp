@@ -26,7 +26,7 @@ struct SplashUIView: View {
                 LoginUiView()
             }else{
 
-                MainUIView()
+                MainUIView(startPage: 0)
             }
         }else{
 

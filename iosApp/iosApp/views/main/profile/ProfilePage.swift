@@ -8,31 +8,34 @@
 
 import SwiftUI
 
+struct ShowDialogCancelReceptionData{
+    let item : VisitResponseIos
+    let someFuncOk: (String) -> Void
+    let someFuncCancel: () -> Void
+}
+
 struct ProfilePage: View {
-    @State var isShowAlertRecomend: StandartAlertData? = nil
+    
     @StateObject var mainPresenter : ProfilePresenter  = ProfilePresenter()
     var clickButterMenu: (() -> Void)?
     
     
-    init(isShowAlertRecomend: StandartAlertData?, clickButterMenu: (() -> Void)?){
-        self.isShowAlertRecomend = isShowAlertRecomend
+    init(clickButterMenu: (() -> Void)?){
         self.clickButterMenu = clickButterMenu
-        
-        //mainPresenter.checkCurrentUser()
     }
     
     var body: some View {
         ZStack{
-
+            
             let  _ = self.mainPresenter.checkCurrentUser()
- 
+            
             VStack(spacing: 0){
                 MyToolBar(title1: self.mainPresenter.centerName, isShowSearchBtn: false, clickHumburger: {() -> Void in
                     self.clickButterMenu?()
                 }, strSerch: nil)
                 
                 HStack(spacing: 0){
-            
+                    
                     VStack{
                         Image(uiImage: self.mainPresenter.iuImageLogo)   //"ico_root"
                             .resizable()
@@ -53,7 +56,7 @@ struct ProfilePage: View {
                                 .foregroundColor(Color.white)
                         }
                         .padding(.vertical, 2.0)
-                     
+                        
                         HStack{
                             Image("call-call_symbol")
                                 .resizable()
@@ -63,6 +66,14 @@ struct ProfilePage: View {
                             Text(self.mainPresenter.centerPhone)
                                 .font(.footnote)
                                 .foregroundColor(Color.white)
+                                .onTapGesture {
+                                    var cleanNum = self.mainPresenter.centerPhone
+                                    let charsToRemove: Set<Character> = [" ", "(", ")", "-"] // "+" can stay
+                                    cleanNum.removeAll(where: { charsToRemove.contains($0) })
+                                    
+                                    guard let phoneURL = URL(string: "tel://\(cleanNum)") else { return }
+                                    UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+                                }
                         }
                         .padding(.vertical, 5.0)
                         HStack{
@@ -74,6 +85,12 @@ struct ProfilePage: View {
                             Text(self.mainPresenter.centerSite)
                                 .font(.footnote)
                                 .foregroundColor(Color.white)
+                                .onTapGesture {
+                                    let address = "https://" + self.mainPresenter.centerSite
+                                    if let urlString = address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: urlString) {
+                                        UIApplication.shared.open(url)
+                                    }
+                                }
                         }
                         .padding(.bottom, 4.0)
                         
@@ -90,16 +107,16 @@ struct ProfilePage: View {
                     if(mainPresenter.actualReceptions.count > 0){
                         Section(header: Text("Предстоящие")) {
                             ForEach(mainPresenter.actualReceptions) { item in
-                                ProfileItem(item : item, isShowAlertRecomend: $isShowAlertRecomend)
+                                getProfileIem(true, item)
                                     .listRowInsets(EdgeInsets(top: 0, leading: -8, bottom: 0, trailing: -8))
                             }
                         }
                     }
-                    
+
                     if(mainPresenter.latestReceptions.count > 0){
                         Section(header: Text("Прошедшие")) {
                             ForEach(mainPresenter.latestReceptions) { item in
-                                ProfileItem(item : item, isShowAlertRecomend: $isShowAlertRecomend)
+                                getProfileIem(false, item)
                                     .listRowInsets(EdgeInsets(top: 0, leading: -8, bottom: 0, trailing: -8))
                             }
                         }
@@ -120,11 +137,15 @@ struct ProfilePage: View {
                     
                     Spacer()
                         .frame(height: 20.0)
-
+                    
                     Text("Здесь будут отображаться Ваши приемы в нашем медицинском центре")
                         .multilineTextAlignment(.center)
-    
+                    
                 }
+            }
+            
+            if self.mainPresenter.showDialogCancelReceptionData != nil {
+                CancelReceptionAlert(dataOb : self.mainPresenter.showDialogCancelReceptionData!)
             }
             
             if(self.mainPresenter.showDialogErrorScreen){
@@ -150,21 +171,34 @@ struct ProfilePage: View {
                 LoadingView()
             }
             
-            if(isShowAlertRecomend != nil){
-                StandartAlert(dataOb: isShowAlertRecomend!)
+            if(self.mainPresenter.isShowAlertRecomend != nil){
+                StandartAlert(dataOb: self.mainPresenter.isShowAlertRecomend!)
             }
             
         }
-        //.edgesIgnoringSafeArea(.all)
-        
     }
-    
 }
 
-struct ProfilePage_Previews: PreviewProvider {
-    @State static private var na = 0
-    static var previews: some View {
+private extension ProfilePage {
+    @ViewBuilder
+    func getProfileIem(_ isUpcoming : Bool, _ item : VisitResponseIos) -> some View {
         
-        ProfilePage(isShowAlertRecomend : nil, clickButterMenu: nil)
+        ProfileItem(item : item, isShowAlertRecomend: self.$mainPresenter.isShowAlertRecomend, isUpcoming: isUpcoming,
+                    timeAndDateServer: self.mainPresenter.timeAndDateServer,
+                    clickConfirmBtn : {(i: VisitResponseIos) -> Void in
+            self.mainPresenter.confirmBtnClick(i)},
+                    clickIAmHere: {(j: VisitResponseIos) -> Void in
+            self.mainPresenter.iAmHereBtnClick(j)},
+                    clickReceptionCancel:{(j: VisitResponseIos) -> Void in
+            self.mainPresenter.cancelBtnClick(j)}
+        )
+    }
+}
+
+
+struct ProfilePage_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        ProfilePage( clickButterMenu: nil)
     }
 }

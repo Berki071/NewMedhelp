@@ -19,18 +19,20 @@ class MainPresenter : ObservableObject{
     @Published var selectMenuPage = 0
     @Published var selectMenuAlert = 0  //1 алер выхода
  
-    var listBonuses : [BonusesItem]? = nil
+    var listBonuses : [BonusesItemIos]? = nil
     
     let sdk: NetworkManager
     var sharePreferenses : SharedPreferenses
     let netConnection = NetMonitor.shared
+    
+    @Published var isShowBonusesListAlert : BonusesListAlertData? = nil
 
-    init(){
+    init(startPage: Int){
         sdk=NetworkManager()
         sharePreferenses = SharedPreferenses()
         netConnection.startMonitoring()
         
-        
+        selectMenuPage = startPage
     
         if(sharePreferenses.centerInfo != nil && sharePreferenses.centerInfo!.title != nil){
             titleTop=sharePreferenses.centerInfo!.title!
@@ -61,7 +63,13 @@ class MainPresenter : ObservableObject{
                           completionHandler: { response, error in
             if let res : BonusesResponse = response {
                 if(res.response!.count > 1 || res.response![0].date != nil){
-                    self.listBonuses = res.response
+                    var tmpL: [BonusesItemIos] = []
+                    
+                    res.response?.forEach{ i in
+                        tmpL.append(BonusesItemIos(i))
+                    }
+                    
+                    self.listBonuses = tmpL
                 }
             } else {
                 if let t=error{
@@ -69,7 +77,12 @@ class MainPresenter : ObservableObject{
                 }
             }
         })
-        
+    }
+    
+    func showBonusesList(){
+        self.isShowBonusesListAlert = BonusesListAlertData(listBonuses: listBonuses!, someFuncOk: {() -> Void in
+            self.isShowBonusesListAlert = nil
+        })
     }
 
 }

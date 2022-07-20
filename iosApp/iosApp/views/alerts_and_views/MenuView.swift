@@ -14,8 +14,8 @@ struct MenuView: View {
     var selectitem : Binding<Int>
     var selectMenuAlert : Binding<Int>
     var showMenu : Binding<Bool>
-    var listBonuses : [BonusesItem]? = nil
-    var selectedNewUser : (() -> Void)?
+    var listBonuses : [BonusesItemIos]? = nil
+    var clickBonus : (() -> Void)?
 
     var bonuses : String? = nil
     var curentUserInfo : UserResponse
@@ -25,13 +25,12 @@ struct MenuView: View {
     
     @ObservedObject var page: Page = .first()
     
-    init(selectitem : Binding<Int>, selectMenuAlert: Binding<Int>, showMenu : Binding<Bool>,listBonuses: [BonusesItem]?,
-         selectedNewUser: (() -> Void)?){
+    init(selectitem : Binding<Int>, selectMenuAlert: Binding<Int>, showMenu : Binding<Bool>,listBonuses: [BonusesItemIos]?,clickBonus: (() -> Void)?){
         self.selectitem = selectitem
         self.selectMenuAlert = selectMenuAlert
         self.showMenu = showMenu
         self.listBonuses = listBonuses
-        self.selectedNewUser = selectedNewUser
+        self.clickBonus = clickBonus
         
         sharePreferenses = SharedPreferenses()
         
@@ -85,13 +84,19 @@ struct MenuView: View {
                             .onPageChanged({ pageIndex in
                                 let tt : Int = pageIndex
                                 let _ = testSelectedUser(item : tt)
+                                showMenu.wrappedValue = false
                                 })
                             .frame(height: 130.0)
                             
 
                         if(bonuses != nil) {
                             Text("Бонусная карта:  \(bonuses!) \u{20BD}")
+                                .underline()
                                 .foregroundColor(Color.white)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    self.clickBonus?()
+                                }
                         }
 
                         Spacer()
@@ -217,9 +222,14 @@ struct MenuView: View {
                 }
                 .frame(width: 2.0)
                 
-                Spacer()
-                    .frame(width: 70.0)
-                
+                VStack{
+                    Color("transparent")
+                }
+                .frame(width: 70.0)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    showMenu.wrappedValue = false
+                }
             }
             .animation( Animation.easeInOut(duration: 0.4))
             
@@ -287,7 +297,6 @@ struct MenuView: View {
 
     func testSelectedUser(item : Int){
         sharePreferenses.currentUserInfo = allUsers[item]
-        selectedNewUser?()
     }
 }
 
@@ -299,6 +308,6 @@ struct MenuView_Previews: PreviewProvider {
     //selectMenuAlert нажатие на элемент где реакция показ алерта
     
     static var previews: some View {
-        MenuView(selectitem: $na, selectMenuAlert: $ni, showMenu: $no, listBonuses: nil, selectedNewUser: nil)
+        MenuView(selectitem: $na, selectMenuAlert: $ni, showMenu: $no, listBonuses: nil, clickBonus: nil)
     }
 }

@@ -12,11 +12,16 @@ import SwiftUI
 
 class ProfileItemPresenter : ObservableObject {
     @Published var iuImageLogo : UIImage =  UIImage(named: "sh_doc")!
+    var timeAndDateServer: Date?
     
     var sharePreferenses : SharedPreferenses
+    var centerResponse : CenterResponse
     
-    init(item : VisitResponseIos){
+    init(item : VisitResponseIos, timeAndDateServer: Date?){
+        self.timeAndDateServer = timeAndDateServer
+        
         sharePreferenses = SharedPreferenses()
+        centerResponse = sharePreferenses.centerInfo!
         
         let currentUserInfo = sharePreferenses.currentUserInfo
         
@@ -29,5 +34,29 @@ class ProfileItemPresenter : ObservableObject {
             })
         }
     
+        
+    }
+    
+    func isTheTimeConfirm(_ timeAndDate: Date?) -> Bool{
+        if timeAndDate == nil || timeAndDateServer == nil{
+            return false
+        }
+        
+        var timeTo = timeAndDateServer!
+        timeTo.addTimeInterval(TimeInterval(Int(centerResponse.timeForConfirm)))
+        
+        return timeAndDate! >= timeAndDateServer! && timeAndDate! <= timeTo
+        
+    }
+    
+    func isTheTimeCancel(_ timeAndDate: Date?) -> Bool {
+        if timeAndDate == nil || timeAndDateServer == nil{
+            return false
+        }
+        
+        var timeTo = timeAndDateServer!
+        timeTo.addTimeInterval(TimeInterval(Int(centerResponse.timeForDenial)))
+        
+        return timeAndDate! >= timeAndDateServer! && timeAndDate! >= timeTo
     }
 }

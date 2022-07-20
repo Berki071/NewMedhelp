@@ -114,7 +114,7 @@ class ChosenForPurchaseView : ConstraintLayout {
         var cash = 0
         services = items.size
         for (tmp in items) {
-            cash += tmp.price
+            cash += tmp.price!!
         }
         amountServices!!.text = services.toString() + ""
         amountCash!!.text = "$cash руб."

@@ -38,8 +38,6 @@ class DoctorsPresenter : ObservableObject {
         netConnection.startMonitoring()
         
         getSpecialtyByCenter()
-    
-        
     }
        
     

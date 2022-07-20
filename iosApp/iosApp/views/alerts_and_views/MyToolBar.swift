@@ -11,19 +11,36 @@ import SwiftUI
 struct MyToolBar: View {
     @State var title : String
     @State var isShowSearchBtn : Bool
-    
-    var textSearch: Binding<String>?
-    @State private var isEditing = false
-    
-    @State var isShowSearchView = false
     var clickHumburger : (() -> Void)?
+    var textSearch: Binding<String>?
+    
+    @State private var isEditing = false
+    @State var isShowSearchView = false
+    var isShowHumburgerBtn : Bool = true
+    
+    var isShowImageFreeLine: Bool
+   
  
 
-    init(title1 : String, isShowSearchBtn : Bool, clickHumburger : @escaping () -> Void, strSerch : Binding<String>?){
+    init(title1 : String, isShowSearchBtn : Bool, clickHumburger : @escaping () -> Void, strSerch : Binding<String>?, isShowImageFreeLine: Bool = true){
         self.title = title1
         self.isShowSearchBtn = isShowSearchBtn
         self.clickHumburger = clickHumburger
         self.textSearch = strSerch
+        self.isShowImageFreeLine = isShowImageFreeLine
+
+    }
+    init(title1 : String, clickHumburger : @escaping () -> Void, isShowImageFreeLine: Bool){
+        self.title = title1
+        self.clickHumburger = clickHumburger
+        self.isShowSearchBtn = false
+        self.isShowImageFreeLine = isShowImageFreeLine
+    }
+    init(title1 : String){
+        self.title = title1
+        self.isShowSearchBtn = false
+        self.isShowHumburgerBtn = false
+        self.isShowImageFreeLine = true
     }
     
     
@@ -33,13 +50,23 @@ struct MyToolBar: View {
             if(!isShowSearchView){
                 
                 HStack{
-                    Button {
-                        self.clickHumburger?()
-                    } label: {
-                        Image(systemName: "line.horizontal.3")
-                            .foregroundColor(Color.white)
-                            .padding(.leading, 12.0)
-                            .imageScale(.large)
+                    let tp = self.isShowHumburgerBtn
+                    if (self.isShowHumburgerBtn == true) {
+                        Button {
+                            self.clickHumburger?()
+                        } label: {
+                            if(isShowImageFreeLine){
+                                Image(systemName: "line.horizontal.3")
+                                    .foregroundColor(Color.white)
+                                    .padding(.leading, 12.0)
+                                    .imageScale(.large)
+                            }else{
+                                Image(systemName: "arrow.left")
+                                    .foregroundColor(Color.white)
+                                    .padding(.leading, 12.0)
+                                    .imageScale(.large)
+                            }
+                        }
                     }
                     
                     Spacer()
@@ -137,6 +164,7 @@ struct MyToolBar_Previews: PreviewProvider {
     @State static private var na2 : String = "" //$na2
     
     static var previews: some View {
-        MyToolBar(title1: na, isShowSearchBtn: true, clickHumburger: {() -> Void in }, strSerch: $na2 )
+        MyToolBar(title1: na, isShowSearchBtn: true, clickHumburger: {() -> Void in }, strSerch: $na2, isShowImageFreeLine: false )
+        //MyToolBar(title1: "my test")
     }
 }

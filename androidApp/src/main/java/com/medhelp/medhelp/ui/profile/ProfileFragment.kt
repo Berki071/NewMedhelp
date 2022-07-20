@@ -377,10 +377,10 @@ class ProfileFragment : BaseFragment(), ItemClickListener, OnRapidFloatingAction
     override fun enrollAgainBtnClick(viz: VisitResponseAndroid) {
         if (viz.works == "да") {
             val intent = ServiceActivity.getStartIntent(context)
-            intent.putExtra(ServiceActivity.EXTRA_DATA_ID_DOCTOR, viz.idSotr)
+            intent.putExtra(ServiceActivity.EXTRA_DATA_ID_DOCTOR, viz.idSotr!!)
             intent.putExtra(ServiceActivity.EXTRA_DATA_SERVICE, 0)
-            intent.putExtra(ServiceActivity.EXTRA_DATA_ID_BRANCH, viz.idBranch)
-            intent.putExtra(ServiceActivity.EXTRA_DATA_ID_USER, viz.idUser)
+            intent.putExtra(ServiceActivity.EXTRA_DATA_ID_BRANCH, viz.idBranch!!)
+            intent.putExtra(ServiceActivity.EXTRA_DATA_ID_USER, viz.idUser!!)
             intent.putExtra(ScheduleFragment.EXTRA_BACK_PAGE, Constants.MENU_THE_MAIN)
             startActivity(intent)
         }

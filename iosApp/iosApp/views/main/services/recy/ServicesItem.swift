@@ -10,19 +10,38 @@ import SwiftUI
 
 struct ServicesItem: View {
     var item : ServiceResponseIos
+    var clickITem: ((ServiceResponseIos) -> Void)? = nil
+    
+   // @State var isShowDopPanel = false
     
     var body: some View {
         ZStack{
-            HStack{
+            VStack(spacing: 0){
                 HStack{
-                    Text(item.title!)
-                    Spacer()
+                    HStack{
+                        Text(item.title!)
+                        Spacer()
+                    }
+                    
+                    Text(String(describing: item.value!) + "р")
+                        .foregroundColor(Color("textItemBlue"))
                 }
+                .padding(.all, 12.0)
                 
-                Text(String(describing: item.value!) + "р")
-                    .foregroundColor(Color("textItemBlue"))
+                if item.hint != nil && !item.hint!.isEmpty {
+                    HStack{
+                        Text(item.hint ?? "")
+                            .font(.footnote)
+                            .padding(.all, 12.0)
+                        Spacer()
+                    }
+                    .background(Color("textSideMenu10"))
+                }
             }
-            .padding(.all, 12.0)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                self.clickITem?(item)
+            }
             
         }
         .overlay(

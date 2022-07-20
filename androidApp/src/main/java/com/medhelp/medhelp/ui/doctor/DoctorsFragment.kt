@@ -130,7 +130,7 @@ class DoctorsFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
                 if (position == 0) {
                     presenter!!.getDoctorList(-1)
                 } else {
-                    presenter!!.getDoctorList(response[position - 1].id)
+                    presenter!!.getDoctorList(response[position - 1].id!!)
                 }
             }
 

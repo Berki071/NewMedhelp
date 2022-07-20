@@ -222,32 +222,6 @@ class SchedulePresenter(val context: Context, val viewHelper: ScheduleFragment) 
         viewHelper.hideLoading()
     }
 
-    val allHospitalBranch: Unit
-        get() {
-            viewHelper.showLoading()
-
-            mainScope.launch {
-                kotlin.runCatching {
-                    networkManager2.getAllHospitalBranch(prefManager.currentUserInfo!!.idCenter.toString())
-                }
-                    .onSuccess {
-                        if (viewHelper == null) {
-                            return@onSuccess
-                        }
-                        Collections.sort(it.response)
-                        viewHelper.setHospitalBranch(it.response)
-                        viewHelper.hideLoading()
-                    }.onFailure {
-                        Timber.tag("my").e(LoggingTree.getMessageForError(it, "SchedulePresenter\$getAllHospitalBranch "))
-                        if (viewHelper == null) {
-                            return@onFailure
-                        }
-                        viewHelper.hideLoading()
-                        viewHelper.showErrorScreen()
-                    }
-            }
-        }
-
     val currentHospitalBranchId: Int
         get() = prefManager.currentUserInfo!!.idBranch!!
 
@@ -379,7 +353,7 @@ class SchedulePresenter(val context: Context, val viewHelper: ScheduleFragment) 
 
         mainScope.launch {
             kotlin.runCatching {
-                networkManager2.getBranchByIdService(idService,prefManager.currentUserInfo!!.apiKey!!, prefManager.centerInfo!!.db_name!!,prefManager.currentUserInfo!!.idUser.toString(),prefManager.currentUserInfo!!.idBranch.toString())
+                networkManager2.getBranchByIdService(idService.toString(), prefManager.currentUserInfo!!.apiKey!!, prefManager.centerInfo!!.db_name!!,prefManager.currentUserInfo!!.idUser.toString(),prefManager.currentUserInfo!!.idBranch.toString())
             }
                 .onSuccess {
                     viewHelper.setHospitalBranch(it.response)
@@ -399,7 +373,7 @@ class SchedulePresenter(val context: Context, val viewHelper: ScheduleFragment) 
 
         mainScope.launch {
             kotlin.runCatching {
-                networkManager2.getBranchByIdServiceIdDoc(idService, idDoc,prefManager.currentUserInfo!!.apiKey!!, prefManager.centerInfo!!.db_name!!,prefManager.currentUserInfo!!.idUser.toString(),prefManager.currentUserInfo!!.idBranch.toString())
+                networkManager2.getBranchByIdServiceIdDoc(idService.toString(), idDoc.toString(), prefManager.currentUserInfo!!.apiKey!!, prefManager.centerInfo!!.db_name!!,prefManager.currentUserInfo!!.idUser.toString(),prefManager.currentUserInfo!!.idBranch.toString())
             }
                 .onSuccess {
                     viewHelper.setHospitalBranch(it.response)
@@ -413,6 +387,32 @@ class SchedulePresenter(val context: Context, val viewHelper: ScheduleFragment) 
                 }
         }
     }
+
+//    val allHospitalBranch: Unit
+//        get() {
+//            viewHelper.showLoading()
+//
+//            mainScope.launch {
+//                kotlin.runCatching {
+//                    networkManager2.getAllHospitalBranch(prefManager.currentUserInfo!!.idCenter.toString())
+//                }
+//                    .onSuccess {
+//                        if (viewHelper == null) {
+//                            return@onSuccess
+//                        }
+//                        Collections.sort(it.response)
+//                        viewHelper.setHospitalBranch(it.response)
+//                        viewHelper.hideLoading()
+//                    }.onFailure {
+//                        Timber.tag("my").e(LoggingTree.getMessageForError(it, "SchedulePresenter\$getAllHospitalBranch "))
+//                        if (viewHelper == null) {
+//                            return@onFailure
+//                        }
+//                        viewHelper.hideLoading()
+//                        viewHelper.showErrorScreen()
+//                    }
+//            }
+//        }
 
     fun setNewIdUserFavouriteBranch(idUser: String?) {
         idUserFavouriteBranch = idUser

@@ -24,7 +24,7 @@ class DoctorsItemPresenter: ObservableObject{
             let imagePathString = item.image_url! + "&token=" + currentUserInfo!.apiKey!
             
             DownloadManager(imagePathString,  resultUiImage: { (tmp : UIImage) -> Void in
-
+                item.iuImageLogo = tmp
                 self.iuImageLogo = tmp
             })
         }

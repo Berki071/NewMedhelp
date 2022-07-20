@@ -20,7 +20,6 @@ class ServicesPresenter : ObservableObject{
     var selectedOption: CategoryResponse?
     var textSearch: String = "" {
          willSet(newValue) {
-             //print(">>> " + textSearch)
              self.filterList()
          }
     }
@@ -123,7 +122,7 @@ class ServicesPresenter : ObservableObject{
             tmpList = serviceList
         }else{
             serviceList.forEach{i in
-                if(i.idSpec != nil && i.idSpec == self.selectedOption!.id) {
+                if(i.idSpec != nil && Int(i.idSpec!) == self.selectedOption!.id) {
                     tmpList.append(i)
                     return
                 }
